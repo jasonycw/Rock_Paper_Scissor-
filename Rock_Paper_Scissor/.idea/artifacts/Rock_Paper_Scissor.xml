@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="Rock_Paper_Scissor">
-    <output-path>$PROJECT_DIR$/dist</output-path>
+    <output-path>$PROJECT_DIR$/dist/Rock_Paper_Scissor</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="CS4280_Project/web/Web" />
       <element id="directory" name="WEB-INF">

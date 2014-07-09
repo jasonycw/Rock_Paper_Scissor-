@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="header">
-    <div>Ava<span>lon</span></div>
+    <div>Rock<span>Paper</span>Scissor</div>
 </div>
 <br>
 <div class="login">

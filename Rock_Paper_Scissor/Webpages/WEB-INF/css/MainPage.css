@@ -1,3 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro|Lato|Ubuntu|Roboto);
+
 body {
     background: #fff url(../img/background/Forever_by_Shady_S.jpg);
     background-size: cover;
@@ -8,7 +12,7 @@ body {
 
 p {
     right: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Exo', sans-serif;
     color: white;
     font-size: 25;
     opacity: 0.8;
@@ -24,17 +28,12 @@ p {
     margin: auto;
 }
 
-#mainContainer {
-    width: 1020px;
-    height: 250px;
-}
-
 .round-button {
     float: left;
     width: 200px;
     height: 200px;
-    /*padding-right: 10%;*/
-    margin-right: 5%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
     border-radius: 50%;
     border: 2px solid #f5f5f5;
     overflow: hidden;
@@ -42,6 +41,11 @@ p {
     box-shadow: 0 0 3px gray;
     opacity: 0.7;
     filter: alpha(opacity=70); /* For IE8 and earlier */
+
+    /*animation*/
+    transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
 }
 
 .round-button:hover {
@@ -52,9 +56,77 @@ p {
 
 .round-button img {
     display: block;
-    width: 200px;
-    height: 200px;
+    width: 190px;
+    height: 190px;
     padding: 12%;
     margin-right: 100%;
     height: auto;
+
+    /*animation*/
+    transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+}
+
+.round-button img:hover {
+    padding: 5%;
+}
+
+.nameTag{
+    /*position*/
+    float: left;
+    height: 100px;
+    min-width: 170px;
+    margin-left: 65px;
+    margin-right: 65px;
+
+    /*style*/
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 40;
+    opacity: 0;
+    filter: alpha(opacity=0); /* For IE8 and earlier */
+
+    /*animation*/
+    transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+}
+
+#mainContainer {
+    width: 1020px;
+    height: 300px;
+}
+
+#buttons{
+    height: 200px;
+}
+
+#nameTagsDiv{
+    /*position*/
+    position: relative;
+    margin: 10px auto;
+    height: 100px;
+    width: 300px;
+
+    /*property*/
+    overflow:hidden;
+
+
+}
+
+#nameTags{
+    width: 1200px;
+    margin-top: -100px;
+    margin-left: -450px;
+    opacity: 0;
+    filter: alpha(opacity=0); /* For IE8 and earlier */
+
+    /*Animation*/
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }

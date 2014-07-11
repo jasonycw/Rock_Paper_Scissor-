@@ -22,7 +22,7 @@ public class RankingServlet extends HttpServlet {
 
         //Forward response to jsp for display
         RequestDispatcher dispatcher;
-        dispatcher=request.getRequestDispatcher("/pages/MainPage.jsp");
+        dispatcher=request.getRequestDispatcher("/pages/StatisticsPage.jsp");
         dispatcher.forward(request,response);
     }
 

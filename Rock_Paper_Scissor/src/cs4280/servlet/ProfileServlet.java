@@ -1,5 +1,6 @@
 package cs4280.servlet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,9 @@ public class ProfileServlet extends HttpServlet {
         */
 
          HttpSession session = request.getSession();
-
+        RequestDispatcher dispatcher;
+        dispatcher=request.getRequestDispatcher("/pages/UserProfilePage.jsp");
+        dispatcher.forward(request,response);
     }
 
     @Override

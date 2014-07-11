@@ -25,6 +25,30 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>GameServlet</servlet-name>
+        <servlet-class>cs4280.servlet.GameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GameServlet</servlet-name>
+        <url-pattern>/game</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>cs4280.servlet.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RankingServlet</servlet-name>
+        <servlet-class>cs4280.servlet.RankingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RankingServlet</servlet-name>
+        <url-pattern>/rank</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>/login</welcome-file>
     </welcome-file-list>

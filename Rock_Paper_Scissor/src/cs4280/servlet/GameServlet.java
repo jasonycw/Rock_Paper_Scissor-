@@ -22,7 +22,7 @@ public class GameServlet extends HttpServlet {
 
         //Forward response to jsp for display
         RequestDispatcher dispatcher;
-        dispatcher=request.getRequestDispatcher("/pages/MainPage.jsp");
+        dispatcher=request.getRequestDispatcher("/pages/GamePage.jsp");
         dispatcher.forward(request,response);
     }
 

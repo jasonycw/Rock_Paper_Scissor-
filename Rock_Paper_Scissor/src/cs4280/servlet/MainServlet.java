@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class HomeServlet extends HttpServlet {
+public class MainServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getRemoteUser();
@@ -22,7 +22,7 @@ public class HomeServlet extends HttpServlet {
 
         //Forward response to jsp for display
         RequestDispatcher dispatcher;
-        dispatcher=request.getRequestDispatcher("/pages/index.jsp");
+        dispatcher=request.getRequestDispatcher("/pages/MainPage.jsp");
         dispatcher.forward(request,response);
     }
 

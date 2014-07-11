@@ -1,6 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,18 +18,19 @@
     <div class="header">
         <div>Rock<span>Paper</span>Scissor</div>
     </div>
-    <%--<br>--%>
     <div class="login">
-        <form action="j_security_check" method="POST">
+        <%--<form action="j_security_check" method="POST">--%>
+            <form action="/main.do" method="POST">
+
             <input type="text" placeholder="Username" name="j_username"><br>
             <input type="password" placeholder="Password" name="j_password"><br>
             <input type="submit" value="Login">
         </form>
         <div id="ackArea"></div>
-        <script> ackError(window.document.getElementById('ackArea'),'Wrong pair of username and password'); </script>
-        <script> ackSuccess(window.document.getElementById('ackArea'),'Welcome back'); </script>
-        <script> ackWarning(window.document.getElementById('ackArea'),'Do not skip the login page'); </script>
-        <script> ackNotice(window.document.getElementById('ackArea'),'Announcement:'); </script>
+        <script> ackError(window.document.getElementById('ackArea'), 'Wrong pair of username and password'); </script>
+        <script> ackSuccess(window.document.getElementById('ackArea'), 'Welcome back'); </script>
+        <script> ackWarning(window.document.getElementById('ackArea'), 'Do not skip the login page'); </script>
+        <script> ackNotice(window.document.getElementById('ackArea'), 'Announcement:'); </script>
     </div>
 
 </div>

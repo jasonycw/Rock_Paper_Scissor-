@@ -1,9 +1,15 @@
 status change - update data to bean
 personal result - get data from bean and calculate
+
 global result - get data from bean and calculate
 website statistic - get data from bean and calculate
+
 gameplay - update the bean and game
+
 login - validation handling, security
+
 mainPage - init bean handling, security
+
 logout - invalidate
+
 (registration)

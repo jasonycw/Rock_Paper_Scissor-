@@ -29,7 +29,7 @@
         </a>
     </div>
     <div class="round-button">
-        <a href="http://example.com">
+        <a href="/logout">
             <img src="/img/nav/Logout.png" alt="Home"/>
         </a>
     </div>

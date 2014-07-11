@@ -19,9 +19,7 @@ public class LogoutServlet extends HttpServlet {
          */
 
         //Kick the user back to login page
-        RequestDispatcher dispatcher;
-        dispatcher = request.getRequestDispatcher("/pages.index.jsp");
-        dispatcher.forward(request,response);
+        response.sendRedirect("/login");
     }
 
     @Override

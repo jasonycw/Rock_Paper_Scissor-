@@ -10,6 +10,9 @@ public class PlayerBean {
 
     public void setId(String id) {
         this.id = id;
+        /*
+        JDBC update
+         */
     }
 
     public String getTheme() {
@@ -18,5 +21,8 @@ public class PlayerBean {
 
     public void setTheme(String theme) {
         this.theme = theme;
+        /*
+        JDBC update
+         */
     }
 }

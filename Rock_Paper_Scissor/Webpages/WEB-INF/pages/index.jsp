@@ -18,9 +18,9 @@
 </div>
 <br>
 <div class="login">
-    <form action="" method="POST">
-        <input type="text" placeholder="Username" name="username"><br>
-        <input type="password" placeholder="Password" name="password"><br>
+    <form action="j_security_check" method="POST">
+        <input type="text" placeholder="Username" name="j_username"><br>
+        <input type="password" placeholder="Password" name="j_password"><br>
         <input type="submit" value="Login">
     </form>
     <div id="ackArea"></div>

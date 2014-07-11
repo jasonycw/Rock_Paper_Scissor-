@@ -13,26 +13,28 @@
 <%--<img src="http://codeitdown.com/media/Home_Icon.svg" alt="Home" />--%>
 <%--</a>--%>
 <%--</div>--%>
-<h3>Welcome, xxxxxxxxx</h3>
-<div class="round-button">
-    <a href="http://example.com">
-        <img src="/img/nav/UserProfile.png" alt="Home" />
-    </a>
-</div>
-<div class="round-button">
-    <a href="http://example.com">
-        <img src="/img/nav/Game.png" alt="Home" />
-    </a>
-</div>
-<div class="round-button">
-    <a href="http://example.com">
-        <img src="/img/nav/Statistics.png" alt="Home" />
-    </a>
-</div>
-<div class="round-button">
-    <a href="http://example.com">
-        <img src="/img/nav/Logout.png" alt="Home" />
-    </a>
+<p align="right">Welcome, xxxxxxxxx</p>
+<div id="mainContainer" class="centered">
+    <div class="round-button">
+        <a href="http://example.com">
+            <img src="/img/nav/UserProfile.png" alt="Home" />
+        </a>
+    </div>
+    <div class="round-button">
+        <a href="http://example.com">
+            <img src="/img/nav/Game.png" alt="Home" />
+        </a>
+    </div>
+    <div class="round-button">
+        <a href="http://example.com">
+            <img src="/img/nav/Statistics.png" alt="Home" />
+        </a>
+    </div>
+    <div class="round-button">
+        <a href="http://example.com">
+            <img src="/img/nav/Logout.png" alt="Home" />
+        </a>
+    </div>
 </div>
 </body>
 </html>

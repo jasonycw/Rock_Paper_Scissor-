@@ -6,31 +6,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/*
-Servlet handling logout request, should forward to index page to relogin after session invalidation
- */
-public class LogoutServlet extends HttpServlet {
+public class RedirectServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         /////////////////////////////////////////////
         /*
-        Renee Workspace, clean up everything
+        Renee Workspace, check if session exists, redirect to previous page if so
         */
 
         /////////////////////////////////////////////
 
-        //Kick the user back to login page
-        response.sendRedirect("/redirect");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+        //Temp redirect
+        response.sendRedirect("/pages/index.jsp");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
 }

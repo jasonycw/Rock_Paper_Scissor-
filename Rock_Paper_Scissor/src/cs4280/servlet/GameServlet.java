@@ -10,15 +10,13 @@ import java.io.IOException;
 public class GameServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getRemoteUser();
 
+        /////////////////////////////////////////////
         /*
-            Louis, JDBC grab user data and save to bean
+        Renee Workspace, check session here, kick the user back if needed
         */
 
-         /*
-            To Renee: do session here
-         */
+        /////////////////////////////////////////////
 
         //Forward response to jsp for display
         RequestDispatcher dispatcher;

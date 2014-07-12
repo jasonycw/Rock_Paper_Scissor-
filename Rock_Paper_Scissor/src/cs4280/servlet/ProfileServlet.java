@@ -13,13 +13,16 @@ Responsible to display user info, provide function to change user preference lik
 public class ProfileServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getRemoteUser();
 
+        /////////////////////////////////////////////
         /*
-            Louis, JDBC grab user data and save to bean
+        Renee Workspace, check session here, kick the user back if needed
         */
 
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+
+        /////////////////////////////////////////////
+
         RequestDispatcher dispatcher;
         dispatcher=request.getRequestDispatcher("/pages/UserProfilePage.jsp");
         dispatcher.forward(request,response);

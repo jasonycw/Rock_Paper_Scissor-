@@ -1,15 +1,13 @@
 package util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * @author User
  */
-public class DBConnection {
+public final class DBConnection {
     private static final String JDBC_CONNECTION = "jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad016_db";
     private static final String DB_USERNAME = "aiad016";
     private static final String DB_PASSWORD = "aiad016";

@@ -1,28 +1,64 @@
 package cs4280.bean;
 
 public class PlayerBean {
-    private String id;
-    private String theme;
+    private String mId;
+    private String mTheme;
+    private int mTotalWin;
+    private int mTotalLose;
+    private int mTotalPlayTime;
 
-    public String getId() {
-        return id;
+    public String getmId() {
+        return mId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setmId(String mId) {
+        this.mId = mId;
         /*
-        JDBC update
+        JDBC Update
          */
     }
 
-    public String getTheme() {
-        return theme;
+    public String getmTheme() {
+        return mTheme;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setmTheme(String mTheme) {
+        this.mTheme = mTheme;
         /*
-        JDBC update
+        JDBC Update
+         */
+    }
+
+    public int getmTotalWin() {
+        return mTotalWin;
+    }
+
+    public void setmTotalWin(int mTotalWin) {
+        this.mTotalWin = mTotalWin;
+        /*
+        JDBC Update
+         */
+    }
+
+    public int getmTotalLose() {
+        return mTotalLose;
+    }
+
+    public void setmTotalLose(int mTotalLose) {
+        this.mTotalLose = mTotalLose;
+        /*
+        JDBC Update
+         */
+    }
+
+    public int getmTotalPlayTime() {
+        return mTotalPlayTime;
+    }
+
+    public void setmTotalPlayTime(int mTotalPlayTime) {
+        this.mTotalPlayTime = mTotalPlayTime;
+        /*
+        JDBC Update
          */
     }
 }

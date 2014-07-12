@@ -9,7 +9,6 @@
     <title>Welcome</title>
     <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/loginPage.css"/>" rel="stylesheet">
-    <script src="<c:url value="/js/ack.js"/>"></script>
     <script src="<c:url value="/js/prefixfree.min.js"/>"></script>
 </head>
 <body>
@@ -20,17 +19,19 @@
     </div>
     <div class="login">
         <%--<form action="j_security_check" method="POST">--%>
-            <form action="/validate" method="POST">
-
-            <input type="text" placeholder="Username" name="j_username"><br>
-            <input type="password" placeholder="Password" name="j_password"><br>
+        <form action="/validate" method="POST">
+            <input type="text" placeholder="Username" name="j_username" value="GhostPlayer"><br>
+            <input type="password" placeholder="Password" name="j_password" value="123"><br>
             <input type="submit" value="Login">
         </form>
-        <div id="ackArea"></div>
-        <script> ackError(window.document.getElementById('ackArea'), 'Wrong pair of username and password'); </script>
-        <script> ackSuccess(window.document.getElementById('ackArea'), 'Welcome back'); </script>
-        <script> ackWarning(window.document.getElementById('ackArea'), 'Do not skip the login page'); </script>
-        <script> ackNotice(window.document.getElementById('ackArea'), 'Announcement:'); </script>
+
+        <%--<p class="error">Wrong username-password pair</p>--%>
+
+        <%--<p class="warning">SQL Injection Detected</p>--%>
+
+        <%--<p class="notice">First connect to CSLab network</p>--%>
+
+        <%--<p class="success">Welcome back</p>--%>
     </div>
 
 </div>

@@ -1,5 +1,11 @@
 package cs4280.bean;
 
+import util.DBConnection;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class PlayerBean {
     private String mId;
     private String mTheme;
@@ -24,9 +30,6 @@ public class PlayerBean {
 
     public void setmTheme(String mTheme) {
         this.mTheme = mTheme;
-        /*
-        JDBC Update
-         */
     }
 
     public int getmTotalWin() {
@@ -35,9 +38,6 @@ public class PlayerBean {
 
     public void setmTotalWin(int mTotalWin) {
         this.mTotalWin = mTotalWin;
-        /*
-        JDBC Update
-         */
     }
 
     public int getmTotalLose() {
@@ -46,9 +46,6 @@ public class PlayerBean {
 
     public void setmTotalLose(int mTotalLose) {
         this.mTotalLose = mTotalLose;
-        /*
-        JDBC Update
-         */
     }
 
     public int getmTotalPlayTime() {
@@ -57,8 +54,12 @@ public class PlayerBean {
 
     public void setmTotalPlayTime(int mTotalPlayTime) {
         this.mTotalPlayTime = mTotalPlayTime;
-        /*
-        JDBC Update
-         */
+    }
+
+    public void update() throws SQLException {
+        Connection con=DBConnection.getConnection();
+        Statement stmt=con.createStatement();
+        String sql="update ";
+        stmt.executeUpdate(sql);
     }
 }

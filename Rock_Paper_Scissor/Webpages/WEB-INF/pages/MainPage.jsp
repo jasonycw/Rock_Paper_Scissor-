@@ -8,10 +8,11 @@
     <link href="<c:url value="/css/MainPage.css"/>" rel="stylesheet">
     <script src="<c:url value="/js/mainPageAnimation.js"/>"></script>
 </head>
+<jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
 <body>
-
-
-<p align="right">Welcome, xxxxxxxxx</p>
+<p align="right">Welcome,
+    <jsp:getProperty name="playerInfo" property="mId"/>
+</p>
 
 <div id="mainContainer" class="centered">
     <div id="buttons">

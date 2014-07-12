@@ -1,11 +1,17 @@
 package cs4280.servlet;
 
+import cs4280.bean.PlayerBean;
+import util.DBConnection;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ValidateIdentityServlet extends HttpServlet {
@@ -17,42 +23,57 @@ public class ValidateIdentityServlet extends HttpServlet {
         /*
         Renee Workspace, check session here, kick the user back if needed
         */
+        HttpSession session = request.getSession(false);
 
         /////////////////////////////////////////////
 
         /////////////////////////////////////////////
         /*
-        Louis Workspace, might verify identity, grab user info and save to bean, else kick the user back if wrong pw
+        Louis Workspace
         */
         try {
-            if (isValidUser(request.getParameter("j_username"), request.getParameter("j_password"))) {
+            //grab info
+            Connection con = DBConnection.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM PlayerAccount WHERE username = ? and password=?");
+            stmt.setString(1, request.getParameter("j_username"));
+            stmt.setString(2, request.getParameter("j_password"));
+            ResultSet rs = stmt.executeQuery();
 
+            if (!rs.next()) {
+                //login attempt failed, kick the user out
+                response.sendRedirect("/redirect");
             } else {
+                //save to bean
+                PlayerBean player = new PlayerBean();
+                player.setmId(rs.getString("username"));
+                player.setmTheme(rs.getString("theme"));
+                player.setmTotalWin(rs.getInt("win"));
+                player.setmTotalLose(rs.getInt("lose"));
+                player.setmTotalPlayTime(rs.getInt("playtime"));
 
+                session.setAttribute("playerInfo",player);
+                /////////////////////////////////////////////
+                /*
+                Renee Workspace, user is now authenticated, bean is ready, save any information if needed
+                */
+
+                session.setAttribute("username", username);
+                session.setAttribute("isLoginedIn", "1");
+                session.setAttribute("Background", "1/2/3");
+                session.setAttribute("currentPage", "main");
+                // when this page direct to another page, have to set attribute first.. when page is first loaded, check attribute see if is really this page ==> redirect
+                // set time
+
+                /////////////////////////////////////////////
+
+
+                //Forward response to jsp for display
+                response.sendRedirect("/main");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         /////////////////////////////////////////////
-
-        /////////////////////////////////////////////
-        /*
-        Renee Workspace, user is now authenticated, save any information if needed
-        */
-
-        HttpSession session = request.getSession();
-        session.setAttribute("username", username);
-        session.setAttribute("isLoginedIn", "1");
-        session.setAttribute("Background", "1/2/3");
-        session.setAttribute("currentPage", "main");
-        // when this page direct to another page, have to set attribute first.. when page is first loaded, check attribute see if is really this page ==> redirect
-        // set time
-
-        /////////////////////////////////////////////
-
-
-        //Forward response to jsp for display
-        response.sendRedirect("/main");
     }
 
     @Override
@@ -65,12 +86,4 @@ public class ValidateIdentityServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
-    private boolean isValidUser(String username, String password) throws SQLException {
-//        PreparedStatement stmt = getConnection().prepareStatement("select * from UserSetting where username=? and password=?");
-//        stmt.setString(1, username);
-//        stmt.setString(2, password);
-//        ResultSet rs = stmt.executeQuery();
-//        return rs != null;
-        return true;
-    }
 }

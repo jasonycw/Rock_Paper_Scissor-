@@ -20,7 +20,7 @@
     </div>
     <div class="login">
         <%--<form action="j_security_check" method="POST">--%>
-            <form action="/main" method="POST">
+            <form action="/validate" method="POST">
 
             <input type="text" placeholder="Username" name="j_username"><br>
             <input type="password" placeholder="Password" name="j_password"><br>

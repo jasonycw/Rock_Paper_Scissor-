@@ -7,45 +7,42 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PlayerBean {
-    private String mId;
-    private String mTheme;
-    private int mTotalWin;
-    private int mTotalLose;
-    private int mTotalPlayTime;
+    private String mUsername="Developer";
+    private String mPreferredTheme="Default";
+    private int mWinCount=100;
+    private int mLoseCount=1;
+    private int mTotalPlayTime=6;
 
-    public String getmId() {
-        return mId;
+    public String getmUsername() {
+        return mUsername;
     }
 
-    public void setmId(String mId) {
-        this.mId = mId;
-        /*
-        JDBC Update
-         */
+    public void setmUsername(String mUsername) {
+        this.mUsername = mUsername;
     }
 
-    public String getmTheme() {
-        return mTheme;
+    public String getmPreferredTheme() {
+        return mPreferredTheme;
     }
 
-    public void setmTheme(String mTheme) {
-        this.mTheme = mTheme;
+    public void setmPreferredTheme(String mPreferredTheme) {
+        this.mPreferredTheme = mPreferredTheme;
     }
 
-    public int getmTotalWin() {
-        return mTotalWin;
+    public int getmWinCount() {
+        return mWinCount;
     }
 
-    public void setmTotalWin(int mTotalWin) {
-        this.mTotalWin = mTotalWin;
+    public void setmWinCount(int mWinCount) {
+        this.mWinCount = mWinCount;
     }
 
-    public int getmTotalLose() {
-        return mTotalLose;
+    public int getmLoseCount() {
+        return mLoseCount;
     }
 
-    public void setmTotalLose(int mTotalLose) {
-        this.mTotalLose = mTotalLose;
+    public void setmLoseCount(int mLoseCount) {
+        this.mLoseCount = mLoseCount;
     }
 
     public int getmTotalPlayTime() {

@@ -11,7 +11,7 @@
 <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
 <body>
 <p align="right">Welcome,
-    <jsp:getProperty name="playerInfo" property="mId"/>
+    <jsp:getProperty name="playerInfo" property="mUsername"/>
 </p>
 
 <div id="mainContainer" class="centered">
@@ -27,7 +27,7 @@
             </a>
         </div>
         <div id="rank-round-button" class="round-button">
-            <a href="/rank">
+            <a href="/record">
                 <img src="/img/nav/Statistics.png" alt="Home"/>
             </a>
         </div>
@@ -40,8 +40,8 @@
     <div id="nameTagsDiv">
         <div id="nameTags">
             <div id="statsNameTag" class="nameTag">Profile</div>
-            <div id="playNameTag" class="nameTag">Play</div>
-            <div id="rankNameTag" class="nameTag">Statistics</div>
+            <div id="playNameTag" class="nameTag">Gaming</div>
+            <div id="rankNameTag" class="nameTag">Record</div>
             <div id="logoutNameTag" class="nameTag">Logout</div>
         </div>
     </div>

@@ -7,13 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-/*
-Responsible to display user info, provide function to change user preference like theme
- */
-public class ProfileServlet extends HttpServlet {
 
+public class RecordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         /////////////////////////////////////////////
         /*
         Renee Workspace, check session here, kick the user back if needed
@@ -23,17 +19,14 @@ public class ProfileServlet extends HttpServlet {
 
         /////////////////////////////////////////////
 
-        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/UserProfilePage.jsp");
+        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/RecordPage.jsp");
         dispatcher.forward(request,response);
     }
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

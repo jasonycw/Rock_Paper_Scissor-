@@ -10,20 +10,11 @@ import java.io.IOException;
 public class TrafficServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getRemoteUser();
-
-        /*
-            Louis, JDBC grab user data and save to bean
-        */
 
          /*
             To Renee: do session here
          */
 
-        //Forward response to jsp for display
-        RequestDispatcher dispatcher;
-        dispatcher=request.getRequestDispatcher("/pages/MainPage.jsp");
-        dispatcher.forward(request,response);
     }
 
     @Override

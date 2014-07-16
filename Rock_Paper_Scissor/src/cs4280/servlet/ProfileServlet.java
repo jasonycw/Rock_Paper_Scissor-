@@ -18,12 +18,22 @@ public class ProfileServlet extends HttpServlet {
         /*
         Renee Workspace, check session here, kick the user back if needed
         */
-
-        HttpSession session = request.getSession();
-
-        /////////////////////////////////////////////
-
         RequestDispatcher dispatcher;
+        HttpSession session = request.getSession();
+        if (session.getAttribute("isLoggedIn") != "1"){
+            dispatcher=request.getRequestDispatcher("/pages/index.jsp");
+            dispatcher.forward(request,response);
+        }
+
+        if (request.getParameter("submitProfile").equals("1")){
+        /*
+        * Louis please set bean here
+        * */
+        String theme = request.getParameter("theme");
+        session.setAttribute("theme",theme);
+        }
+
+
         dispatcher=request.getRequestDispatcher("/pages/UserProfilePage.jsp");
         dispatcher.forward(request,response);
     }

@@ -7,9 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-    <link href="<c:url value="../../css/ack.css"/>" rel="stylesheet">
-    <link href="<c:url value="../../css/loginPage.css"/>" rel="stylesheet">
-    <script src="<c:url value="../../js/prefixfree.min.js"/>"></script>
+    <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/loginPage.css"/>" rel="stylesheet">
+    <script src="<c:url value="/js/prefixfree.min.js"/>"></script>
 </head>
 <body>
 
@@ -26,8 +26,6 @@
             <input type="submit" value="Login">
         </form>
         <form action="<c:url value="/validate"/>" method="POST">
-            <input type="hidden" placeholder="Username" name="j_username" value="GhostPlayer"><br>
-            <input type="hidden" placeholder="Password" name="j_password" value="123"><br>
             <input type="hidden" name="test" value="true">
             <input type="submit" value="Dev Mode">
         </form>

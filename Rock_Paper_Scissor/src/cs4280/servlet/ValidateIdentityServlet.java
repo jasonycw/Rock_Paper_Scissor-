@@ -3,6 +3,7 @@ package cs4280.servlet;
 import cs4280.bean.PlayerBean;
 import cs4280.exception.WrongCredentialException;
 import util.DBConnection;
+import util.ProjectUrl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -60,7 +61,7 @@ public class ValidateIdentityServlet extends HttpServlet {
 
 
         //Forward response to jsp for display
-        response.sendRedirect("/main");
+        response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/main");
     }
 
     /////////////////////////////////////////////

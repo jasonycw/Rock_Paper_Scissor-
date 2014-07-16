@@ -17,23 +17,23 @@
 <div id="mainContainer" class="centered">
     <div id="buttons">
         <div id="stats-round-button" class="round-button">
-            <a href="/profile">
-                <img src="/img/nav/UserProfile.png" alt="Home"/>
+            <a href="<c:url value="/profile"/>">
+                <img src="<c:url value="/img/nav/UserProfile.png"/>" alt="Home"/>
             </a>
         </div>
         <div id="play-round-button" class="round-button">
-            <a href="/game">
-                <img src="/img/nav/Game.png" alt="Home"/>
+            <a href="<c:url value="/game"/>">
+                <img src="<c:url value="/img/nav/Game.png"/>" alt="Home"/>
             </a>
         </div>
         <div id="rank-round-button" class="round-button">
-            <a href="/record">
-                <img src="/img/nav/Statistics.png" alt="Home"/>
+            <a href="<c:url value="/record"/>">
+                <img src="<c:url value="/img/nav/Statistics.png"/>" alt="Home"/>
             </a>
         </div>
         <div id="logout-round-button" class="round-button">
-            <a href="/logout">
-                <img src="/img/nav/Logout.png" alt="Home"/>
+            <a href="<c:url value="/logout"/>">
+                <img src="<c:url value="/img/nav/Logout.png"/>" alt="Home"/>
             </a>
         </div>
     </div>

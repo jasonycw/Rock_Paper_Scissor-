@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PlayerBean {
-    private String mUsername="Developer";
-    private String mPreferredTheme="Default";
-    private int mWinCount=100;
-    private int mLoseCount=1;
-    private int mTotalPlayTime=6;
+    private String mUsername = "Developer";
+    private String mPreferredTheme = "Default";
+    private int mWinCount = 100;
+    private int mLoseCount = 1;
+    private int mTotalPlayTime = 6;
+
+    public PlayerBean() {
+
+    }
 
     public String getmUsername() {
         return mUsername;
@@ -54,9 +58,9 @@ public class PlayerBean {
     }
 
     public void update() throws SQLException {
-        Connection con=DBConnection.getConnection();
-        Statement stmt=con.createStatement();
-        String sql="update ";
+        Connection con = DBConnection.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = "UPDATE PlayerAccount SET  ";
         stmt.executeUpdate(sql);
     }
 }

@@ -1,5 +1,7 @@
 package cs4280.servlet;
 
+import util.ProjectUrl;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,7 @@ public class LogoutServlet extends HttpServlet {
         /////////////////////////////////////////////
 
         //Kick the user back to login page
-        response.sendRedirect("/redirect");
+        response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/redirect");
     }
 
     @Override

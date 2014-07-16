@@ -5,31 +5,28 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class GameServlet extends HttpServlet {
-
+public class RecordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         /////////////////////////////////////////////
         /*
         Renee Workspace, check session here, kick the user back if needed
         */
 
+        HttpSession session = request.getSession();
+
         /////////////////////////////////////////////
 
-        //Forward response to jsp for display
-        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
-        dispatcher.forward(request, response);
+        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/RecordPage.jsp");
+        dispatcher.forward(request,response);
+    }
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
     }
 }

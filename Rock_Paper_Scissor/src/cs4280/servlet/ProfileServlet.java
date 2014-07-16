@@ -34,7 +34,8 @@ public class ProfileServlet extends HttpServlet {
         }
 
 
-        dispatcher=request.getRequestDispatcher("/pages/UserProfilePage.jsp");
+
+        dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/UserProfilePage.jsp");
         dispatcher.forward(request,response);
     }
 

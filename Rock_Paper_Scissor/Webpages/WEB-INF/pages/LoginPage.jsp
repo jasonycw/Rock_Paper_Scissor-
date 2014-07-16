@@ -19,12 +19,16 @@
     </div>
     <div class="login">
         <%--<form action="j_security_check" method="POST">--%>
-        <form action="/validate" method="POST">
+        <form action="<c:url value="/validate"/>" method="POST">
             <input type="text" placeholder="Username" name="j_username" value="GhostPlayer"><br>
             <input type="password" placeholder="Password" name="j_password" value="123"><br>
+            <input type="hidden" name="test" value="false">
             <input type="submit" value="Login">
         </form>
-
+        <form action="<c:url value="/validate"/>" method="POST">
+            <input type="hidden" name="test" value="true">
+            <input type="submit" value="Dev Mode">
+        </form>
         <%--<p class="error">Wrong username-password pair</p>--%>
 
         <%--<p class="warning">SQL Injection Detected</p>--%>

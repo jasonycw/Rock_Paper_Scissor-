@@ -1,5 +1,7 @@
 package cs4280.servlet;
 
+import util.ProjectUrl;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +18,7 @@ public class RedirectServlet extends HttpServlet {
         */
 
         /////////////////////////////////////////////
-
-        //Temp redirect
-        response.sendRedirect("/pages/index.jsp");
+        response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/login");
     }
 
     @Override

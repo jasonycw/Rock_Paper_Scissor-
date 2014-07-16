@@ -1,7 +1,9 @@
 package cs4280.servlet;
 
 import cs4280.bean.PlayerBean;
+import cs4280.exception.WrongCredentialException;
 import util.DBConnection;
+import util.ProjectUrl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,6 @@ import java.sql.SQLException;
 public class ValidateIdentityServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getRemoteUser();
 
         /////////////////////////////////////////////
         /*
@@ -31,49 +32,74 @@ public class ValidateIdentityServlet extends HttpServlet {
         /*
         Louis Workspace
         */
-        try {
-            //grab info
-            Connection con = DBConnection.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM PlayerAccount WHERE username = ? and password=?");
-            stmt.setString(1, request.getParameter("j_username"));
-            stmt.setString(2, request.getParameter("j_password"));
-            ResultSet rs = stmt.executeQuery();
+        PlayerBean player = new PlayerBean();
+        if (!request.getParameter("test").equals("true")) {
+            try {
+                //grab info
+                ResultSet rs = getUserInfo(request.getParameter("j_username"), request.getParameter("j_password"));
+                player = toPlayerBean(rs);
 
-            if (!rs.next()) {
-                //login attempt failed, kick the user out
-                response.sendRedirect("/redirect");
-            } else {
-                //save to bean
-                PlayerBean player = new PlayerBean();
-                player.setmId(rs.getString("username"));
-                player.setmTheme(rs.getString("theme"));
-                player.setmTotalWin(rs.getInt("win"));
-                player.setmTotalLose(rs.getInt("lose"));
-                player.setmTotalPlayTime(rs.getInt("playtime"));
+            } catch (WrongCredentialException e) {
+                e.printStackTrace();
+            }
+        }
+        session.setAttribute("playerInfo", player);
 
-                session.setAttribute("playerInfo",player);
-                /////////////////////////////////////////////
+        /////////////////////////////////////////////
                 /*
                 Renee Workspace, user is now authenticated, bean is ready, save any information if needed
                 */
 
-                session.setAttribute("username", username);
-                session.setAttribute("isLoginedIn", "1");
-                session.setAttribute("Background", "1/2/3");
-                session.setAttribute("currentPage", "main");
-                // when this page direct to another page, have to set attribute first.. when page is first loaded, check attribute see if is really this page ==> redirect
-                // set time
+//                session.setAttribute("username", username);
+//                session.setAttribute("isLoginedIn", "1");
+//                session.setAttribute("Background", "1/2/3");
+//                session.setAttribute("currentPage", "main");
+        // when this page direct to another page, have to set attribute first.. when page is first loaded, check attribute see if is really this page ==> redirect
+        // set time
 
-                /////////////////////////////////////////////
+        /////////////////////////////////////////////
 
 
-                //Forward response to jsp for display
-                response.sendRedirect("/main");
+        //Forward response to jsp for display
+        response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/main");
+    }
+
+    /////////////////////////////////////////////
+
+    private PlayerBean toPlayerBean(ResultSet rs) {
+        PlayerBean player = new PlayerBean();
+        try {
+            if (rs.next()) {
+                player.setmUsername(rs.getString("username"));
+                player.setmPreferredTheme(rs.getString("theme"));
+                player.setmWinCount(rs.getInt("win"));
+                player.setmLoseCount(rs.getInt("lose"));
+                player.setmTotalPlayTime(rs.getInt("win"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        /////////////////////////////////////////////
+        return player;
+    }
+
+    private ResultSet getUserInfo(String username, String password) throws WrongCredentialException {
+        ResultSet rs = null;
+        try {
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM PlayerAccount WHERE username = ? and password=?");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                throw new WrongCredentialException();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override

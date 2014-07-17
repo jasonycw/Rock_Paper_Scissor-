@@ -61,7 +61,7 @@ public class ValidateIdentityServlet extends HttpServlet {
 
 
         //Forward response to jsp for display
-        response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/main");
+        response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
     }
 
     /////////////////////////////////////////////
@@ -74,7 +74,7 @@ public class ValidateIdentityServlet extends HttpServlet {
                 player.setmPreferredTheme(rs.getString("theme"));
                 player.setmWinCount(rs.getInt("win"));
                 player.setmLoseCount(rs.getInt("lose"));
-                player.setmTotalPlayTime(rs.getInt("win"));
+                player.setmTotalPlayTime(rs.getInt("playtime"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class ValidateIdentityServlet extends HttpServlet {
         try {
             Connection con = DBConnection.getConnection();
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM PlayerAccount WHERE username = ? and password=?");
+            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, playtime FROM PlayerAccount WHERE username = ? and password=?");
             stmt.setString(1, username);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
@@ -96,6 +96,10 @@ public class ValidateIdentityServlet extends HttpServlet {
                 throw new WrongCredentialException();
             }
 
+            stmt = con.prepareStatement("SELECT username, password, theme, win, lose, playtime FROM PlayerAccount WHERE username = ? and password=?");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }

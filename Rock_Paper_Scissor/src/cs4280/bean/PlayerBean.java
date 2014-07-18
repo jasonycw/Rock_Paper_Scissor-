@@ -11,14 +11,18 @@ public class PlayerBean {
     private String mPreferredTheme;
     private int mWinCount;
     private int mLoseCount;
-    private int mTotalPlayTime;
+    private int mDrawCount;
+    private String mLoginTime;
 
     public PlayerBean() {
         mUsername = "Developer";
         mPreferredTheme = "Default";
         mWinCount = 100;
         mLoseCount = 1;
-        mTotalPlayTime = 6;
+        mLoginTime=" 2009-10-02 16:52:30 ";
+        /*
+        grab current time through db
+         */
     }
 
     public String getmUsername() {
@@ -53,12 +57,21 @@ public class PlayerBean {
         this.mLoseCount = mLoseCount;
     }
 
-    public int getmTotalPlayTime() {
-        return mTotalPlayTime;
+
+    public int getmDrawCount() {
+        return mDrawCount;
     }
 
-    public void setmTotalPlayTime(int mTotalPlayTime) {
-        this.mTotalPlayTime = mTotalPlayTime;
+    public void setmDrawCount(int mDrawCount) {
+        this.mDrawCount = mDrawCount;
+    }
+
+    public String getmLoginTime() {
+        return mLoginTime;
+    }
+
+    public void setmLoginTime(String mLoginTime) {
+        this.mLoginTime = mLoginTime;
     }
 
     public void update() throws SQLException {

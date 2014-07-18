@@ -23,6 +23,7 @@ import java.util.Date;
 public class ValidateIdentityServlet extends HttpServlet {
     String sec;
     long time;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         /////////////////////////////////////////////
@@ -37,25 +38,26 @@ public class ValidateIdentityServlet extends HttpServlet {
         /*
         Louis Workspace
         */
-        if (isUserValid(request.getParameter("j_username"), request.getParameter("j_password")) || (request.getParameter("test").equals("true"))) {
+        boolean devMode = request.getParameter("test").equals("true");
+        String username = request.getParameter("j_username");
+        String password = request.getParameter("j_password");
+
+        if (devMode || isUserValid(username, password)) {
             PlayerBean player = new PlayerBean();
             Date date = new Date();
             time = date.getTime();
             sec = String.valueOf(time);
             player.setmLoginTime(sec);
-
-            if (!request.getParameter("test").equals("true")) {
+            if (!devMode) {
                 //grab info
-                ResultSet rs = getUserInfo(request.getParameter("j_username"), request.getParameter("j_password"));
-                player = toPlayerBean(rs);
-
+                ResultSet rs = getUserInfo(username, password);
+                player = updateUserInfo(player, rs);
             }
-
+            long result = time + 100;
+            session.setAttribute("playerInfo", player);
+            session.setAttribute("sec", result);
+            session.setAttribute("ackMsg", new AckBean());
         }
-        long result = time+100;
-
-        session.setAttribute("sec",result);
-        session.setAttribute("ackMsg", new AckBean());
 
         /////////////////////////////////////////////
                 /*
@@ -84,27 +86,8 @@ public class ValidateIdentityServlet extends HttpServlet {
         compare
      */
 
-    private boolean isUserValid(String username, String password) {
-        Connection con = null;
-        try {
-            con = DBConnection.getConnection();
 
-            PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM PlayerAccount WHERE username = ? and password=?");
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-
-            if (!rs.next()) {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    private PlayerBean toPlayerBean(ResultSet rs) {
-        PlayerBean player = new PlayerBean();
+    private PlayerBean updateUserInfo(PlayerBean player, ResultSet rs) {
         try {
             if (rs.next()) {
                 player.setmUsername(rs.getString("username"));
@@ -122,10 +105,10 @@ public class ValidateIdentityServlet extends HttpServlet {
 
     private ResultSet getUserInfo(String username, String password) {
         ResultSet rs = null;
+        Connection con = null;
         try {
-            Connection con = null;
-
-            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, playtime FROM PlayerAccount WHERE username = ? and password=?");
+            con = DBConnection.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, draw, login_time FROM PlayerAccount WHERE username = ? AND password=?");
             stmt.setString(1, username);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
@@ -133,6 +116,25 @@ public class ValidateIdentityServlet extends HttpServlet {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    private static boolean isUserValid(String username, String password) {
+        Connection con = null;
+        try {
+            con = DBConnection.getConnection();
+
+            PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM PlayerAccount WHERE username = ? AND password=?");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override

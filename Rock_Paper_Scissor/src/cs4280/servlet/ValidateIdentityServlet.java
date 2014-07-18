@@ -4,6 +4,7 @@ import cs4280.bean.AckBean;
 import cs4280.bean.PlayerBean;
 import util.DBConnection;
 import util.ProjectUrl;
+import util.SessionValidation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

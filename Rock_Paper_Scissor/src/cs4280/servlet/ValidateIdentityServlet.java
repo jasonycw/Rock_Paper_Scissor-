@@ -4,7 +4,6 @@ import cs4280.bean.AckBean;
 import cs4280.bean.PlayerBean;
 import util.DBConnection;
 import util.ProjectUrl;
-import util.SessionValidation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,12 +32,14 @@ public class ValidateIdentityServlet extends HttpServlet {
         /*
         Louis Workspace
         */
-        if (isUserValid(request.getParameter("j_username"), request.getParameter("j_password")) || (request.getParameter("test").equals("true"))) {
+        boolean devMode = request.getParameter("test").equals("true");
+
+        if (devMode || isUserValid(request.getParameter("j_username"), request.getParameter("j_password"))) {
             PlayerBean player = new PlayerBean();
-            if (!request.getParameter("test").equals("true")) {
+            if (!devMode) {
                 //grab info
                 ResultSet rs = getUserInfo(request.getParameter("j_username"), request.getParameter("j_password"));
-                player = toPlayerBean(rs);
+                player = updateUserInfo(player, rs);
 
             }
             if (isSessionValid(player)) {
@@ -82,27 +83,8 @@ public class ValidateIdentityServlet extends HttpServlet {
         return true;
     }
 
-    private boolean isUserValid(String username, String password) {
-        Connection con = null;
-        try {
-            con = DBConnection.getConnection();
 
-            PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM PlayerAccount WHERE username = ? and password=?");
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-
-            if (!rs.next()) {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    private PlayerBean toPlayerBean(ResultSet rs) {
-        PlayerBean player = new PlayerBean();
+    private PlayerBean updateUserInfo(PlayerBean player, ResultSet rs) {
         try {
             if (rs.next()) {
                 player.setmUsername(rs.getString("username"));
@@ -120,9 +102,9 @@ public class ValidateIdentityServlet extends HttpServlet {
 
     private ResultSet getUserInfo(String username, String password) {
         ResultSet rs = null;
+        Connection con = null;
         try {
-            Connection con = null;
-
+            con = DBConnection.getConnection();
             PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, playtime FROM PlayerAccount WHERE username = ? and password=?");
             stmt.setString(1, username);
             stmt.setString(2, password);
@@ -131,6 +113,25 @@ public class ValidateIdentityServlet extends HttpServlet {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    private static boolean isUserValid(String username, String password) {
+        Connection con = null;
+        try {
+            con = DBConnection.getConnection();
+
+            PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM PlayerAccount WHERE username = ? and password=?");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override

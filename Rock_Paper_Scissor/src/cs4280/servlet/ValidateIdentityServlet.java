@@ -15,9 +15,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class ValidateIdentityServlet extends HttpServlet {
-
+    String sec;
+    long time;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         /////////////////////////////////////////////
@@ -34,20 +39,22 @@ public class ValidateIdentityServlet extends HttpServlet {
         */
         if (isUserValid(request.getParameter("j_username"), request.getParameter("j_password")) || (request.getParameter("test").equals("true"))) {
             PlayerBean player = new PlayerBean();
+            Date date = new Date();
+            time = date.getTime();
+            sec = String.valueOf(time);
+            player.setmLoginTime(sec);
+
             if (!request.getParameter("test").equals("true")) {
                 //grab info
                 ResultSet rs = getUserInfo(request.getParameter("j_username"), request.getParameter("j_password"));
                 player = toPlayerBean(rs);
 
             }
-            if (isSessionValid(player)) {
-                session.setAttribute("playerInfo", player);
-            } else {
-                //break-in attempt
-            }
+
         }
+        long result = time+100;
 
-
+        session.setAttribute("sec",result);
         session.setAttribute("ackMsg", new AckBean());
 
         /////////////////////////////////////////////
@@ -76,10 +83,6 @@ public class ValidateIdentityServlet extends HttpServlet {
         grab db login time
         compare
      */
-    private boolean isSessionValid(PlayerBean player) {
-
-        return true;
-    }
 
     private boolean isUserValid(String username, String password) {
         Connection con = null;

@@ -1,5 +1,6 @@
 package cs4280.servlet;
 
+import cs4280.bean.AckBean;
 import cs4280.bean.PlayerBean;
 import cs4280.exception.WrongCredentialException;
 import util.DBConnection;
@@ -44,6 +45,7 @@ public class ValidateIdentityServlet extends HttpServlet {
             }
         }
         session.setAttribute("playerInfo", player);
+        session.setAttribute("ackMsg", new AckBean());
 
         /////////////////////////////////////////////
                 /*

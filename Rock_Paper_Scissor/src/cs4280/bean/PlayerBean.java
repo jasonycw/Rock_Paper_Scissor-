@@ -7,14 +7,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PlayerBean {
-    private String mUsername = "Developer";
-    private String mPreferredTheme = "Default";
-    private int mWinCount = 100;
-    private int mLoseCount = 1;
-    private int mTotalPlayTime = 6;
+    private String mUsername;
+    private String mPreferredTheme;
+    private int mWinCount;
+    private int mLoseCount;
+    private int mTotalPlayTime;
 
     public PlayerBean() {
-
+        mUsername = "Developer";
+        mPreferredTheme = "Default";
+        mWinCount = 100;
+        mLoseCount = 1;
+        mTotalPlayTime = 6;
     }
 
     public String getmUsername() {

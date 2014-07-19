@@ -1,5 +1,7 @@
 package cs4280.servlet;
 
+import util.SessionValidation;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,8 @@ import java.io.IOException;
 public class MainServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //if(SessionValidation.test("sdf","safd","dsaf")) lewis
 
         /////////////////////////////////////////////
         /*

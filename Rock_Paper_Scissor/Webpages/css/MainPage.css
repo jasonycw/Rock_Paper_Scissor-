@@ -3,10 +3,10 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro|Lato|Ubuntu|Roboto);
 
 /**{*/
-    /*animation*/
-    /*transition: all .5s ease-in-out;*/
-    /*-moz-transition: all .5s ease-in-out;*/
-    /*-webkit-transition: all .5s ease-in-out;*/
+/*animation*/
+/*transition: all .5s ease-in-out;*/
+/*-moz-transition: all .5s ease-in-out;*/
+/*-webkit-transition: all .5s ease-in-out;*/
 /*}*/
 
 p {
@@ -71,7 +71,7 @@ p {
     padding: 5%;
 }
 
-.nameTag{
+.nameTag {
     /*position*/
     float: left;
     height: 100px;
@@ -98,11 +98,11 @@ p {
     height: 300px;
 }
 
-#buttons{
+#buttons {
     height: 200px;
 }
 
-#nameTagsDiv{
+#nameTagsDiv {
     /*position*/
     position: relative;
     margin: 10px auto;
@@ -110,12 +110,10 @@ p {
     width: 300px;
 
     /*property*/
-    overflow:hidden;
-
-
+    overflow: hidden;
 }
 
-#nameTags{
+#nameTags {
     width: 1200px;
     margin-top: -100px;
     margin-left: -450px;

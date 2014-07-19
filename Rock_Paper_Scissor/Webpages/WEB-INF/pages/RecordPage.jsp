@@ -47,26 +47,28 @@
         --%>
         <div id="rankTagContainer">
             <div id="ratioTag" class="nameTag">W/L Ratio</div>
-            <div id="totalGamesTag" class="nameTag">Number of Game</div>
+            <div id="totalGamesTag" class="nameTag"># of Game</div>
             <div id="totalWinTag" class="nameTag">Win</div>
             <div id="totalLoseTag" class="nameTag">Lose</div>
             <div id="gameTimeTag" class="nameTag">Time</div>
         </div>
         <div id="rankTableContainer">
-            <div id="ratioTable" class="nameTag">
+            <div id="allTableContainer">
+                <div id="ratioTable" class="rankTable">
+                    ratioTable
+                </div>
+                <div id="totalGamesTable" class="rankTable">
+                    totalGamesTable
+                </div>
+                <div id="totalWinTable" class="rankTable">
+                    totalWinTable
+                </div>
+                <div id="totalLoseTable" class="rankTable">
+                    totalLoseTable
+                </div>
+                <div id="gameTimeTable" class="rankTable">
 
-            </div>
-            <div id="totalGamesTable" class="nameTag">
-
-            </div>
-            <div id="totalWinTable" class="nameTag">
-
-            </div>
-            <div id="totalLoseTable" class="nameTag">
-
-            </div>
-            <div id="gameTimeTable" class="nameTag">
-
+                </div>
             </div>
         </div>
     </div>
@@ -76,7 +78,7 @@
             Located at bottom right
         --%>
         Total number of games played: 82
-            <br/>
+        <br/>
         Current online user: 3
     </div>
 </div>

@@ -7,23 +7,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PlayerBean {
-    private String mUsername = "Developer";
-    private String mPreferredTheme = "Default";
-    private int mWinCount = 100;
-    private int mLoseCount = 1;
-    private int mTotalPlayTime = 6;
-    private int theme = 1;
 
-    public int getTheme() {
-        return theme;
-    }
-
-    public void setTheme(int theme) {
-        this.theme = theme;
-    }
+    private String mUsername;
+    private String mPreferredTheme;
+    private int mWinCount;
+    private int mLoseCount;
+    private int mDrawCount;
+    private String mLoginTime;
 
     public PlayerBean() {
-
+        mUsername = "Developer";
+        mPreferredTheme = "Default";
+        mWinCount = 100;
+        mLoseCount = 1;
+        mLoginTime=" 2009-10-02 16:52:30 ";
+        /*
+        grab current time through db
+         */
     }
 
     public String getmUsername() {
@@ -58,12 +58,21 @@ public class PlayerBean {
         this.mLoseCount = mLoseCount;
     }
 
-    public int getmTotalPlayTime() {
-        return mTotalPlayTime;
+
+    public int getmDrawCount() {
+        return mDrawCount;
     }
 
-    public void setmTotalPlayTime(int mTotalPlayTime) {
-        this.mTotalPlayTime = mTotalPlayTime;
+    public void setmDrawCount(int mDrawCount) {
+        this.mDrawCount = mDrawCount;
+    }
+
+    public String getmLoginTime() {
+        return mLoginTime;
+    }
+
+    public void setmLoginTime(String mLoginTime) {
+        this.mLoginTime = mLoginTime;
     }
 
     public void update() throws SQLException {

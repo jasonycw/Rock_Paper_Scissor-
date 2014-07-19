@@ -22,6 +22,19 @@ public class LogoutServlet extends HttpServlet {
 
         /////////////////////////////////////////////
 
+        /////////////////////////////////////////////
+        /*
+        Louis Workspace, clean up db last login time
+        */
+
+        /////////////////////////////////////////////
+
+        /////////////////////////////////////////////
+        /*
+        Lewis, create ackBean to tell user to login again
+         */
+        /////////////////////////////////////////////
+
         //Kick the user back to login page
         response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/redirect");
     }

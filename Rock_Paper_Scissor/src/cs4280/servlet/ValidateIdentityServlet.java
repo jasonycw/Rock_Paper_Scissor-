@@ -1,8 +1,8 @@
 package cs4280.servlet;
 
 import cs4280.bean.PageProgressBean;
+import cs4280.bean.AckBean;
 import cs4280.bean.PlayerBean;
-import cs4280.exception.WrongCredentialException;
 import util.DBConnection;
 import util.ProjectUrl;
 
@@ -16,8 +16,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class ValidateIdentityServlet extends HttpServlet {
+    String sec;
+    long time;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,7 +31,7 @@ public class ValidateIdentityServlet extends HttpServlet {
         /*
         Renee Workspace, check session here, kick the user back if needed
         */
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
 
         /////////////////////////////////////////////
 
@@ -33,22 +39,30 @@ public class ValidateIdentityServlet extends HttpServlet {
         /*
         Louis Workspace
         */
-        PlayerBean player = new PlayerBean();
-        if (!request.getParameter("test").equals("true")) {
-            try {
+        boolean devMode = request.getParameter("test").equals("true");
+        String username = request.getParameter("j_username");
+        String password = request.getParameter("j_password");
+
+        if (devMode || isUserValid(username, password)) {
+            PlayerBean player = new PlayerBean();
+            Date date = new Date();
+            time = date.getTime();
+            sec = String.valueOf(time);
+            player.setmLoginTime(sec);
+            if (!devMode) {
                 //grab info
-                ResultSet rs = getUserInfo(request.getParameter("j_username"), request.getParameter("j_password"));
-                player = toPlayerBean(rs);
-
-            } catch (WrongCredentialException e) {
-                e.printStackTrace();
+                ResultSet rs = getUserInfo(username, password);
+                player = updateUserInfo(player, rs);
             }
-        }
+            long result = time + 100;
+            session.setAttribute("playerInfo", player);
+            session.setAttribute("sec", result);
+            session.setAttribute("ackMsg", new AckBean());
+            PageProgressBean pageProgress = new PageProgressBean();
+            pageProgress.setIsLoggedIn(true);
 
-        PageProgressBean pageProgress = new PageProgressBean();
-        pageProgress.setIsLoggedIn(true);
-        session.setAttribute("playerInfo", player);
-        session.setAttribute("pageInfo", pageProgress);
+            session.setAttribute("pageInfo", pageProgress);
+        }
 
         /////////////////////////////////////////////
                 /*
@@ -70,16 +84,23 @@ public class ValidateIdentityServlet extends HttpServlet {
     }
 
     /////////////////////////////////////////////
+     /*
+    Lewis Workspace,
+        get time from bean
+        grab db login time
+        compare
+     */
 
-    private PlayerBean toPlayerBean(ResultSet rs) {
-        PlayerBean player = new PlayerBean();
+
+    private PlayerBean updateUserInfo(PlayerBean player, ResultSet rs) {
         try {
             if (rs.next()) {
                 player.setmUsername(rs.getString("username"));
                 player.setmPreferredTheme(rs.getString("theme"));
                 player.setmWinCount(rs.getInt("win"));
                 player.setmLoseCount(rs.getInt("lose"));
-                player.setmTotalPlayTime(rs.getInt("win"));
+                player.setmDrawCount(rs.getInt("draw"));
+                player.setmLoginTime(rs.getString("login_time"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,24 +108,38 @@ public class ValidateIdentityServlet extends HttpServlet {
         return player;
     }
 
-    private ResultSet getUserInfo(String username, String password) throws WrongCredentialException {
+    private ResultSet getUserInfo(String username, String password) {
         ResultSet rs = null;
+        Connection con = null;
         try {
-            Connection con = DBConnection.getConnection();
-
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM PlayerAccount WHERE username = ? and password=?");
+            con = DBConnection.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, draw, login_time FROM PlayerAccount WHERE username = ? AND password=?");
             stmt.setString(1, username);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
-
-            if (!rs.next()) {
-                throw new WrongCredentialException();
-            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    private static boolean isUserValid(String username, String password) {
+        Connection con = null;
+        try {
+            con = DBConnection.getConnection();
+
+            PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM PlayerAccount WHERE username = ? AND password=?");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override

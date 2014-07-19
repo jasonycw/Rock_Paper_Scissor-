@@ -6,10 +6,13 @@
 <head>
     <title>MainPage</title>
     <link href="<c:url value="/css/MainPage.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/ack2.css"/>" rel="stylesheet">
     <script src="<c:url value="/js/mainPageAnimation.js"/>"></script>
 </head>
 <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
+<jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
 <body>
+<jsp:getProperty name="ackMsg" property="HTMLOutput"/>
 <p align="right">Welcome,
     <jsp:getProperty name="playerInfo" property="mUsername"/>
 </p>

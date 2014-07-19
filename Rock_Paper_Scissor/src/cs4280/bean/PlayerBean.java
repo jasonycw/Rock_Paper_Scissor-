@@ -17,7 +17,7 @@ public class PlayerBean {
 
     public PlayerBean() {
         mUsername = "Developer";
-        mPreferredTheme = "Default";
+        mPreferredTheme = "1";
         mWinCount = 100;
         mLoseCount = 1;
         mLoginTime="1405641600";

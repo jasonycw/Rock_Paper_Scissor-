@@ -1,5 +1,6 @@
 package cs4280.bean;
 
+import cs4280.exception.GameSetException;
 import cs4280.model.RoundResult;
 
 import java.util.Queue;
@@ -28,7 +29,11 @@ public class GameProgressBean {
         return mResult;
     }
 
-    public void updateCurrentRoundResult(int playerDecision, int npcDecision) {
+    public void updateCurrentRoundResult(int playerDecision, int npcDecision) throws GameSetException {
+        if (playerDecision==0 && npcDecision==0){
+            throw new GameSetException();
+        }
+
         if ((playerDecision != ROCKCODE && playerDecision != PAPERCODE && playerDecision != SCISSORCODE) || (npcDecision != ROCKCODE && npcDecision != PAPERCODE && npcDecision != SCISSORCODE)) {
             return;
         }

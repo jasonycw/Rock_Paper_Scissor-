@@ -36,7 +36,7 @@ public class ProfileServlet extends HttpServlet {
             /**
              * to do: set password + password checking
              */
-                playerInfo.setTheme(Integer.parseInt(request.getParameter("theme")));
+                playerInfo.setmPreferredTheme(request.getParameter("theme"));
 
                 session.setAttribute("playerInfo",playerInfo);
         }

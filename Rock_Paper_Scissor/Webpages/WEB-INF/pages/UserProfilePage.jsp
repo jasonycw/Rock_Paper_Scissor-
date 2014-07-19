@@ -14,7 +14,7 @@
         <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     </head>
     <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
-    <body class="background<%=playerInfo.getTheme()%>">
+    <body class="background<%=playerInfo.getmPreferredTheme()%>">
         <h1 style="color: #fff">Personal Profile</h1>
         <form action="" method="post">
             <%if (request.getParameter("submitProfile") != null && request.getParameter("submitProfile").equals("1")){%>

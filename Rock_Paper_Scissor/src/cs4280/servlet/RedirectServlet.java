@@ -15,6 +15,7 @@ public class RedirectServlet extends HttpServlet {
         /////////////////////////////////////////////
         /*
         Renee Workspace, check if session exists, redirect to previous page if so
+        grab playerbean, pageProgressBean
         */
 
         /////////////////////////////////////////////

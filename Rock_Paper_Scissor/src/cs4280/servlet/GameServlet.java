@@ -17,11 +17,11 @@ public class GameServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
-        PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
-        if (playerInfo == null ||  pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true){
-            dispatcher=request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-            dispatcher.forward(request,response);
+        PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
+        if (playerInfo == null || pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true) {
+            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
+            dispatcher.forward(request, response);
             return;
         }
         pageProgressBean.setmBreadcrumb("/game");

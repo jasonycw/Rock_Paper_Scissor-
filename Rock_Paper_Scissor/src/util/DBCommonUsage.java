@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBCommonUsage {
-    public String getLoginTime(String username, String password) {
+    public static String getLoginTime(String username, String password) {
         Connection con = null;
         ResultSet rs = null;
         PreparedStatement stmt = null;

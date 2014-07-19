@@ -1,7 +1,9 @@
 package cs4280.servlet;
 
+
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
+import util.SessionValidation;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +27,17 @@ public class MainServlet extends HttpServlet {
             return;
         }
         pageProgressBean.setmBreadcrumb("/main");
+
+        //if(SessionValidation.test("sdf","safd","dsaf")) lewis
+
+        /////////////////////////////////////////////
+        /*
+        Renee Workspace, check session here, kick the user back if needed
+        */
+
+        /////////////////////////////////////////////
+
+
         //Forward response to jsp for display
         dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/MainPage.jsp");
         dispatcher.forward(request, response);

@@ -19,7 +19,7 @@ public class PlayerBean {
         mPreferredTheme = "Default";
         mWinCount = 100;
         mLoseCount = 1;
-        mLoginTime=" 2009-10-02 16:52:30 ";
+        mLoginTime="1405641600";
         /*
         grab current time through db
          */

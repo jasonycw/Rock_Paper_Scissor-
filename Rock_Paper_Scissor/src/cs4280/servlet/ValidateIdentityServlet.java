@@ -79,13 +79,6 @@ public class ValidateIdentityServlet extends HttpServlet {
     }
 
     /////////////////////////////////////////////
-     /*
-    Lewis Workspace,
-        get time from bean
-        grab db login time
-        compare
-     */
-
 
     private PlayerBean updateUserInfo(PlayerBean player, ResultSet rs) {
         try {

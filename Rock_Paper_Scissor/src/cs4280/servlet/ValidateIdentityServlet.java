@@ -1,5 +1,6 @@
 package cs4280.servlet;
 
+import cs4280.bean.PageProgressBean;
 import cs4280.bean.AckBean;
 import cs4280.bean.PlayerBean;
 import util.DBConnection;
@@ -57,6 +58,10 @@ public class ValidateIdentityServlet extends HttpServlet {
             session.setAttribute("playerInfo", player);
             session.setAttribute("sec", result);
             session.setAttribute("ackMsg", new AckBean());
+            PageProgressBean pageProgress = new PageProgressBean();
+            pageProgress.setIsLoggedIn(true);
+
+            session.setAttribute("pageInfo", pageProgress);
         }
 
         /////////////////////////////////////////////

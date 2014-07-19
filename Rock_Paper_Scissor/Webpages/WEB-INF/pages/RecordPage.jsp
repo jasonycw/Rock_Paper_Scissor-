@@ -24,7 +24,7 @@
             TODO: User name, W/L ratio, no. of game played, no. of win, no. of lose, total game time
             Out of window, only shows while personalStateButton is clicked
         --%>
-        <div id="personalRankTable" class="table">
+        <div id="personalRankTable" class="centered" onclick="">
             <div class="oneColumn">Total games</div>
             <div class="oneColumn">Time played</div>
             <div class="twoColumn">W/L Ratio</div>
@@ -40,7 +40,7 @@
         --%>
         Personal State
     </div>
-    <div id="globalRankContainer">
+    <div id="globalRankContainer" class="centered">
         <%--
             TODO: Table showing all user ranking. Sort by W/L ratio, no. of game played, no. of win, no. of lose, total game time. Highlighting current user
             Located at middle
@@ -75,8 +75,9 @@
             TODO: Showing how many games has been played and current logined user account.
             Located at bottom right
         --%>
-        Total number of games played:
-        Current online user:
+        Total number of games played: 82
+            <br/>
+        Current online user: 3
     </div>
 </div>
 </body>

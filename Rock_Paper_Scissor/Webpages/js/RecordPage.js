@@ -18,7 +18,7 @@ window.onload = function () {
         personalRankContainer.style.marginTop = "-100%";
     }
 
-    document.getElementById("personalRankTable").onclick= function(){
-        personalRankContainer.style.marginTop = 0;
+    document.getElementById("personalRankTable").onclick = function(e){
+        e.stopPropagation();
     }
 }

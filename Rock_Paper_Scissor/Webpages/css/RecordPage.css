@@ -3,6 +3,15 @@
     color: white;
 }
 
+.centered {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 #personalRankContainer{
     /*position*/
     display: block;
@@ -10,6 +19,7 @@
     width: 100%;
     height: 100%;
     margin-top: -100%;
+    z-index:999;
 
     /*style*/
     background-color: rgba(0, 0, 0, 0.33);
@@ -20,31 +30,22 @@
     transition: margin .5s ease-in-out;
     -moz-transition: margin .5s ease-in-out;
     -webkit-transition: margin .5s ease-in-out;
-    /*transition: opacity 0s ease-in-out;*/
-    /*-moz-transition: opacity 0s ease-in-out;*/
-    /*-webkit-transition: opacity 0s ease-in-out;*/
 }
 
 #personalRankContainer:hover{ cursor:pointer}
 
-.table{
+#personalRankTable{
     /*position*/
     padding: 5px;
     width: 520px;
     height: 320px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
 
     /*style*/
     background-color: rgba(0, 0, 0, 0.50);
     border-radius: 10px;
 }
 
-.table:hover{ cursor:default }
+#personalRankTable:hover{ cursor:default }
 
 .twoColumn, .oneColumn{
     /*position*/
@@ -78,12 +79,10 @@
 
 #personalStateButton{
     /*position*/
-    /*display: block;*/
-    /*position: absolute;*/
     margin: 0 auto;
-    width: 500px;
 
     /*style*/
+    width: 500px;
     text-align: center;
     font-size: 40px;
     background-color: rgba(0, 0, 0, 0.33);
@@ -95,4 +94,26 @@
 }
 
 #personalStateButton:hover{ cursor:pointer}
+
+#globalRankContainer{
+    /*style*/
+    width: 500px;
+    height: 500px;
+}
+
+#siteStatisticContainer{
+    /*position*/
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    /*style*/
+    padding: 5px;
+    font-size: 16px;
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.33);
+    border-top-left-radius: 10px;
+    border-left: 3px solid rgba(245, 245, 245, 0.80);
+    border-top: 3px solid rgba(245, 245, 245, 0.80);
+}
 

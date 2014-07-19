@@ -43,7 +43,7 @@ public class ValidateIdentityServlet extends HttpServlet {
         if (devMode || isUserValid(username, password)) {
             PlayerBean player = new PlayerBean();
             String currentTime = Time.getCurrentTimeInUnix();
-            player.setmLoginTime(currentTime);
+            player.setmLoginTime(currentTime);//send key to dB
             if (!devMode) {
                 //Get info from DB
                 ResultSet rs = getUserInfo(username, password);

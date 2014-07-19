@@ -14,6 +14,17 @@ public class PlayerBean {
     private int mLoseCount;
     private int mDrawCount;
     private String mLoginTime;
+    private int mTotalPlaytime;
+
+    public int getmTotalPlaytime() {
+        return mTotalPlaytime;
+    }
+
+    public void updateTotalPlaytime() {
+        /*
+        Get current time, and add displacement
+         */
+    }
 
     public PlayerBean() {
         mUsername = "Developer";
@@ -21,6 +32,7 @@ public class PlayerBean {
         mWinCount = 100;
         mLoseCount = 1;
         mLoginTime="1405641600";
+
         /*
         grab current time through db
          */

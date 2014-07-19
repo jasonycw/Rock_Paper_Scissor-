@@ -1,9 +1,11 @@
 package util;
-import util.DBCommonUsage;
+
+import static util.DBCommonUsage.getLoginTime;
+
 public class SessionValidation {
 public static boolean  test(String username,String password,String sessionTime) {
 
-    String dbTime = DBCommonUsage.getLoginTime(username, password);
+    String dbTime = getLoginTime(username, password);
     long temp = Long.parseLong(dbTime);
     String result = String.valueOf(temp+100);
     if (result.equals(sessionTime))

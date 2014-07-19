@@ -1,5 +1,8 @@
 package cs4280.servlet;
 
+import cs4280.bean.PageProgressBean;
+import cs4280.bean.PlayerBean;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +13,18 @@ import java.io.IOException;
 
 public class RecordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /////////////////////////////////////////////
-        /*
-        Renee Workspace, check session here, kick the user back if needed
-        */
-
+        RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
+        PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
+        PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
+        if (playerInfo == null ||  pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true){
+            dispatcher=request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
+            dispatcher.forward(request,response);
+            return;
+        }
 
-        /////////////////////////////////////////////
-
-        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/RecordPage.jsp");
+        pageProgressBean.setmBreadcrumb("/record");
+        dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/RecordPage.jsp");
         dispatcher.forward(request,response);
     }
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

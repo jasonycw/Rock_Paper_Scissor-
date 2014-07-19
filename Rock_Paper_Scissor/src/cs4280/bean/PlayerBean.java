@@ -17,10 +17,11 @@ public class PlayerBean {
 
     public PlayerBean() {
         mUsername = "Developer";
-        mPreferredTheme = "Default";
+        mPreferredTheme = "1";
         mWinCount = 100;
         mLoseCount = 1;
         mLoginTime=" 2009-10-02 16:52:30 ";
+
         /*
         grab current time through db
          */

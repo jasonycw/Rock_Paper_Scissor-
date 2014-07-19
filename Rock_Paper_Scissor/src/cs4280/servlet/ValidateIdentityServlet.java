@@ -60,19 +60,11 @@ public class ValidateIdentityServlet extends HttpServlet {
             session.setAttribute("ackMsg", new AckBean());
             PageProgressBean pageProgress = new PageProgressBean();
             pageProgress.setIsLoggedIn(true);
-
+            pageProgress.setmBreadcrumb("main");
             session.setAttribute("pageInfo", pageProgress);
         }
 
-        /////////////////////////////////////////////
-                /*
-                Renee Workspace, user is now authenticated, bean is ready, save any information if needed
-                */
 
-//                session.setAttribute("username", username);
-//                session.setAttribute("isLoginedIn", "1");
-//                session.setAttribute("Background", "1/2/3");
-//                session.setAttribute("currentPage", "main");
         // when this page direct to another page, have to set attribute first.. when page is first loaded, check attribute see if is really this page ==> redirect
         // set time
 

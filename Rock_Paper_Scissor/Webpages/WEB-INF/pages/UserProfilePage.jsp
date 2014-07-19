@@ -12,27 +12,29 @@
     <head>
         <title>Personal Profile</title>
         <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
+        <link href="<c:url value="/css/Profile.css"/>" rel="stylesheet">
+        <link href="<c:url value="/css/ack2.css"/>" rel="stylesheet">
     </head>
     <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
+
+    <jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
     <body class="background<%=playerInfo.getmPreferredTheme()%>">
-        <h1 style="color: #fff">Personal Profile</h1>
+    <%if (request.getParameter("submitProfile") != null && request.getParameter("submitProfile").equals("1")){%>
+    <jsp:getProperty name="ackMsg" property="HTMLOutput"/>
+    <%}%>
+    <h1 style="color: #fff">Personal Profile</h1>
         <form action="" method="post">
-            <%if (request.getParameter("submitProfile") != null && request.getParameter("submitProfile").equals("1")){%>
-            <div class="submitSuccess">
-                <span>Your submit has been received, Thank you!</span>
-            </div>
-            <%}%>
+
             <h3>Username</h3>
             <div><%=playerInfo.getmUsername()%></div>
             <h3>Password</h3>
             <input type="text" name="password"/>
             <h3>Theme</h3>
-
-            <a href="javascript:changeTheme(1)"><div id="1" class="image background1"></div></a>
-            <a href="javascript:changeTheme(2)"><div id="2" class="image background2"></div></a>
-            <a href="javascript:changeTheme(3)"><div id="3" class="image background3"></div></a>
+            <a href="javascript:changeTheme(1)"><div id="1" class="image background1 <%if(playerInfo.getmPreferredTheme().equals("1")){out.print("selected");}%>"></div></a>
+            <a href="javascript:changeTheme(2)"><div id="2" class="image background2 <%if(playerInfo.getmPreferredTheme().equals("2")){out.print("selected");}%>"></div></a>
+            <a href="javascript:changeTheme(3)"><div id="3" class="image background3 <%if(playerInfo.getmPreferredTheme().equals("3")){out.print("selected");}%>"></div></a>
             <div class="clearfix"></div>
-            <input type="hidden" id="theme" name="theme" value="1"/>
+            <input type="hidden" id="theme" name="theme" value=""<%=playerInfo.getmPreferredTheme()%>"/>
             <button type="submit" name="submitProfile" value="1">Save</button>
         </form>
     </body>

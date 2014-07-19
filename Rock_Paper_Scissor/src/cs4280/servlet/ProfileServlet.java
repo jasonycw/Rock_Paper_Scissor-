@@ -1,5 +1,6 @@
 package cs4280.servlet;
 
+import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 
@@ -30,14 +31,25 @@ public class ProfileServlet extends HttpServlet {
             dispatcher.forward(request,response);
             return;
         }
+        pageProgressBean.setmBreadcrumb("/profile");
+
         String submited = request.getParameter("submitProfile");
         if (submited != null && submited.equals("1")){
-
+            AckBean ack  = (AckBean) session.getAttribute("ackMsg");
             /**
              * to do: set password + password checking
              */
-                playerInfo.setmPreferredTheme(request.getParameter("theme"));
 
+                if(ack == null){
+                    ack = new AckBean();
+                }
+
+                ack.setmMessage("Your submit has been well received, Thank you!");
+                String theme = request.getParameter("theme");
+                if(theme != null){
+                    playerInfo.setmPreferredTheme(theme);
+                }
+                session.setAttribute("ackMsg",ack);
                 session.setAttribute("playerInfo",playerInfo);
         }
 

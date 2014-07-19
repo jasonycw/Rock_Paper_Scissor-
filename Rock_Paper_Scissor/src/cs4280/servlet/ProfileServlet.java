@@ -3,6 +3,7 @@ package cs4280.servlet;
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
+import util.SessionValidation;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +25,12 @@ public class ProfileServlet extends HttpServlet {
         */
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
+        String usr = (String)session.getAttribute("usr");
+        String pw = (String)session.getAttribute("pw");
+        String encryptedKey = (String)session.getAttribute("encryptedKey");
+        if(!SessionValidation.CheckBreakInAttempt(usr,pw,encryptedKey)) {
+
+        }
         PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
         if (playerInfo == null || pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true) {

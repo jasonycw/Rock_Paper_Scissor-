@@ -22,8 +22,9 @@ import java.util.Date;
 
 
 public class ValidateIdentityServlet extends HttpServlet {
-    String sec;
-    long time;
+    String key;
+    String encryptedKey;
+    long currentTime;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -46,17 +47,22 @@ public class ValidateIdentityServlet extends HttpServlet {
         if (devMode || isUserValid(username, password)) {
             PlayerBean player = new PlayerBean();
             Date date = new Date();
-            time = date.getTime();
-            sec = String.valueOf(time);
-            player.setmLoginTime(sec);
+            currentTime = date.getTime();
+            key = Long.toString(currentTime);
+            player.setmLoginTime(key);//send key to dB
+            long temp = currentTime + 100;
+            encryptedKey = Long.toString(temp);
+            session.setAttribute("encryptedKey", encryptedKey); //send encrypted Key to Session
+            session.setAttribute("usr",username);
+            session.setAttribute("pw",password);
             if (!devMode) {
                 //grab info
                 ResultSet rs = getUserInfo(username, password);
                 player = updateUserInfo(player, rs);
             }
-            long result = time + 100;
+
             session.setAttribute("playerInfo", player);
-            session.setAttribute("sec", result);
+
             session.setAttribute("ackMsg", new AckBean());
             PageProgressBean pageProgress = new PageProgressBean();
             pageProgress.setIsLoggedIn(true);

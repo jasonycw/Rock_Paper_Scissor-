@@ -1,16 +1,29 @@
 package util;
 import util.DBCommonUsage;
+
+import static java.lang.Long.parseLong;
+
 public class SessionValidation {
-public static boolean  test(String username,String password,String sessionTime) {
+public static boolean CheckBreakInAttempt(String username,String password,String sessionKey) {
+    String encryptedKey="";
 
-    String dbTime = DBCommonUsage.getLoginTime(username, password);
-    long temp = Long.parseLong(dbTime);
-    String result = String.valueOf(temp+100);
-    if (result.equals(sessionTime))
-        return true;
-    else
-        return false;
+    String key = DBCommonUsage.getLoginTime(username, password);
+    try {
+            long temp = Long.valueOf(key);
+            encryptedKey = Long.toString(temp+100);
+            if (encryptedKey.equals(sessionKey))
+                return false;
+            else
+                return true;
+    }
+    catch(NumberFormatException n)
+    {
 
+    }
+
+
+    return true;
+}
 }
 
-}
+

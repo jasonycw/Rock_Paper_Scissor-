@@ -34,6 +34,7 @@ public class ProfileServlet extends HttpServlet {
         pageProgressBean.setmBreadcrumb("/profile");
         String submited = request.getParameter("submitProfile");
 
+
         if (submited != null && submited.equals("1")) {
             String PasswwordErrorMessage = passwordErrorMessage(request.getParameter("password"), request.getParameter("confirmPassword"));
             AckBean ack = (AckBean) session.getAttribute("ackMsg");

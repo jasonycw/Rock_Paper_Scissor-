@@ -17,6 +17,7 @@
         <link href="<c:url value="/css/ack2.css"/>" rel="stylesheet">
     </head>
     <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
+
     <jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
     <body class="background<%=playerInfo.getmPreferredTheme()%>">
     <%if (request.getParameter("submitProfile") != null && request.getParameter("submitProfile").equals("1")){

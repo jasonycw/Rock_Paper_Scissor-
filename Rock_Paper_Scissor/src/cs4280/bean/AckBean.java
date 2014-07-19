@@ -29,10 +29,7 @@ public class AckBean {
         if (mMessage == null) {
             return "";
         } else {
-            return "<div class=\"ack-box " + mType + "\"><p> Your settings have been saved successfully ! </p><div class=\"ack-progress\"></div></div>";
-
-            //        return  ? "" : "<p class=\"" + mType + "\">" + mMessage + "</p>";
-
+            return "<div class=\"ack-box " + mType + "\"><p>" + mMessage + "</p><div class=\"ack-progress\"></div></div>";
         }
 
     }

@@ -1,10 +1,11 @@
 package cs4280.servlet;
 
-import cs4280.bean.PageProgressBean;
 import cs4280.bean.AckBean;
+import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 import util.DBConnection;
 import util.ProjectUrl;
+import util.Time;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,14 +17,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class ValidateIdentityServlet extends HttpServlet {
-    String sec;
-    long time;
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -45,16 +42,14 @@ public class ValidateIdentityServlet extends HttpServlet {
 
         if (devMode || isUserValid(username, password)) {
             PlayerBean player = new PlayerBean();
-            Date date = new Date();
-            time = date.getTime();
-            sec = String.valueOf(time);
-            player.setmLoginTime(sec);
+            String currentTime = Time.getCurrentTimeInUnix();
+            player.setmLoginTime(currentTime);
             if (!devMode) {
-                //grab info
+                //Get info from DB
                 ResultSet rs = getUserInfo(username, password);
                 player = updateUserInfo(player, rs);
             }
-            long result = time + 100;
+            long result = Integer.parseInt(currentTime) + 100;
             session.setAttribute("playerInfo", player);
             session.setAttribute("sec", result);
             session.setAttribute("ackMsg", new AckBean());

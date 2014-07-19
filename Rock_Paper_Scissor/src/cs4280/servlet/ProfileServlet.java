@@ -1,5 +1,8 @@
 package cs4280.servlet;
 
+import cs4280.bean.PageProgressBean;
+import cs4280.bean.PlayerBean;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,17 +23,22 @@ public class ProfileServlet extends HttpServlet {
         */
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        if (session.getAttribute("isLoggedIn") != "1"){
-            dispatcher=request.getRequestDispatcher("/pages/index.jsp");
+        PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
+        PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
+        if (playerInfo == null ||  pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true){
+            dispatcher=request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
             dispatcher.forward(request,response);
+            return;
         }
+        String submited = request.getParameter("submitProfile");
+        if (submited != null && submited.equals("1")){
 
-        if (request.getParameter("submitProfile").equals("1")){
-        /*
-        * Louis please set bean here
-        * */
-        String theme = request.getParameter("theme");
-        session.setAttribute("theme",theme);
+            /**
+             * to do: set password + password checking
+             */
+                playerInfo.setTheme(Integer.parseInt(request.getParameter("theme")));
+
+                session.setAttribute("playerInfo",playerInfo);
         }
 
 

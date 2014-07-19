@@ -12,6 +12,15 @@ public class PlayerBean {
     private int mWinCount = 100;
     private int mLoseCount = 1;
     private int mTotalPlayTime = 6;
+    private int theme = 1;
+
+    public int getTheme() {
+        return theme;
+    }
+
+    public void setTheme(int theme) {
+        this.theme = theme;
+    }
 
     public PlayerBean() {
 

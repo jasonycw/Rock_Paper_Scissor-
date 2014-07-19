@@ -1,5 +1,6 @@
 package cs4280.servlet;
 
+import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 import cs4280.exception.WrongCredentialException;
 import util.DBConnection;
@@ -43,7 +44,11 @@ public class ValidateIdentityServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
+        PageProgressBean pageProgress = new PageProgressBean();
+        pageProgress.setIsLoggedIn(true);
         session.setAttribute("playerInfo", player);
+        session.setAttribute("pageInfo", pageProgress);
 
         /////////////////////////////////////////////
                 /*
@@ -61,7 +66,7 @@ public class ValidateIdentityServlet extends HttpServlet {
 
 
         //Forward response to jsp for display
-        response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/main");
+        response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
     }
 
     /////////////////////////////////////////////

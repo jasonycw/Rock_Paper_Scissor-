@@ -9,15 +9,6 @@
 /*-webkit-transition: all .5s ease-in-out;*/
 /*}*/
 
-p {
-    right: 0;
-    font-family: 'Exo', sans-serif;
-    color: white;
-    font-size: 25;
-    opacity: 0.8;
-    filter: alpha(opacity=80); /* For IE8 and earlier */
-}
-
 .centered {
     position: absolute;
     top: 0;
@@ -126,4 +117,22 @@ p {
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     transition: all 0.5s ease;
+}
+
+#welcomeDiv{
+    /*position*/
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 50px;
+    padding: 10px;
+}
+
+#welcomeDiv p {
+    margin: 0;
+    font-family: 'Exo', sans-serif;
+    color: white;
+    font-size: 25;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
 }

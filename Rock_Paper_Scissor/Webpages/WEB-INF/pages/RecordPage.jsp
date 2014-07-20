@@ -27,18 +27,18 @@
         Out of window, only shows while personalStateButton is clicked
     --%>
     <div id="personalRankTable" class="centered" onclick="">
-        <div class="oneColumn">
+        <div class="twoColumn">
             <div class="title">Total Game</div>
             <div class="data">
                 <jsp:getProperty name="playerInfo" property="totalGame"/>
             </div>
         </div>
-        <div class="oneColumn">
-            <div class="title">Time Played (min)</div>
-            <div class="data">
-                <jsp:getProperty name="playerInfo" property="mTotalOnlineTime"/>
-            </div>
-        </div>
+        <%--<div class="oneColumn">--%>
+            <%--<div class="title">Time Played (min)</div>--%>
+            <%--<div class="data">--%>
+                <%--<jsp:getProperty name="playerInfo" property="mTotalOnlineTime"/>--%>
+            <%--</div>--%>
+        <%--</div>--%>
         <div class="twoColumn">
             <div class="title">W/L Ratio</div>
             <div class="data">
@@ -82,7 +82,7 @@
     <div id="totalGamesTag" class="nameTag"># of Game</div>
     <div id="totalWinTag" class="nameTag">Win</div>
     <div id="totalLoseTag" class="nameTag">Lose</div>
-    <div id="gameTimeTag" class="nameTag">Time</div>
+    <%--<div id="gameTimeTag" class="nameTag">Time</div>--%>
 </div>
 <div id="rankTableContainer">
 <div id="allTableContainer">
@@ -95,37 +95,17 @@
             <th>W/L Ratio</th>
         </tr>
         </thead>
-        <tr>
-            <td>1</td>
-            <td>Player1</td>
-            <td>0.9</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Player1</td>
-            <td>0.86</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Player1</td>
-            <td>0.3</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Player1</td>
-            <td>0</td>
-
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
+        <c:forEach var="ratioKing" items="${requestScope['win_lose_Rank']}">
+            <tr>
+                <td>1</td>
+                <td>
+                    <c:out value="${ratioKing.key}"/>
+                </td>
+                <td>
+                    <c:out value="${ratioKing.value}"/>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 <div id="totalGamesTable" class="rankTable">
@@ -137,37 +117,17 @@
             <th># of Game</th>
         </tr>
         </thead>
-        <tr>
-            <td>1</td>
-            <td>Player1</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Player1</td>
-            <td>9</td>
-        </tr>
-        <tr>
-
-            <td>3</td>
-            <td>Player1</td>
-            <td>8</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
+        <c:forEach var="loser" items="${requestScope['lose_Rank']}">
+            <tr>
+                <td>1</td>
+                <td>
+                    <c:out value="${loser.key}"/>
+                </td>
+                <td>
+                    <c:out value="${winRank.value}"/>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 <div id="totalWinTable" class="rankTable">
@@ -179,37 +139,17 @@
             <th>Win</th>
         </tr>
         </thead>
-        <tr>
-            <td>1</td>
-            <td>Player1</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Player1</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Player1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Player1</td>
-            <td>0</td>
-
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
+        <c:forEach var="winner" items="${requestScope['win_Rank']}">
+            <tr>
+                <td>1</td>
+                <td>
+                    <c:out value="${winner.key}"/>
+                </td>
+                <td>
+                    <c:out value="${winner.value}"/>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 <div id="totalLoseTable" class="rankTable">
@@ -221,81 +161,41 @@
             <th>Lose</th>
         </tr>
         </thead>
-        <tr>
-            <td>1</td>
-            <td>Player1</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Player1</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Player1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Player1</td>
-            <td>0</td>
-
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Player1</td>
-            <td>0</td>
-        </tr>
+        <c:forEach var="loser" items="${requestScope['lose_Rank']}">
+            <tr>
+                <td>1</td>
+                <td>
+                    <c:out value="${loser.key}"/>
+                </td>
+                <td>
+                    <c:out value="${loser.value}"/>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
 </div>
-<div id="gameTimeTable" class="rankTable">
-    <table class="bordered">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Time</th>
-        </tr>
-        </thead>
-        <tr>
-            <td>1</td>
-            <td>Player1</td>
-            <td>3 hr 20 min</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Player1</td>
-            <td>32 min</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Player1</td>
-            <td>1 min</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Player1</td>
-            <td>0 sec</td>
-
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Player1</td>
-            <td>0 sec</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Player1</td>
-            <td>0 sec</td>
-        </tr>
-    </table>
-</div>
+<%--<div id="gameTimeTable" class="rankTable">--%>
+    <%--<table class="bordered">--%>
+        <%--<thead>--%>
+        <%--<tr>--%>
+            <%--<th>#</th>--%>
+            <%--<th>Name</th>--%>
+            <%--<th>Time</th>--%>
+        <%--</tr>--%>
+        <%--</thead>--%>
+        <%--<c:forEach var="winRank" items="${requestScope['win_Rank']}">--%>
+            <%--<tr>--%>
+                <%--<td>1</td>--%>
+                <%--<td>--%>
+                    <%--<c:out value="${winRank.key}"/>--%>
+                <%--</td>--%>
+                <%--<td>--%>
+                    <%--<c:out value="${winRank.value}"/>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
+        <%--</c:forEach>--%>
+    <%--</table>--%>
+<%--</div>--%>
 </div>
 </div>
 </div>

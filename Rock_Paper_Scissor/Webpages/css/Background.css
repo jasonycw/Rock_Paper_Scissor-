@@ -9,21 +9,27 @@ body {
     background-size: cover;
     font-family: 'Exo', sans-serif;
 }
+
+.centered {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .background1{
     background: #fff url(/img/background/Forever_by_Shady_S.jpg);
-
     background-size: cover;
 }
 
 .background2{
     background: #fff url(/img/background/Beach_by_Renato_Giordanelli.jpg);
-
     background-size: cover;
 }
 
 .background3{
     background: #fff url(/img/background/warty-final-ubuntu.jpg);
-
     background-size: cover;
-
 }

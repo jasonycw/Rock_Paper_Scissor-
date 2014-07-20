@@ -26,7 +26,7 @@ public class AckBean {
     }
 
     public String getHTMLOutput() {
-        if (mMessage == null) {
+        if (mMessage == null || mMessage.equals("")) {
             return "";
         } else {
             return "<div class=\"ack-box " + mType + "\"><p>" + mMessage + "</p><div class=\"ack-progress\"></div></div>";

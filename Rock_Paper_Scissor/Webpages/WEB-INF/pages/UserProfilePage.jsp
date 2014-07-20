@@ -38,33 +38,37 @@
         <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
     </a>
 </div>
-<h1>Personal Profile</h1>
+<div class="content">
+    <h1>Personal Profile</h1>
 
-<form action="" method="post">
+    <form action="" method="post">
 
-    <h3>Username</h3>
+        <h3>Username</h3>
 
-    <div><%=playerInfo.getmUsername()%>
-    </div>
+        <div><%=playerInfo.getmUsername()%>
+        </div>
 
-    <h3>Change Password</h3>
-    <input type="password" name="new_password"/>
+        <h3>Change Password</h3>
+        <input type="password" name="new_password"/>
 
-    <h3>Theme</h3>
-    <a href="javascript:changeTheme(1)">
-        <div id="1" class="image background1 <%if(selectedTheme.equals("1")){out.print("selected");}%>"></div>
-    </a>
-    <a href="javascript:changeTheme(2)">
-        <div id="2" class="image background2 <%if(selectedTheme.equals("2")){out.print("selected");}%>"></div>
-    </a>
-    <a href="javascript:changeTheme(3)">
-        <div id="3" class="image background3 <%if(selectedTheme.equals("3")){out.print("selected");}%>"></div>
-    </a>
+        <h3>Theme</h3>
+        <a href="javascript:changeTheme(1)">
+            <div id="1" class="image background1 <%if(selectedTheme.equals("1")){out.print("selected");}%>"></div>
+        </a>
+        <a href="javascript:changeTheme(2)">
+            <div id="2" class="image background2 <%if(selectedTheme.equals("2")){out.print("selected");}%>"></div>
+        </a>
+        <a href="javascript:changeTheme(3)">
+            <div id="3" class="image background3 <%if(selectedTheme.equals("3")){out.print("selected");}%>"></div>
+        </a>
 
-    <div class="clearfix"></div>
-    <input type="hidden" id="theme" name="theme" value="<%=playerInfo.getmPreferredTheme()%>"/>
-    <button type="submit" name="submitProfile" value="1">Save</button>
-</form>
+        <div class="clearfix"></div>
+        <input type="hidden" id="theme" name="theme" value="<%=playerInfo.getmPreferredTheme()%>"/>
+        <button type="submit" name="submitProfile" value="1">Save</button>
+    </form>
+
+</div>
+
 </body>
 </html>
 

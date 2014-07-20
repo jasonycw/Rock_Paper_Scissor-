@@ -26,7 +26,11 @@
 <%! private String yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
 
 <body class="background<%=playerInfo.getmPreferredTheme()%>" onload="changeImage();">
-
+<div id="backButton" class="backbutton">
+    <a href="<c:url value="/main"/>">
+        <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
+    </a>
+</div>
 <div id="mainContainer">
     <div id="title" class="centered">
         <jsp:getProperty name="playerInfo" property="mUsername"/> V.S. <span font-style="italic">THE COMPUTER</span>

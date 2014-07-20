@@ -76,8 +76,7 @@
         }%>
 
     </div>
-    <div class="clearfix"></div>
-    <button type="submit" value="1" name="BackToMain" class="BackToMain">Back To Main</button>
+
 </form>
 </body>
 

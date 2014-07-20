@@ -16,6 +16,7 @@
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Game.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/ack2.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/backbutton.css"/>" rel="stylesheet">
 </head>
 <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
 <jsp:useBean id="gameInfo" type="cs4280.bean.GameProgressBean" scope="session"/>
@@ -25,7 +26,11 @@
 <%! private String yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
 <%if(gameInfo.getmCurrentRound() == gameInfo.getMAXROUND()){%>
     <body class="background<%=playerInfo.getmPreferredTheme()%>" >
-
+    <div id="backButton" class="backbutton">
+        <a href="<c:url value="/main"/>">
+            <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
+        </a>
+    </div>
     <h1>Game Result</h1>
     <form action="" method="post">
 

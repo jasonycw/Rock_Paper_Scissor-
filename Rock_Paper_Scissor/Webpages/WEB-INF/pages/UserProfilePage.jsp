@@ -15,6 +15,7 @@
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Profile.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/ack2.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/backbutton.css"/>" rel="stylesheet">
 </head>
 <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
 
@@ -32,7 +33,11 @@
     selectedTheme = playerInfo.getmPreferredTheme();
 }
 %>
-<a href="<c:url value="/main"/>">Back to MainPage</a>
+<div id="backButton" class="backbutton">
+    <a href="<c:url value="/main"/>">
+        <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
+    </a>
+</div>
 <h1>Personal Profile</h1>
 
 <form action="" method="post">

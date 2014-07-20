@@ -15,6 +15,7 @@
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/RecordPage.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/borderedClassTable.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/backbutton.css"/>" rel="stylesheet">
     <script src="<c:url value="/js/RecordPage.js"/>"></script>
 </head>
 <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
@@ -28,25 +29,40 @@
     <div id="personalRankTable" class="centered" onclick="">
         <div class="oneColumn">
             <div class="title">Total Game</div>
-            <div class="data"><jsp:getProperty name="playerInfo" property="totalGame"/></div>
+            <div class="data">
+                <jsp:getProperty name="playerInfo" property="totalGame"/>
+            </div>
         </div>
         <div class="oneColumn">
             <div class="title">Time Played (min)</div>
-            <div class="data"><jsp:getProperty name="playerInfo" property="mTotalPlaytime"/></div>
+            <div class="data">
+                <jsp:getProperty name="playerInfo" property="mTotalPlaytime"/>
+            </div>
         </div>
         <div class="twoColumn">
             <div class="title">W/L Ratio</div>
-            <div class="data"><jsp:getProperty name="playerInfo" property="winLoseRatio"/></div>
+            <div class="data">
+                <jsp:getProperty name="playerInfo" property="winLoseRatio"/>
+            </div>
         </div>
         <div class="oneColumn">
             <div class="title">Win</div>
-            <div class="data"><jsp:getProperty name="playerInfo" property="mWinCount"/></div>
+            <div class="data">
+                <jsp:getProperty name="playerInfo" property="mWinCount"/>
+            </div>
         </div>
         <div class="oneColumn">
             <div class="title">Lose</div>
-            <div class="data"><jsp:getProperty name="playerInfo" property="mLoseCount"/></div>
+            <div class="data">
+                <jsp:getProperty name="playerInfo" property="mLoseCount"/>
+            </div>
         </div>
     </div>
+</div>
+<div id="backButton" class="backbutton">
+    <a href="<c:url value="/main"/>">
+        <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
+    </a>
 </div>
 <div id="personalStateButton">
     <%--

@@ -212,9 +212,9 @@
         TODO: Showing how many games has been played and current logined user account.
         Located at bottom right
     --%>
-    Total number of games played: 82
+    Total number of games played: <c:out value='${total_play_count}' />
     <br/>
-    Current online user: 3
+    Current online user: 1024768
 </div>
 </div>
 </body>

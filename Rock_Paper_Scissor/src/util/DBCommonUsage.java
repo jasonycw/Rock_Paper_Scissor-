@@ -93,4 +93,45 @@ public class DBCommonUsage {
         }
         return rankList;
     }
+
+    public static ArrayList<Rank> getNumberOfGameRank() {
+        ResultSet rs = null;
+        ArrayList<Rank> rankList = new ArrayList<Rank>();
+        try {
+            int i = 1;
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            String sql = "SELECT username, win+lose+draw GameCount from PlayerAccount ORDER BY GameCount desc";
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                rankList.add(new Rank(i, rs.getString("username"), rs.getInt("GameCount") + ""));
+                i++;
+            }
+        } catch (SQLException e) {
+             /*
+            Can't connect to DB, fake default data
+             */
+            rankList.add(new Rank(1, "JustKidding", 83 + ""));
+            rankList.add(new Rank(2, "One2Tree", 50 + ""));
+        }
+        return rankList;
+    }
+
+    public static int getTotalGamePlayed() {
+        ResultSet rs = null;
+        ArrayList<Rank> rankList = new ArrayList<Rank>();
+        try {
+            int i = 1;
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            String sql = "SELECT SUM(win+lose+draw) Count from PlayerAccount";
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+
+        }
+        return 3;
+    }
 }

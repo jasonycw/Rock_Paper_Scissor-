@@ -26,11 +26,26 @@
         Out of window, only shows while personalStateButton is clicked
     --%>
     <div id="personalRankTable" class="centered" onclick="">
-        <div class="oneColumn"><div class="title">Total Game</div><div class="data">100</div></div>
-        <div class="oneColumn"><div class="title">Time Played</div><div class="data">3:02</div></div>
-        <div class="twoColumn"><div class="title">W/L Ratio</div><div class="data">0.97</div></div>
-        <div class="oneColumn"><div class="title">Win</div><div class="data">97</div></div>
-        <div class="oneColumn"><div class="title">Lose</div><div class="data">3</div></div>
+        <div class="oneColumn">
+            <div class="title">Total Game</div>
+            <div class="data"><jsp:getProperty name="playerInfo" property="totalGame"/></div>
+        </div>
+        <div class="oneColumn">
+            <div class="title">Time Played (min)</div>
+            <div class="data"><jsp:getProperty name="playerInfo" property="mTotalPlaytime"/></div>
+        </div>
+        <div class="twoColumn">
+            <div class="title">W/L Ratio</div>
+            <div class="data"><jsp:getProperty name="playerInfo" property="winLoseRatio"/></div>
+        </div>
+        <div class="oneColumn">
+            <div class="title">Win</div>
+            <div class="data"><jsp:getProperty name="playerInfo" property="mWinCount"/></div>
+        </div>
+        <div class="oneColumn">
+            <div class="title">Lose</div>
+            <div class="data"><jsp:getProperty name="playerInfo" property="mLoseCount"/></div>
+        </div>
     </div>
 </div>
 <div id="personalStateButton">

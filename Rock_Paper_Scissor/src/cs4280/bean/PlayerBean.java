@@ -20,10 +20,10 @@ public class PlayerBean {
     private String mLoginTime;
     private String mTotalOnlineTime;
 
-    public long getmTotalPlaytime() {
+    public String getmTotalPlaytime() {
         long totalPlayTimeInSeconds = Long.parseLong(this.mTotalOnlineTime);
         long min = totalPlayTimeInSeconds/60;
-        return min;
+        return Long.toString(min);
     }
 
     public void updateTotalOnlineTime() {

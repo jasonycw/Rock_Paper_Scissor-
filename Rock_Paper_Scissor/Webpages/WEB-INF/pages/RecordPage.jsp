@@ -36,7 +36,7 @@
         <div class="oneColumn">
             <div class="title">Time Played (min)</div>
             <div class="data">
-                <jsp:getProperty name="playerInfo" property="mTotalPlaytime"/>
+                <jsp:getProperty name="playerInfo" property="mTotalOnlineTime"/>
             </div>
         </div>
         <div class="twoColumn">

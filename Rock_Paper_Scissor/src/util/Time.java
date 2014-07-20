@@ -7,6 +7,6 @@ public class Time {
         long time;
         Date date = new Date();
         time = date.getTime();
-        return String.valueOf(time);
+        return String.valueOf(time/1000);
     }
 }

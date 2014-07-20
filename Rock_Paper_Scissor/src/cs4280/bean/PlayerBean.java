@@ -1,28 +1,28 @@
 package cs4280.bean;
 
 import util.DBConnection;
-import java.text.DecimalFormat;
 import util.Time;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 public class PlayerBean {
 
-    private String mUsername;
-    private String mPassword;
-    private String mPreferredTheme;
-    private int mWinCount;
-    private int mLoseCount;
-    private int mDrawCount;
-    private String mLoginTime;
-    private String mTotalOnlineTime;
+    private String mUsername = "Developer";
+    private String mPassword = "123";
+    private String mPreferredTheme = "1";
+    private int mWinCount = 100;
+    private int mLoseCount = 10;
+    private int mDrawCount = 0;
+    private String mLoginTime = "1405641600";
+    private String mTotalOnlineTime = "3600";
 
-    public String getmTotalPlaytime() {
-        long totalPlayTimeInSeconds = Long.parseLong(this.mTotalOnlineTime);
-        long min = totalPlayTimeInSeconds/60;
+    public String getmTotalOnlineTime() {
+        long TotalOnlineTimeInSeconds = Long.parseLong(this.mTotalOnlineTime);
+        long min = TotalOnlineTimeInSeconds / 60;
         return Long.toString(min);
     }
 
@@ -31,17 +31,6 @@ public class PlayerBean {
     }
 
     public PlayerBean() {
-        mUsername = "Developer";
-        mPassword = "123";
-        mPreferredTheme = "1";
-        mWinCount = 100;
-        mLoseCount = 1;
-        mDrawCount = 1;
-        mLoginTime = "1405641600";
-        mTotalOnlineTime = "3600";
-        /*
-        grab current time through db
-         */
     }
 
     public PlayerBean(ResultSet rs) {
@@ -54,7 +43,7 @@ public class PlayerBean {
                 setmLoseCount(rs.getInt("lose"));
                 setmDrawCount(rs.getInt("draw"));
                 setmLoginTime(rs.getString("login_time"));
-                setmTotalOnlineTime(rs.getString("total_playtime"));
+//                setmTotalOnlineTime(rs.getString("total_playtime"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,16 +102,17 @@ public class PlayerBean {
         this.mDrawCount = mDrawCount;
     }
 
-    public int getTotalGame(){return (this.mDrawCount+this.mWinCount+this.mLoseCount);}
+    public int getTotalGame() {
+        return (this.mDrawCount + this.mWinCount + this.mLoseCount);
+    }
 
-    public String getWinLoseRatio(){
-        int totalGame = this.mWinCount+this.mLoseCount;
+    public String getWinLoseRatio() {
+        int totalGame = this.mWinCount + this.mLoseCount;
 
-        if(totalGame != 0){
+        if (totalGame != 0) {
             DecimalFormat dFormat = new DecimalFormat("0.0");
-            return dFormat.format((this.mWinCount*1.0)/totalGame*100) + "%";
-        }
-        else
+            return dFormat.format((this.mWinCount * 1.0) / totalGame * 100) + "%";
+        } else
             return "0";
     }
 

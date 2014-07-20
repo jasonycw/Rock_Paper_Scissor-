@@ -43,15 +43,14 @@ public class ValidateIdentityServlet extends HttpServlet {
         if (devMode || isUserValid(username, password)) {
             PlayerBean player = new PlayerBean();
             String currentTime = Time.getCurrentTimeInUnix();
-            player.setmLoginTime(currentTime);
             if (!devMode) {
                 //Get info from DB
                 ResultSet rs = getUserInfo(username, password);
                 player = updateUserInfo(player, rs);
             }
-            long result = Long.parseLong(currentTime) + 100;
+            player.setmLoginTime(currentTime);//send key to dB
+
             session.setAttribute("playerInfo", player);
-            session.setAttribute("sec", result);
             session.setAttribute("ackMsg", new AckBean());
             PageProgressBean pageProgress = new PageProgressBean();
             pageProgress.setIsLoggedIn(true);

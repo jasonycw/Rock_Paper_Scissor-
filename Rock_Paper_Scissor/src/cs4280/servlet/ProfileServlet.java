@@ -3,7 +3,8 @@ package cs4280.servlet;
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
-import util.SessionTimeEncrytion;
+import util.ProjectUrl;
+import util.SessionTimeConversion;
 import util.SessionValidation;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
 /*
 Responsible to display user info, provide function to change user preference like theme
  */
@@ -26,17 +28,26 @@ public class ProfileServlet extends HttpServlet {
         */
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        PlayerBean player=(PlayerBean)session.getAttribute("playerInfo");
-        if(!SessionValidation.validate(player.getmUsername(),player.getmPassword(), SessionTimeEncrytion.encrypt(player.getmLoginTime()))) {
 
-        }
-        PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
+        PlayerBean player = (PlayerBean) session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
-        if (playerInfo == null || pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true) {
-            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-            dispatcher.forward(request, response);
+
+        if (player == null || pageProgressBean == null || !pageProgressBean.getIsLoggedIn()) {
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
             return;
         }
+
+        if (!SessionValidation.CheckBreakInAttempt(player.getmUsername(), player.getmPassword(), SessionTimeConversion.encrypt(player.getmLoginTime()))) {
+            /**
+             * Break-in attempt detected
+             */
+            AckBean msg = new AckBean();
+            msg.setmMessage("Break-in attempt");
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+            return;
+        }
+
+
         pageProgressBean.setmBreadcrumb("/profile");
         String submited = request.getParameter("submitProfile");
 
@@ -47,11 +58,11 @@ public class ProfileServlet extends HttpServlet {
             if (ack == null) {
                 ack = new AckBean();
             }
-            if(PasswordErrorMessage.equals("")){
+            if (PasswordErrorMessage.equals("")) {
                 ack.setmMessage("Your submit has been well received, Thank you!");
                 String theme = request.getParameter("theme");
                 if (theme != null) {
-                    playerInfo.setmPreferredTheme(theme);
+                    player.setmPreferredTheme(theme);
                 }
                 /**
                  *  Louis set password here
@@ -61,10 +72,10 @@ public class ProfileServlet extends HttpServlet {
             } else {
                 ack.setmMessage(PasswordErrorMessage);
 
+            }
         }
-    }
         dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/UserProfilePage.jsp");
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
     }
 
     @Override
@@ -77,17 +88,18 @@ public class ProfileServlet extends HttpServlet {
         processRequest(req, resp);
     }
     // return "" means password are ok
-    private String passwordErrorMessage(String pw, String confrimPw){
+
+    private String passwordErrorMessage(String pw, String confrimPw) {
         /**
          * Louis: please check old password here
-          */
+         */
 
-        if(pw.equals(confrimPw)){
-           return "";
+        if (pw.equals(confrimPw)) {
+            return "";
 
-       }else{
+        } else {
             return "ERROR! Password pairs are not matching!";
-       }
+        }
 
     }
 }

@@ -19,26 +19,15 @@ public class RedirectServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
-        PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
-        if (playerInfo == null ||  pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true || pageProgressBean.getmBreadcrumb() == null){
-            dispatcher=request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-            dispatcher.forward(request,response);
+        PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
+        if (playerInfo == null || pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true || pageProgressBean.getmBreadcrumb() == null) {
+            dispatcher = request.getServletContext().getRequestDispatcher("/login");
+            dispatcher.forward(request, response);
             return;
-        }else{
-
-
-
-            response.sendRedirect(ProjectUrl.getBaseUrl(request)+pageProgressBean.getmBreadcrumb());
+        } else {
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + pageProgressBean.getmBreadcrumb());
         }
-        /////////////////////////////////////////////
-        /*
-        Renee Workspace, check if session exists, redirect to previous page if so
-        grab playerbean, pageProgressBean
-        */
-
-        /////////////////////////////////////////////
-
     }
 
     @Override

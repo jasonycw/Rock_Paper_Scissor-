@@ -122,6 +122,18 @@ button:hover {
     background-size: cover;
 }
 
+.FL{
+    float: left;
+
+}
+
+.winLoseTitle{
+    margin-bottom: 10px;
+}
+.resultBlock1{
+    margin-right: 50px;
+
+}
 /*.computerImage{*/
 /*width:200px;*/
 /*height: 200px;*/

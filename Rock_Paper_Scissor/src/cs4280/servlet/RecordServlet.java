@@ -38,13 +38,15 @@ public class RecordServlet extends HttpServlet {
             }
         }
 
+        ArrayList<Rank> win_lose_rank = DBCommonUsage.getWLRateRank();
+        ArrayList<Rank> number_of_game_rank = DBCommonUsage.getWLRateRank();
+        ArrayList<Rank> win_rank = DBCommonUsage.getWinRank();
+        ArrayList<Rank> lose_rank = DBCommonUsage.getLoseRank();
 
-        ArrayList<Rank> win_Rank = DBCommonUsage.getWinRank();
-        ArrayList<Rank> lose_Rank = DBCommonUsage.getLoseRank();
-        ArrayList<Rank> win_lose_Rank = DBCommonUsage.getWLRateRank();
-        session.setAttribute("win_Rank", win_Rank);
-        session.setAttribute("lose_Rank", lose_Rank);
-        session.setAttribute("win_lose_Rank", win_lose_Rank);
+        session.setAttribute("win_lose_rank", win_lose_rank);
+        session.setAttribute("number_of_game_rank", number_of_game_rank);
+        session.setAttribute("win_rank", win_rank);
+        session.setAttribute("lose_rank", lose_rank);
 
         pageProgressBean.setmBreadcrumb("/record");
         dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/RecordPage.jsp");

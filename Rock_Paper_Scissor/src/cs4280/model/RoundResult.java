@@ -28,16 +28,25 @@ public class RoundResult {
         this.mNPCDecision = mNPCDecision;
     }
 
-    public boolean isPlayerWin() {
+    public int getPlayerScroe() {
         if (mPlayerDecision == PAPER_CODE) {
-            return mNPCDecision == ROCK_CODE;
+            if(mNPCDecision == ROCK_CODE)
+                return 1;
+            else if (mNPCDecision == PAPER_CODE)
+                return 0;
         }
         if (mPlayerDecision == SCISSOR_CODE) {
-            return mNPCDecision == PAPER_CODE;
+            if(mNPCDecision == PAPER_CODE)
+                return 1;
+            else if (mNPCDecision == SCISSOR_CODE)
+                return 0;
         }
         if (mPlayerDecision == ROCK_CODE) {
-            return mNPCDecision == SCISSOR_CODE;
+            if(mNPCDecision == SCISSOR_CODE)
+                return 1;
+            else if (mNPCDecision == ROCK_CODE)
+                return 0;
         }
-        return false;
+        return -1;
     }
 }

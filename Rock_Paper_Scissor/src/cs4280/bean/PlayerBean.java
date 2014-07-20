@@ -2,7 +2,12 @@ package cs4280.bean;
 
 import util.DBConnection;
 import java.text.DecimalFormat;
-import java.sql.*;
+import util.Time;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PlayerBean {
 
@@ -13,18 +18,16 @@ public class PlayerBean {
     private int mLoseCount;
     private int mDrawCount;
     private String mLoginTime;
-    private String mTotalPlaytime;
+    private String mTotalOnlineTime;
 
     public long getmTotalPlaytime() {
-        long totalPlayTimeInSeconds = Long.parseLong(this.mTotalPlaytime);
+        long totalPlayTimeInSeconds = Long.parseLong(this.mTotalOnlineTime);
         long min = totalPlayTimeInSeconds/60;
         return min;
     }
 
-    public void updateTotalPlaytime() {
-        /*
-        Get current time, and add displacement
-         */
+    public void updateTotalOnlineTime() {
+        mTotalOnlineTime = Long.parseLong(mTotalOnlineTime) + Long.parseLong(Time.getCurrentTimeInUnix()) - Long.parseLong(mLoginTime) + "";
     }
 
     public PlayerBean() {
@@ -35,7 +38,7 @@ public class PlayerBean {
         mLoseCount = 1;
         mDrawCount = 1;
         mLoginTime = "1405641600";
-        mTotalPlaytime = "3600";
+        mTotalOnlineTime = "3600";
         /*
         grab current time through db
          */
@@ -51,7 +54,7 @@ public class PlayerBean {
                 setmLoseCount(rs.getInt("lose"));
                 setmDrawCount(rs.getInt("draw"));
                 setmLoginTime(rs.getString("login_time"));
-                setmTotalPlaytime(rs.getString("total_playtime"));
+                setmTotalOnlineTime(rs.getString("total_playtime"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,8 +69,8 @@ public class PlayerBean {
         this.mPassword = mPassword;
     }
 
-    public void setmTotalPlaytime(String mTotalPlaytime) {
-        this.mTotalPlaytime = mTotalPlaytime;
+    public void setmTotalOnlineTime(String mTotalPlaytime) {
+        this.mTotalOnlineTime = mTotalOnlineTime;
     }
 
     public String getmUsername() {
@@ -101,7 +104,6 @@ public class PlayerBean {
     public void setmLoseCount(int mLoseCount) {
         this.mLoseCount = mLoseCount;
     }
-
 
     public int getmDrawCount() {
         return mDrawCount;
@@ -141,7 +143,7 @@ public class PlayerBean {
         stmt.setInt(4, mDrawCount);
         stmt.setString(5, mPreferredTheme);
         stmt.setString(6, mLoginTime);
-        stmt.setString(7, mTotalPlaytime);
+        stmt.setString(7, mTotalOnlineTime);
         stmt.setString(8, mUsername);
 
         stmt.executeUpdate();

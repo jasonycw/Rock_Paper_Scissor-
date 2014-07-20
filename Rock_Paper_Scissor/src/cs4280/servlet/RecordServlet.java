@@ -38,11 +38,6 @@ public class RecordServlet extends HttpServlet {
             }
         }
 
-        if (playerInfo == null || pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true) {
-            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
 
         ArrayList<Rank> win_Rank= DBCommonUsage.getWinRank();
         ArrayList<Rank> lose_Rank= DBCommonUsage.getLoseRank();

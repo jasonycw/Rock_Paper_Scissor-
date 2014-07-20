@@ -39,24 +39,10 @@ public class GameServlet extends HttpServlet {
                 e1.printStackTrace();
             }
         }
-        // kick back if didn't logged in
-        try {
-            SessionValidation.CheckBreakInAttempt(session, request, response);
-        } catch (BreakInException e) {
-            session.setAttribute("ackMsg", new AckBean("Warning", "Break-in attempt"));
-            try {
-                response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
-                return;
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
-        if (playerInfo == null ||  pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true){
-            response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/login");
-            //dispatcher=request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-            //dispatcher.forward(request,response);
-            return;
-        }
+
+
+
+
         pageProgressBean.setmBreadcrumb("/game");
         // set game progress bean to session
         GameProgressBean gameInfo = (GameProgressBean)session.getAttribute("gameInfo");

@@ -38,7 +38,7 @@ public class GameProgressBean {
     }
 
     public int getNpcScore() {
-        return mPlayerScore;
+        return mNPCScore;
     }
 
     public void setmNPCScore(int npcScore) {
@@ -66,18 +66,19 @@ public class GameProgressBean {
         if ((playerDecision != ROCKCODE && playerDecision != PAPERCODE && playerDecision != SCISSORCODE) || (npcDecision != ROCKCODE && npcDecision != PAPERCODE && npcDecision != SCISSORCODE)) {
             return;
         }
-        if (mCurrentRound > 3) {
+        if (mCurrentRound >= 3) {
             return;
         }
         RoundResult temp = new RoundResult();
         temp.setmPlayerDecision(playerDecision);
         temp.setmNPCDecision(npcDecision);
         mResult.add(temp);
-        if (temp.getPlayerScroe() == -1) {
+        if (temp.getPlayerScore() == -1) {
             mNPCScore += 1;
-        } else if (temp.getPlayerScroe() == 1) {
+        }else if (temp.getPlayerScore() == 1) {
             mPlayerScore += 1;
         }
         setmCurrentRound(mCurrentRound + 1);
+
     }
 }

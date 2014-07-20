@@ -24,63 +24,6 @@
 
 <%! private String computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
 <%! private String yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
-<%if (gameInfo.getmCurrentRound() >= gameInfo.getMAXROUND()) {%>
-<body class="background<%=playerInfo.getmPreferredTheme()%>">
-<div id="backButton" class="backbutton">
-    <a href="<c:url value="/main"/>">
-        <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
-    </a>
-</div>
-<h1>Game Result</h1>
-
-<form action="" method="post">
-
-    <div class="winLoseTitle">
-        <% if (gameInfo.getmScore() > gameInfo.getNpcScore()) {
-            out.print("YOU WIN!");
-        } else if (gameInfo.getmScore() == gameInfo.getNpcScore()) {
-            out.print("DRAW");
-        } else {
-            out.print("YOU LOSE :(");
-        }
-        %>
-    </div>
-    <div class="FL resultBlock1">
-        <h2>Computer Choices</h2>
-        <% for (RoundResult result : gameInfo.getmResult()) {
-            if (result.getmNPCDecision() == gameInfo.getROCKCODE()) {
-                computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";
-                out.print("<img class=\"FL image\" src=\"" + computerChoiceSrc + "\"/>");
-            } else if (result.getmNPCDecision() == gameInfo.getPAPERCODE()) {
-                computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png";
-                out.print("<img class=\"FL image\" src=\"" + computerChoiceSrc + "\"/>");
-            } else {
-                computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png";
-                out.print("<img class=\"FL image\" src=\"" + computerChoiceSrc + "\"/>");
-            }
-        }%>
-    </div>
-    <div class="FL">
-        <h2>Your Choices</h2>
-        <% for (RoundResult result : gameInfo.getmResult()) {
-            if (result.getmPlayerDecision() == gameInfo.getROCKCODE()) {
-                yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";
-                out.print("<img class=\"FL image\" src=\"" + yourChoiceSrc + "\"/>");
-            } else if (result.getmPlayerDecision() == gameInfo.getPAPERCODE()) {
-                yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png";
-                out.print("<img class=\"FL image\" src=\"" + yourChoiceSrc + "\"/>");
-            } else {
-                yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png";
-                out.print("<img class=\"FL image\" src=\"" + yourChoiceSrc + "\"/>");
-            }
-        }%>
-
-    </div>
-    <div class="clearfix"></div>
-    <button type="submit" value="1" name="BackToMain" class="BackToMain">Back To Main</button>
-</form>
-</body>
-<%} else {%>
 
 <body class="background<%=playerInfo.getmPreferredTheme()%>" onload="changeImage();">
 
@@ -148,7 +91,7 @@
     </div>
 </div>
 </body>
-<%}%>
+
 
 </html>
 

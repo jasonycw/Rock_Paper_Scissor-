@@ -24,7 +24,6 @@ public class GameServlet extends HttpServlet {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
 
-        PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
 
         //Break in checking
@@ -40,19 +39,43 @@ public class GameServlet extends HttpServlet {
             }
         }
 
-
-
-
         pageProgressBean.setmBreadcrumb("/game");
         // set game progress bean to session
         GameProgressBean gameInfo = (GameProgressBean)session.getAttribute("gameInfo");
         if (gameInfo == null){
             gameInfo = new GameProgressBean();
             session.setAttribute("gameInfo",gameInfo);
+        }else{
+            if(gameInfo.getmCurrentRound()>=gameInfo.getMAXROUND()){
+                PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
+                setPlayerScore(gameInfo,playerInfo,session);
+            }
         }
 
-        //See if the player gave a choice
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+
+        RequestDispatcher dispatcher;
+        try {
+            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }catch (Exception e) {
+        }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+
+        RequestDispatcher dispatcher;
+        HttpSession session = request.getSession();
+        GameProgressBean gameInfo = (GameProgressBean)session.getAttribute("gameInfo");
+        //See if the player gave a choice
         int playerChoice = -1;
         if(request.getParameter("rock") != null && request.getParameter("rock").equals("1")){
             playerChoice= 3;
@@ -70,36 +93,33 @@ public class GameServlet extends HttpServlet {
             session.setAttribute("gameInfo",gameInfo);
         }
 
-        if(request.getParameter("BackToMain") != null && request.getParameter("BackToMain").equals("1")){
-            if(gameInfo.getmScore()>gameInfo.getNpcScore()){
-                playerInfo.setmWinCount(playerInfo.getmWinCount() + 1);
-            }else if(gameInfo.getmScore()==gameInfo.getNpcScore()){
-                playerInfo.setmDrawCount(playerInfo.getmDrawCount() + 1);
-            }else{
-                playerInfo.setmLoseCount(playerInfo.getmLoseCount() + 1);
-            }
-            try {
-                playerInfo.update();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            gameInfo = new GameProgressBean();
-            session.setAttribute("gameInfo",gameInfo);
-            response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/main");
-
+        if(gameInfo.getmCurrentRound()>=gameInfo.getMAXROUND()){
+            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GameResultPage.jsp");
         }else {
             dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
+
+        }
+
+        try {
             dispatcher.forward(request, response);
+            return;
+        }catch (Exception e) {
         }
     }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+    private void setPlayerScore(GameProgressBean gameInfo, PlayerBean playerInfo, HttpSession session){
+        if(gameInfo.getmScore()>gameInfo.getNpcScore()){
+            playerInfo.setmWinCount(playerInfo.getmWinCount() + 1);
+        }else if(gameInfo.getmScore()==gameInfo.getNpcScore()){
+            playerInfo.setmDrawCount(playerInfo.getmDrawCount() + 1);
+        }else{
+            playerInfo.setmLoseCount(playerInfo.getmLoseCount() + 1);
+        }
+        try {
+            playerInfo.update();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        gameInfo = new GameProgressBean();
+        session.setAttribute("gameInfo", gameInfo);
     }
 }

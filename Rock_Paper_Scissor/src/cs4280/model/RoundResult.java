@@ -28,7 +28,7 @@ public class RoundResult {
         this.mNPCDecision = mNPCDecision;
     }
 
-    public int getPlayerScroe() {
+    public int getPlayerScore() {
         if (mPlayerDecision == PAPER_CODE) {
             if(mNPCDecision == ROCK_CODE)
                 return 1;

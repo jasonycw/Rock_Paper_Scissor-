@@ -46,6 +46,10 @@
         <servlet-name>TrafficServlet</servlet-name>
         <servlet-class>cs4280.servlet.TrafficServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GameResultServlet</servlet-name>
+        <servlet-class>cs4280.servlet.GameResultServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>RedirectServlet</servlet-name>
@@ -88,5 +92,11 @@
         <servlet-name>TrafficServlet</servlet-name>
         <url-pattern>/record/traffic</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>GameResultServlet</servlet-name>
+        <url-pattern>/gameResult</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
 </web-app>

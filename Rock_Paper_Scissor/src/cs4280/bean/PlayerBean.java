@@ -2,9 +2,7 @@ package cs4280.bean;
 
 import util.DBConnection;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class PlayerBean {
 
@@ -29,16 +27,33 @@ public class PlayerBean {
 
     public PlayerBean() {
         mUsername = "Developer";
-        mPassword="123";
+        mPassword = "123";
         mPreferredTheme = "1";
         mWinCount = 100;
         mLoseCount = 1;
         mDrawCount = 1;
-        mLoginTime="1405641600";
-        mTotalPlaytime="0";
+        mLoginTime = "1405641600";
+        mTotalPlaytime = "0";
         /*
         grab current time through db
          */
+    }
+
+    public PlayerBean(ResultSet rs) {
+        try {
+            if (rs.next()) {
+                setmUsername(rs.getString("username"));
+                setmPassword(rs.getString("password"));
+                setmPreferredTheme(rs.getString("theme"));
+                setmWinCount(rs.getInt("win"));
+                setmLoseCount(rs.getInt("lose"));
+                setmDrawCount(rs.getInt("draw"));
+                setmLoginTime(rs.getString("login_time"));
+                setmTotalPlaytime(rs.getString("total_playtime"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getmPassword() {
@@ -104,8 +119,16 @@ public class PlayerBean {
 
     public void update() throws SQLException {
         Connection con = DBConnection.getConnection();
-        Statement stmt = con.createStatement();
-        String sql = "UPDATE PlayerAccount SET  ";
-        stmt.executeUpdate(sql);
+        PreparedStatement stmt = con.prepareStatement("UPDATE PlayerAccount SET password=? , win=?, lose=?, draw=?, theme=?, login_time=?, total_playtime=? where username=?");
+        stmt.setString(1, mPassword);
+        stmt.setInt(2, mWinCount);
+        stmt.setInt(3, mLoseCount);
+        stmt.setInt(4, mDrawCount);
+        stmt.setString(5, mPreferredTheme);
+        stmt.setString(6, mLoginTime);
+        stmt.setString(7, mTotalPlaytime);
+        stmt.setString(8, mUsername);
+
+        stmt.executeUpdate();
     }
 }

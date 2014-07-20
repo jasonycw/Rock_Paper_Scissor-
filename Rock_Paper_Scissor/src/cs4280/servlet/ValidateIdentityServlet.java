@@ -46,9 +46,14 @@ public class ValidateIdentityServlet extends HttpServlet {
             if (!devMode) {
                 //Get info from DB
                 ResultSet rs = getUserInfo(username, password);
-                player = updateUserInfo(player, rs);
+                player = new PlayerBean(rs);
+                player.setmLoginTime(currentTime);//send key to dB
+                try {
+                    player.update();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-            player.setmLoginTime(currentTime);//send key to dB
 
             session.setAttribute("playerInfo", player);
             session.setAttribute("ackMsg", new AckBean());
@@ -71,31 +76,13 @@ public class ValidateIdentityServlet extends HttpServlet {
 
     /////////////////////////////////////////////
 
-    private PlayerBean updateUserInfo(PlayerBean player, ResultSet rs) {
-        try {
-            if (rs.next()) {
-                player.setmUsername(rs.getString("username"));
-                player.setmPassword(rs.getString("password"));
-                player.setmPreferredTheme(rs.getString("theme"));
-                player.setmWinCount(rs.getInt("win"));
-                player.setmLoseCount(rs.getInt("lose"));
-                player.setmDrawCount(rs.getInt("draw"));
-                player.setmLoginTime(rs.getString("login_time"));
-                player.setmTotalPlaytime(rs.getString("total_playtime"));
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return player;
-    }
 
     private ResultSet getUserInfo(String username, String password) {
         ResultSet rs = null;
         Connection con = null;
         try {
             con = DBConnection.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, draw, login_time FROM PlayerAccount WHERE username = ? AND password=?");
+            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, draw, login_time, total_playtime FROM PlayerAccount WHERE username = ? AND password=?");
             stmt.setString(1, username);
             stmt.setString(2, password);
             rs = stmt.executeQuery();

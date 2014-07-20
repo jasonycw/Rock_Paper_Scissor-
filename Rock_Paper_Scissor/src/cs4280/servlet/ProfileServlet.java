@@ -3,8 +3,8 @@ package cs4280.servlet;
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
+import cs4280.exception.BreakInException;
 import util.ProjectUrl;
-import util.SessionTimeConversion;
 import util.SessionValidation;
 
 import javax.servlet.RequestDispatcher;
@@ -32,15 +32,10 @@ public class ProfileServlet extends HttpServlet {
         PlayerBean player = (PlayerBean) session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
 
-        if (player == null || pageProgressBean == null || !pageProgressBean.getIsLoggedIn()) {
-            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
-            return;
-        }
+        try {
+            SessionValidation.CheckBreakInAttempt(session);
 
-        if (!SessionValidation.CheckBreakInAttempt(player.getmUsername(), player.getmPassword(), SessionTimeConversion.encrypt(player.getmLoginTime()))) {
-            /**
-             * Break-in attempt detected
-             */
+        } catch (BreakInException e) {
             AckBean msg = new AckBean();
             msg.setmMessage("Break-in attempt");
             response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");

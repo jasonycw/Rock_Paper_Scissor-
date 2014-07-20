@@ -117,14 +117,16 @@
             <th># of Game</th>
         </tr>
         </thead>
-        <c:forEach var="loser" items="${requestScope['lose_Rank']}">
+        <c:forEach var="loser" items="${'lose_Rank'}">
             <tr>
-                <td>1</td>
                 <td>
-                    <c:out value="${loser.key}"/>
+                    <c:out value="${loser.rank}"/>
                 </td>
                 <td>
-                    <c:out value="${winRank.value}"/>
+                    <c:out value="${loser.name}"/>
+                </td>
+                <td>
+                    <c:out value="${loser.value}"/>
                 </td>
             </tr>
         </c:forEach>

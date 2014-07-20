@@ -63,7 +63,6 @@
     border-radius: 10px;
     font-size: 30px;
     background-color: rgba(245, 245, 245, 0.90);
-    text-align: center;
 }
 
 .oneColumn {
@@ -84,6 +83,46 @@
     font-size: 60px;
     width: 500px;
     height: 125px;
+}
+
+.oneColumn .title, .twoColumn .title{
+    /*position*/
+    text-align: left;
+    position: relative;
+    margin-left: 5;
+    z-index: 1;
+
+    /*style*/
+    height: 40px;
+    font-size: 30px;
+}
+
+.oneColumn .data{
+    /*position*/
+    position: relative;
+    z-index: 2;
+
+    /*style*/
+    width: 250px;
+    height: 80px;
+    margin-top: -40px;
+    text-align: center;
+    font-size: 60px;
+    color: #373737;
+}
+
+.twoColumn .data{
+    /*position*/
+    position: relative;
+    z-index: 2;
+
+    /*style*/
+    width: 500px;
+    height: 125px;
+    margin-top: -40px;
+    text-align: center;
+    font-size: 120px;
+    color: #373737;
 }
 
 #personalStateButton {
@@ -191,11 +230,14 @@
     margin-right: 15px;
 
     /*style*/
-    color: red;
+    color: black;
     width: 670px;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: white;
+
+    /*property*/
+    overflow-y: scroll;
 }
 
 /*

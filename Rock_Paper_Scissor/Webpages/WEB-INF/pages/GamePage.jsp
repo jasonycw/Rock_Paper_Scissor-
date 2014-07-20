@@ -76,7 +76,7 @@
     </body>
 <%}else{%>
 
-    <body class="background<%=playerInfo.getmPreferredTheme()%>" >
+    <body class="background<%=playerInfo.getmPreferredTheme()%>" onload="changeImage();">
         <h1>Let's Play!</h1>
         <form action="" method="post">
             <div class="FL compBlock">

@@ -1,6 +1,7 @@
 package cs4280.bean;
 
 import util.DBConnection;
+import java.text.DecimalFormat;
 import util.Time;
 
 import java.sql.Connection;
@@ -19,8 +20,10 @@ public class PlayerBean {
     private String mLoginTime;
     private String mTotalOnlineTime;
 
-    public String getTotalOnlineTime() {
-        return mTotalOnlineTime;
+    public long getmTotalPlaytime() {
+        long totalPlayTimeInSeconds = Long.parseLong(this.mTotalOnlineTime);
+        long min = totalPlayTimeInSeconds/60;
+        return min;
     }
 
     public void updateTotalOnlineTime() {
@@ -35,7 +38,7 @@ public class PlayerBean {
         mLoseCount = 1;
         mDrawCount = 1;
         mLoginTime = "1405641600";
-        mTotalOnlineTime = "0";
+        mTotalOnlineTime = "3600";
         /*
         grab current time through db
          */
@@ -108,6 +111,19 @@ public class PlayerBean {
 
     public void setmDrawCount(int mDrawCount) {
         this.mDrawCount = mDrawCount;
+    }
+
+    public int getTotalGame(){return (this.mDrawCount+this.mWinCount+this.mLoseCount);}
+
+    public String getWinLoseRatio(){
+        int totalGame = this.mWinCount+this.mLoseCount;
+
+        if(totalGame != 0){
+            DecimalFormat dFormat = new DecimalFormat("0.0");
+            return dFormat.format((this.mWinCount*1.0)/totalGame*100) + "%";
+        }
+        else
+            return "0";
     }
 
     public String getmLoginTime() {

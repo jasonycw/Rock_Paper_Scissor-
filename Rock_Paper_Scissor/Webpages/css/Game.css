@@ -1,42 +1,88 @@
-body{
-
-    padding: 20px 25px;
+* {
     color: #fff;
-    font-size: 12px;
+    margin: 0;
+    padding: 0;
 }
 
+#title {
+    width: 1300px;
+    font-size: 60px;
+    height: 100px;
+    margin-top: 0;
+    text-align: center;
+}
 
-.image{
-    width:200px;
-    height: 200px;
-    margin-left: 20px;
+#gameDiv {
+    width: 1300px;
+    height: 500px;
+    margin-top: 100px;
+}
+
+#score {
+    height: 50px;
+    width: inherit;
+}
+
+#playerScore, #npcScore {
+    float: left;
+    width: 50%;
+    text-align: center;
+    font-size: 30px;
+}
+
+#playerGame, #npcGame {
+    float: left;
+    width: 50%;
+}
+
+#playerCurrentAction, #npcPreviousAction {
+    float: left;
+}
+
+#npcCurrentAction, #playerPreviousAction {
+    float: right;
+}
+
+.currentAction {
+    width: 80%;
+    height: 100%;
+    text-align: center;
+}
+
+.previousAction {
+    width: 20%;
+    height: 100%;
+    text-align: center;
+}
+
+.image {
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     opacity: 0.8;
     background-color: #fff;
-    filter: alpha(opacity=80); /* For IE8 and earlier */
+    filter: alpha(opacity=80); /*For IE8 and earlier*/
+
+    /*Animation*/
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    -ms-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
 }
 
-.computerImage{
-    width:200px;
-    height: 200px;
-    border-radius: 50%;
-    opacity: 0.8;
-    filter: alpha(opacity=80); /* For IE8 and earlier */
+.prevChoice {
+    width: 50px;
+    height: 50px;
     background-color: #fff;
-
-    margin-top: 20px;
-
-}
-.image:hover{
-    opacity: 0.99;
-    filter: alpha(opacity=99); /* For IE8 and earlier */
-}
-.clearfix {
-    clear: both;
-
+    border-radius: 50%;
+    margin-bottom: calc((100% - 50px)/2.0);
+    margin-right: calc((100% - 50px)/2.0);
+    margin-left: calc((100% - 50px)/2.0);
+    margin-bottom: calc((100% - 50px)/2.0);
 }
 
-button{
+button {
     width: 260px;
     height: 35px;
     background: #fff;
@@ -49,80 +95,89 @@ button{
     font-weight: 400;
     padding: 6px;
     margin-top: 20px;
+
 }
 
-button:hover{
+button:hover {
     opacity: 0.9;
 }
 
-
-.selected {
-    -webkit-box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);
-    box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);
-    -moz-box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);
+.image:hover {
+    opacity: 0.99;
+    filter: alpha(opacity=99); /*For IE8 and earlier */
 }
 
-.FL{
-    float: left;
-}
-
-.FR{
-    float: right;
-}
-
-.rock{
+.rock {
     background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png);
     background-size: cover;
 }
 
-.paper{
+.paper {
     background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png);
     background-size: cover;
 }
 
-.scissor{
+.scissor {
     background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png);
     background-size: cover;
 }
 
-.playerBlock{
-    width: 700px;
-    height: 100%;
-}
+/*.computerImage{*/
+/*width:200px;*/
+/*height: 200px;*/
+/*border-radius: 50%;*/
+/*opacity: 0.8;*/
+/*filter: alpha(opacity=80); *//* For IE8 and earlier */
+/*background-color: #fff;*/
 
-.scoreBlock{
-    width: 100px;
-    height: 100%;
+/*margin-top: 20px;*/
 
-}
+/*}*/
 
-.compBlock{
-    width: 300px;
-    height: 100%;
-    padding-left: 150px;
+/*.clearfix {*/
+/*clear: both;*/
 
-}
+/*}*/
 
-.prevChoice{
-    width: 30px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 50%;
-    margin-right: 5px;
 
-}
-.winLoseTitle{
-    margin-left: 45%;
-    font-size: 36px;
-    margin-bottom: 10px;
+/*.selected {*/
+/*-webkit-box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);*/
+/*box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);*/
+/*-moz-box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);*/
+/*}*/
 
-}
 
-.resultBlock1{
-    margin-left: 15px;
-    margin-right: 50px;
-}
 
-.BackToMain{
-    margin-left:43%;
-}
+/*.playerBlock{*/
+/*width: 700px;*/
+/*height: 100%;*/
+/*}*/
+
+/*.scoreBlock{*/
+/*width: 100px;*/
+/*height: 100%;*/
+
+/*}*/
+
+/*.compBlock{*/
+/*width: 300px;*/
+/*height: 100%;*/
+/*padding-left: 150px;*/
+
+/*}*/
+
+/*.winLoseTitle{*/
+/*margin-left: 45%;*/
+/*font-size: 36px;*/
+/*margin-bottom: 10px;*/
+
+/*}*/
+
+/*.resultBlock1{*/
+/*margin-left: 15px;*/
+/*margin-right: 50px;*/
+/*}*/
+
+/*.BackToMain{*/
+/*margin-left:43%;*/
+/*}*/

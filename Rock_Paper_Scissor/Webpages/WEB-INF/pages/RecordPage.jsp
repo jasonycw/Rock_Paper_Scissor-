@@ -95,14 +95,16 @@
             <th>W/L Ratio</th>
         </tr>
         </thead>
-        <c:forEach var="ratioKing" items="${requestScope['win_lose_Rank']}">
+        <c:forEach var='ratioKing' items='${win_lose_rank}'>
             <tr>
-                <td>1</td>
                 <td>
-                    <c:out value="${ratioKing.key}"/>
+                    <c:out value="${ratioKing.rank}"/>
                 </td>
                 <td>
-                    <c:out value="${ratioKing.value}"/>
+                    <c:out value="${ratioKing.name}"/>
+                </td>
+                <td>
+                    <c:out value="${ratioKing.value}"/>%
                 </td>
             </tr>
         </c:forEach>
@@ -117,16 +119,16 @@
             <th># of Game</th>
         </tr>
         </thead>
-        <c:forEach var="loser" items="${'lose_Rank'}">
+        <c:forEach var='timeWaster' items='${number_of_game_rank}'>
             <tr>
                 <td>
-                    <c:out value="${loser.rank}"/>
+                    <c:out value="${timeWaster.rank}"/>
                 </td>
                 <td>
-                    <c:out value="${loser.name}"/>
+                    <c:out value="${timeWaster.name}"/>
                 </td>
                 <td>
-                    <c:out value="${loser.value}"/>
+                    <c:out value="${timeWaster.value}"/> games
                 </td>
             </tr>
         </c:forEach>
@@ -141,11 +143,13 @@
             <th>Win</th>
         </tr>
         </thead>
-        <c:forEach var="winner" items="${requestScope['win_Rank']}">
+        <c:forEach var='winner' items='${win_rank}'>
             <tr>
-                <td>1</td>
                 <td>
-                    <c:out value="${winner.key}"/>
+                    <c:out value="${winner.rank}"/>
+                </td>
+                <td>
+                    <c:out value="${winner.name}"/>
                 </td>
                 <td>
                     <c:out value="${winner.value}"/>
@@ -163,11 +167,13 @@
             <th>Lose</th>
         </tr>
         </thead>
-        <c:forEach var="loser" items="${requestScope['lose_Rank']}">
+        <c:forEach var='loser' items='${lose_rank}'>
             <tr>
-                <td>1</td>
                 <td>
-                    <c:out value="${loser.key}"/>
+                    <c:out value="${loser.rank}"/>
+                </td>
+                <td>
+                    <c:out value="${loser.name}"/>
                 </td>
                 <td>
                     <c:out value="${loser.value}"/>

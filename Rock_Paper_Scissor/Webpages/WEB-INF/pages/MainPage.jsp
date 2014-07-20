@@ -14,10 +14,11 @@
 <jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
 <jsp:getProperty name="ackMsg" property="HTMLOutput"/>
-<p align="right">Welcome,
-    <jsp:getProperty name="playerInfo" property="mUsername"/>
-</p>
-
+<div id="welcomeDiv">
+    <p align="right">Welcome,
+        <jsp:getProperty name="playerInfo" property="mUsername"/>
+    </p>
+</div>
 <div id="mainContainer" class="centered">
     <div id="buttons">
         <div id="stats-round-button" class="round-button">

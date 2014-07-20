@@ -29,6 +29,7 @@ public class ProfileServlet extends HttpServlet {
         PlayerBean player = (PlayerBean) session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
 
+        //Break in checking
         try {
             SessionValidation.CheckBreakInAttempt(session, request, response);
         } catch (BreakInException e) {

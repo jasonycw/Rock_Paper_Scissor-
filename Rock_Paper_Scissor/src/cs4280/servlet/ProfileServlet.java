@@ -42,6 +42,7 @@ public class ProfileServlet extends HttpServlet {
             }
         }
 
+
         pageProgressBean.setmBreadcrumb("/profile");
         String submited = request.getParameter("submitProfile");
 

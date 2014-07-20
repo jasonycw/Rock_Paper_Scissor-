@@ -35,11 +35,6 @@ public class RecordServlet extends HttpServlet {
             }
         }
 
-        if (playerInfo == null || pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true) {
-            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
 
         pageProgressBean.setmBreadcrumb("/record");
         dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/RecordPage.jsp");

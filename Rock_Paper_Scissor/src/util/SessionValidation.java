@@ -14,7 +14,7 @@ public class SessionValidation {
         PlayerBean player = (PlayerBean) session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
 
-        if (player == null || pageProgressBean == null) {
+        if (player == null || pageProgressBean == null || !pageProgressBean.getIsLoggedIn()) {
             throw new BreakInException();
         }
 

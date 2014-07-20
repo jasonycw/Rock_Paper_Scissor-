@@ -1,11 +1,8 @@
 package cs4280.bean;
 
-import cs4280.exception.GameSetException;
 import cs4280.model.RoundResult;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
 public class GameProgressBean {
     private final int MAXROUND = 3;
@@ -28,7 +25,6 @@ public class GameProgressBean {
     public int getSCISSORCODE() {
         return SCISSORCODE;
     }
-
 
 
     private ArrayList<RoundResult> mResult = new ArrayList<RoundResult>();
@@ -65,7 +61,7 @@ public class GameProgressBean {
         return mResult;
     }
 
-    public void updateCurrentRoundResult(int playerDecision, int npcDecision){
+    public void updateCurrentRoundResult(int playerDecision, int npcDecision) {
 
         if ((playerDecision != ROCKCODE && playerDecision != PAPERCODE && playerDecision != SCISSORCODE) || (npcDecision != ROCKCODE && npcDecision != PAPERCODE && npcDecision != SCISSORCODE)) {
             return;
@@ -74,9 +70,9 @@ public class GameProgressBean {
         temp.setmPlayerDecision(playerDecision);
         temp.setmNPCDecision(npcDecision);
         mResult.add(temp);
-        if(temp.getPlayerScroe() == -1){
+        if (temp.getPlayerScroe() == -1) {
             npcScore += 1;
-        }else if(temp.getPlayerScroe() == 1){
+        } else if (temp.getPlayerScroe() == 1) {
             mScore += 1;
         }
         setmCurrentRound(mCurrentRound + 1);

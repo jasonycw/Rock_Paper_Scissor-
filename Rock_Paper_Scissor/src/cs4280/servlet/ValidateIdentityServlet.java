@@ -1,10 +1,11 @@
 package cs4280.servlet;
 
-import cs4280.bean.PageProgressBean;
 import cs4280.bean.AckBean;
+import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 import util.DBConnection;
 import util.ProjectUrl;
+import util.Time;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,81 +17,47 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class ValidateIdentityServlet extends HttpServlet {
-    String sec;
-    long time;
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /////////////////////////////////////////////
-        /*
-        Renee Workspace, check session here, kick the user back if needed
-        */
         HttpSession session = request.getSession();
 
-        /////////////////////////////////////////////
-
-        /////////////////////////////////////////////
-        /*
-        Louis Workspace
-        */
         boolean devMode = request.getParameter("test").equals("true");
         String username = request.getParameter("j_username");
         String password = request.getParameter("j_password");
 
         if (devMode || isUserValid(username, password)) {
             PlayerBean player = new PlayerBean();
-            Date date = new Date();
-            time = date.getTime();
-            sec = String.valueOf(time);
-            player.setmLoginTime(sec);
+            String currentTime = Time.getCurrentTimeInUnix();
             if (!devMode) {
-                //grab info
+                //Get info from DB
                 ResultSet rs = getUserInfo(username, password);
-                player = updateUserInfo(player, rs);
+                player = new PlayerBean(rs);
+                player.setmLoginTime(currentTime);
+                try {
+                    player.update();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-            long result = time + 100;
+
             session.setAttribute("playerInfo", player);
-            session.setAttribute("sec", result);
-            session.setAttribute("ackMsg", new AckBean());
+            session.setAttribute("ackMsg", new AckBean("Success", "Welcome Back buddy"));
             PageProgressBean pageProgress = new PageProgressBean();
             pageProgress.setIsLoggedIn(true);
             pageProgress.setmBreadcrumb("main");
             session.setAttribute("pageInfo", pageProgress);
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
+        } else {
+            session.setAttribute("ackMsg", new AckBean("Error", "Incorrect credentials"));
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+
         }
 
-
-        // when this page direct to another page, have to set attribute first.. when page is first loaded, check attribute see if is really this page ==> redirect
-        // set time
-
-        /////////////////////////////////////////////
-
-
-        //Forward response to jsp for display
-        response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
-    }
-
-    /////////////////////////////////////////////
-
-    private PlayerBean updateUserInfo(PlayerBean player, ResultSet rs) {
-        try {
-            if (rs.next()) {
-                player.setmUsername(rs.getString("username"));
-                player.setmPreferredTheme(rs.getString("theme"));
-                player.setmWinCount(rs.getInt("win"));
-                player.setmLoseCount(rs.getInt("lose"));
-                player.setmDrawCount(rs.getInt("draw"));
-                player.setmLoginTime(rs.getString("login_time"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return player;
     }
 
     private ResultSet getUserInfo(String username, String password) {
@@ -98,7 +65,7 @@ public class ValidateIdentityServlet extends HttpServlet {
         Connection con = null;
         try {
             con = DBConnection.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, draw, login_time FROM PlayerAccount WHERE username = ? AND password=?");
+            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, draw, login_time, total_playtime FROM PlayerAccount WHERE username = ? AND password=?");
             stmt.setString(1, username);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
@@ -118,8 +85,8 @@ public class ValidateIdentityServlet extends HttpServlet {
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
-            if (!rs.next()) {
-                return false;
+            if (rs.next()) {
+                return rs.getInt(1) == 1;
             }
         } catch (SQLException e) {
             e.printStackTrace();

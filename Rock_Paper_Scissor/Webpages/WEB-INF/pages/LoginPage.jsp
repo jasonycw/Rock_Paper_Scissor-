@@ -11,8 +11,9 @@
     <link href="<c:url value="/css/loginPage.css"/>" rel="stylesheet">
     <script src="<c:url value="/js/prefixfree.min.js"/>"></script>
 </head>
+<jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
 <body>
-
+<jsp:getProperty name="ackMsg" property="HTMLOutput"/>
 <div class="mainContainer">
     <div class="header">
         <div>Rock<span>Paper</span>Scissor</div>

@@ -5,8 +5,8 @@ public class AckBean {
     private String mMessage;
 
     public AckBean() {
-        this.mType = "Success";
-        this.mMessage = "Hi buddy~";
+        this.mType = "";
+        this.mMessage = "";
     }
 
     public AckBean(String mType, String mMessage) {
@@ -26,13 +26,10 @@ public class AckBean {
     }
 
     public String getHTMLOutput() {
-        if (mMessage == null) {
+        if (mMessage == null || mMessage.equals("")) {
             return "";
         } else {
-            return "<div class=\"ack-box " + mType + "\"><p> Your settings have been saved successfully ! </p><div class=\"ack-progress\"></div></div>";
-
-            //        return  ? "" : "<p class=\"" + mType + "\">" + mMessage + "</p>";
-
+            return "<div class=\"ack-box " + mType + "\"><p>" + mMessage + "</p><div class=\"ack-progress\"></div></div>";
         }
 
     }

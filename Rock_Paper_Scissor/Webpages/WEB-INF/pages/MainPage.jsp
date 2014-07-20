@@ -45,7 +45,7 @@
         <div id="nameTags">
             <div id="statsNameTag" class="nameTag">Profile</div>
             <div id="playNameTag" class="nameTag">Gaming</div>
-            <div id="rankNameTag" class="nameTag">Record</div>
+            <div id="rankNameTag" class="nameTag">Records</div>
             <div id="logoutNameTag" class="nameTag">Logout</div>
         </div>
     </div>

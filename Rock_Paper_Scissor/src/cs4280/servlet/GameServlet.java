@@ -19,6 +19,7 @@ public class GameServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
+
         PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
         // kick back if didn't logged in

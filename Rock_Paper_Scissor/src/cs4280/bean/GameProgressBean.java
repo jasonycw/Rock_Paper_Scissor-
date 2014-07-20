@@ -1,5 +1,6 @@
 package cs4280.bean;
 
+import cs4280.exception.GameSetException;
 import cs4280.model.RoundResult;
 
 import java.util.ArrayList;
@@ -64,7 +65,8 @@ public class GameProgressBean {
         return mResult;
     }
 
-    public void updateCurrentRoundResult(int playerDecision, int npcDecision) {
+    public void updateCurrentRoundResult(int playerDecision, int npcDecision){
+
         if ((playerDecision != ROCKCODE && playerDecision != PAPERCODE && playerDecision != SCISSORCODE) || (npcDecision != ROCKCODE && npcDecision != PAPERCODE && npcDecision != SCISSORCODE)) {
             return;
         }

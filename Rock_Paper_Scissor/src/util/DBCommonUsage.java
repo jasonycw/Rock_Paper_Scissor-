@@ -1,5 +1,7 @@
 package util;
 
+import com.sun.media.jfxmedia.logging.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +18,9 @@ public class DBCommonUsage {
             stmt.setString(1, username);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
-            return rs.getString("login_time");
+            if (rs.next()){
+                return rs.getString("login_time");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

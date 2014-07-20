@@ -20,11 +20,13 @@ public class SessionValidation {
 
         String username = player.getmUsername();
         String password = player.getmPassword();
-        String sessionKey = SessionTimeConversion.encrypt(player.getmLoginTime());
-        String dbTime = DBCommonUsage.getLoginTime(username, password);
+        String sessionKey = player.getmLoginTime();
+        String dbKey = DBCommonUsage.getLoginTime(username, password);
 
-        String encryptedKey = SessionTimeConversion.encrypt(dbTime);
-        if (!encryptedKey.equals(sessionKey)) {
+
+        if (!sessionKey.equals(dbKey)) {
+            System.out.println("HAHA");
+
             throw new BreakInException();
         }
     }

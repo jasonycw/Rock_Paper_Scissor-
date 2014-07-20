@@ -11,8 +11,8 @@ public class GameProgressBean {
     private final int SCISSORCODE = 2;
     private final int ROCKCODE = 3;
 
-    private int mScore = 0;
-    private int npcScore = 0;
+    private int mPlayerScore = 0;
+    private int mNPCScore = 0;
 
     public int getPAPERCODE() {
         return PAPERCODE;
@@ -30,19 +30,19 @@ public class GameProgressBean {
     private ArrayList<RoundResult> mResult = new ArrayList<RoundResult>();
 
     public int getmScore() {
-        return mScore;
+        return mPlayerScore;
     }
 
     public void setmScore(int mScore) {
-        this.mScore = mScore;
+        this.mPlayerScore = mScore;
     }
 
     public int getNpcScore() {
-        return npcScore;
+        return mPlayerScore;
     }
 
-    public void setNpcScore(int npcScore) {
-        this.npcScore = npcScore;
+    public void setmNPCScore(int npcScore) {
+        this.mNPCScore = npcScore;
     }
 
     public int getMAXROUND() {
@@ -71,9 +71,9 @@ public class GameProgressBean {
         temp.setmNPCDecision(npcDecision);
         mResult.add(temp);
         if (temp.getPlayerScroe() == -1) {
-            npcScore += 1;
+            mNPCScore += 1;
         } else if (temp.getPlayerScroe() == 1) {
-            mScore += 1;
+            mPlayerScore += 1;
         }
         setmCurrentRound(mCurrentRound + 1);
     }

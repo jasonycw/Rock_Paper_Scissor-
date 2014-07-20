@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class GameServlet extends HttpServlet {
 
@@ -90,6 +91,11 @@ public class GameServlet extends HttpServlet {
                 playerInfo.setmDrawCount(playerInfo.getmDrawCount() + 1);
             }else{
                 playerInfo.setmLoseCount(playerInfo.getmLoseCount() + 1);
+            }
+            try {
+                playerInfo.update();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
             gameInfo = new GameProgressBean();
             session.setAttribute("gameInfo",gameInfo);

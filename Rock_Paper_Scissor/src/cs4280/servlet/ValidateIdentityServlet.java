@@ -24,18 +24,8 @@ public class ValidateIdentityServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /////////////////////////////////////////////
-        /*
-        Renee Workspace, check session here, kick the user back if needed
-        */
         HttpSession session = request.getSession();
 
-        /////////////////////////////////////////////
-
-        /////////////////////////////////////////////
-        /*
-        Louis Workspace
-        */
         boolean devMode = request.getParameter("test").equals("true");
         String username = request.getParameter("j_username");
         String password = request.getParameter("j_password");
@@ -47,7 +37,7 @@ public class ValidateIdentityServlet extends HttpServlet {
                 //Get info from DB
                 ResultSet rs = getUserInfo(username, password);
                 player = new PlayerBean(rs);
-                player.setmLoginTime(currentTime);//send key to dB
+                player.setmLoginTime(currentTime);
                 try {
                     player.update();
                 } catch (SQLException e) {
@@ -56,26 +46,19 @@ public class ValidateIdentityServlet extends HttpServlet {
             }
 
             session.setAttribute("playerInfo", player);
-            session.setAttribute("ackMsg", new AckBean());
+            session.setAttribute("ackMsg", new AckBean("Success", "Welcome Back buddy"));
             PageProgressBean pageProgress = new PageProgressBean();
             pageProgress.setIsLoggedIn(true);
             pageProgress.setmBreadcrumb("main");
             session.setAttribute("pageInfo", pageProgress);
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
+        } else {
+            session.setAttribute("ackMsg", new AckBean("Error", "Incorrect credentials"));
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+
         }
 
-
-        // when this page direct to another page, have to set attribute first.. when page is first loaded, check attribute see if is really this page ==> redirect
-        // set time
-
-        /////////////////////////////////////////////
-
-
-        //Forward response to jsp for display
-        response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
     }
-
-    /////////////////////////////////////////////
-
 
     private ResultSet getUserInfo(String username, String password) {
         ResultSet rs = null;
@@ -102,8 +85,8 @@ public class ValidateIdentityServlet extends HttpServlet {
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
-            if (!rs.next()) {
-                return false;
+            if (rs.next()) {
+                return rs.getInt(1) == 1;
             }
         } catch (SQLException e) {
             e.printStackTrace();

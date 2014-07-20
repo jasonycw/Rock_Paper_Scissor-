@@ -42,6 +42,8 @@ public class RecordServlet extends HttpServlet {
         ArrayList<Rank> number_of_game_rank = DBCommonUsage.getWLRateRank();
         ArrayList<Rank> win_rank = DBCommonUsage.getWinRank();
         ArrayList<Rank> lose_rank = DBCommonUsage.getLoseRank();
+        ArrayList<Rank> play_rank = DBCommonUsage.getNumberOfGameRank();
+        int total_play_count = DBCommonUsage.getTotalGamePlayed();
 
         session.setAttribute("win_lose_rank", win_lose_rank);
         session.setAttribute("number_of_game_rank", number_of_game_rank);

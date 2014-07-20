@@ -37,8 +37,8 @@ public class ValidateIdentityServlet extends HttpServlet {
                 //Get info from DB
                 ResultSet rs = getUserInfo(username, password);
                 player = new PlayerBean(rs);
-                player.setmLoginTime(currentTime);
                 try {
+                    player.setmLoginTime(currentTime);
                     player.update();
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -65,7 +65,7 @@ public class ValidateIdentityServlet extends HttpServlet {
         Connection con = null;
         try {
             con = DBConnection.getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT username, password, theme, win, lose, draw, login_time, total_playtime FROM PlayerAccount WHERE username = ? AND password=?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM PlayerAccount WHERE username = ? AND password=?");
             stmt.setString(1, username);
             stmt.setString(2, password);
             rs = stmt.executeQuery();

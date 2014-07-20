@@ -30,9 +30,10 @@
     filter: alpha(opacity=0); /* For IE8 and earlier */
 
     /*animation*/
-    transition: margin .5s ease-in-out;
-    -moz-transition: margin .5s ease-in-out;
-    -webkit-transition: margin .5s ease-in-out;
+    transition: margin .5s ease-in-out, opacity .6s ease-in-out;
+    -moz-transition: margin .5s ease-in-out, opacity .6s ease-in-out;
+    -webkit-transition: margin .5s ease-in-out, opacity .6s ease-in-out;
+
 }
 
 #personalRankContainer:hover {
@@ -163,7 +164,7 @@
     content: '';
     display: inline-block;
     vertical-align: middle;
-    height: 5%;
+    height: 15px;
 }
 
 #allTableContainer {
@@ -173,7 +174,7 @@
 
     /*style*/
     width: 3500px;
-    height: 90%;
+    height: calc(100% - 30px);
 
     /*Animation*/
     -webkit-transition: all 0.5s ease;

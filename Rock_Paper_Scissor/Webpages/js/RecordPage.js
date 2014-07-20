@@ -17,6 +17,7 @@ window.onload = function () {
 
     personalRankContainer.onclick = function(){
         personalRankContainer.style.marginTop = "-100%";
+        personalRankContainer.style.opacity = 0;
     }
 
     document.getElementById("personalRankTable").onclick = function(e){

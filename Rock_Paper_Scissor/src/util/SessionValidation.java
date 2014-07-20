@@ -25,8 +25,6 @@ public class SessionValidation {
             String dbKey = DBCommonUsage.getLoginTime(username, password);
 
             if (!sessionKey.equals(dbKey)) {
-                System.out.println("HAHA");
-
                 throw new BreakInException();
             }
         }

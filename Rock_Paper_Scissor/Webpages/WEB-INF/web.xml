@@ -38,14 +38,6 @@
         <servlet-name>RecordServlet</servlet-name>
         <servlet-class>cs4280.servlet.RecordServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>RankingServlet</servlet-name>
-        <servlet-class>cs4280.servlet.RankingServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TrafficServlet</servlet-name>
-        <servlet-class>cs4280.servlet.TrafficServlet</servlet-class>
-    </servlet>
 
     <servlet-mapping>
         <servlet-name>RedirectServlet</servlet-name>

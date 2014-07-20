@@ -44,7 +44,7 @@ public class ValidateIdentityServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-
+            session.setAttribute("test", devMode);
             session.setAttribute("playerInfo", player);
             session.setAttribute("ackMsg", new AckBean("Success", "Welcome Back buddy"));
             PageProgressBean pageProgress = new PageProgressBean();

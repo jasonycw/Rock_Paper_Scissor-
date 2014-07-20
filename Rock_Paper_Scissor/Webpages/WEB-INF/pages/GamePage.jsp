@@ -24,7 +24,7 @@
 
 <%! private String computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
 <%! private String yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
-<%if (gameInfo.getmCurrentRound() == gameInfo.getMAXROUND()) {%>
+<%if (gameInfo.getmCurrentRound() >= gameInfo.getMAXROUND()) {%>
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
 <div id="backButton" class="backbutton">
     <a href="<c:url value="/main"/>">

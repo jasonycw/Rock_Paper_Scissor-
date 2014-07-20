@@ -66,6 +66,9 @@ public class GameProgressBean {
         if ((playerDecision != ROCKCODE && playerDecision != PAPERCODE && playerDecision != SCISSORCODE) || (npcDecision != ROCKCODE && npcDecision != PAPERCODE && npcDecision != SCISSORCODE)) {
             return;
         }
+        if (mCurrentRound > 3) {
+            return;
+        }
         RoundResult temp = new RoundResult();
         temp.setmPlayerDecision(playerDecision);
         temp.setmNPCDecision(npcDecision);

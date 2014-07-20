@@ -41,7 +41,6 @@ public class RecordServlet extends HttpServlet {
 
         ArrayList<Rank> win_Rank= DBCommonUsage.getWinRank();
         ArrayList<Rank> lose_Rank= DBCommonUsage.getLoseRank();
-        ArrayList<Rank> draw_Rank= DBCommonUsage.getDrawRank();
         ArrayList<Rank> win_lose_Rank= DBCommonUsage.getWLRateRank();
 
         pageProgressBean.setmBreadcrumb("/record");

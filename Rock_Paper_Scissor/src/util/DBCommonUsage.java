@@ -29,60 +29,52 @@ public class DBCommonUsage {
         ResultSet rs = null;
         ArrayList<Rank> rankList = new ArrayList<Rank>();
         try {
+            int i = 1;
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
             String sql = "SELECT username, win from PlayerAccount ORDER BY win DESC";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                rankList.add(new Rank(rs.getString("username"), rs.getInt("win") + ""));
+                rankList.add(new Rank(i, rs.getString("username"), rs.getInt("win") + ""));
+                i++;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rankList;
     }
+
     public static ArrayList<Rank> getLoseRank() {
         ResultSet rs = null;
         ArrayList<Rank> rankList = new ArrayList<Rank>();
         try {
+            int i = 1;
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
             String sql = "SELECT username, lose from PlayerAccount ORDER BY lose DESC";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                rankList.add(new Rank(rs.getString("username"), rs.getInt("lose") + ""));
+                rankList.add(new Rank(i, rs.getString("username"), rs.getInt("lose") + ""));
+                i++;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rankList;
     }
-    public static ArrayList<Rank> getDrawRank() {
-        ResultSet rs = null;
-        ArrayList<Rank> rankList = new ArrayList<Rank>();
-        try {
-            Connection con = DBConnection.getConnection();
-            Statement stmt = con.createStatement();
-            String sql = "SELECT username, draw from PlayerAccount ORDER BY draw DESC";
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                rankList.add(new Rank(rs.getString("username"), rs.getInt("draw") + ""));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rankList;
-    }
+
     public static ArrayList<Rank> getWLRateRank() {
         ResultSet rs = null;
         ArrayList<Rank> rankList = new ArrayList<Rank>();
         try {
+            int i = 1;
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
             String sql = "SELECT username, (win*100.0/(win+lose)) rate from PlayerAccount ORDER BY (win/(win+lose)*100.0) desc";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                rankList.add(new Rank(rs.getString("username"), rs.getInt("rate") + ""));
+                rankList.add(new Rank(i, rs.getString("username"), rs.getInt("rate") + ""));
+                i++;
             }
         } catch (SQLException e) {
             e.printStackTrace();

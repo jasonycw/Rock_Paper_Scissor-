@@ -37,6 +37,7 @@ public class RecordServlet extends HttpServlet {
                 e1.printStackTrace();
             }
         }
+        pageProgressBean.setmBreadcrumb("/record");
 
         ArrayList<Rank> win_lose_rank = DBCommonUsage.getWLRateRank();
         ArrayList<Rank> number_of_game_rank = DBCommonUsage.getNumberOfGameRank();

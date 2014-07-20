@@ -1,7 +1,9 @@
 package cs4280.servlet;
 
+import cs4280.bean.GameProgressBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
+import util.ProjectUrl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,15 +21,56 @@ public class GameServlet extends HttpServlet {
         HttpSession session = request.getSession();
         PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
         PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
+        // kick back if didn't logged in
         if (playerInfo == null ||  pageProgressBean == null || pageProgressBean.getIsLoggedIn() != true){
-            dispatcher=request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-            dispatcher.forward(request,response);
+            response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/login");
+            //dispatcher=request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
+            //dispatcher.forward(request,response);
             return;
         }
         pageProgressBean.setmBreadcrumb("/game");
-        //Forward response to jsp for display
-        dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
-        dispatcher.forward(request, response);
+        // set game progress bean to session
+        GameProgressBean gameInfo = (GameProgressBean)session.getAttribute("gameInfo");
+        if (gameInfo == null){
+            gameInfo = new GameProgressBean();
+            session.setAttribute("gameInfo",gameInfo);
+        }
+
+        //See if the player gave a choice
+
+        int playerChoice = -1;
+        if(request.getParameter("rock") != null && request.getParameter("rock").equals("1")){
+            playerChoice= 3;
+        }else if(request.getParameter("paper") != null && request.getParameter("paper").equals("1")){
+            playerChoice= 1;
+        }
+        else if(request.getParameter("scissor") != null && request.getParameter("scissor").equals("1")){
+            playerChoice= 2;
+        }
+
+        if(playerChoice!=-1){
+            int npcChoice = 1 + (int)(Math.random()*3);
+
+            gameInfo.updateCurrentRoundResult(playerChoice,npcChoice);
+            session.setAttribute("gameInfo",gameInfo);
+        }
+
+        if(request.getParameter("BackToMain") != null && request.getParameter("BackToMain").equals("1")){
+            if(gameInfo.getmScore()>gameInfo.getNpcScore()){
+                playerInfo.setmWinCount(playerInfo.getmWinCount() + 1);
+            }else if(gameInfo.getmScore()==gameInfo.getNpcScore()){
+                playerInfo.setmDrawCount(playerInfo.getmDrawCount() + 1);
+            }else{
+                playerInfo.setmLoseCount(playerInfo.getmLoseCount() + 1);
+            }
+            gameInfo = new GameProgressBean();
+            session.setAttribute("gameInfo",gameInfo);
+            response.sendRedirect(ProjectUrl.getBaseUrl(request)+"/main");
+
+        }else {
+            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

@@ -1,0 +1,128 @@
+body{
+
+    padding: 20px 25px;
+    color: #fff;
+    font-size: 12px;
+}
+
+
+.image{
+    width:200px;
+    height: 200px;
+    margin-left: 20px;
+    border-radius: 50%;
+    opacity: 0.8;
+    background-color: #fff;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.computerImage{
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+    background-color: #fff;
+
+    margin-top: 20px;
+
+}
+.image:hover{
+    opacity: 0.99;
+    filter: alpha(opacity=99); /* For IE8 and earlier */
+}
+.clearfix {
+    clear: both;
+
+}
+
+button{
+    width: 260px;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #a18d6c;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 6px;
+    margin-top: 20px;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+
+.selected {
+    -webkit-box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);
+    box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);
+    -moz-box-shadow: 0px 0px 12px 4px rgba(250, 247, 250, 1);
+}
+
+.FL{
+    float: left;
+}
+
+.FR{
+    float: right;
+}
+
+.rock{
+    background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png);
+    background-size: cover;
+}
+
+.paper{
+    background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png);
+    background-size: cover;
+}
+
+.scissor{
+    background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png);
+    background-size: cover;
+}
+
+.playerBlock{
+    width: 700px;
+    height: 100%;
+}
+
+.scoreBlock{
+    width: 100px;
+    height: 100%;
+
+}
+
+.compBlock{
+    width: 300px;
+    height: 100%;
+    padding-left: 150px;
+
+}
+
+.prevChoice{
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-right: 5px;
+
+}
+.winLoseTitle{
+    margin-left: 45%;
+    font-size: 36px;
+    margin-bottom: 10px;
+
+}
+
+.resultBlock1{
+    margin-left: 15px;
+    margin-right: 50px;
+}
+
+.BackToMain{
+    margin-left:43%;
+}

@@ -39,7 +39,11 @@ public class DBCommonUsage {
                 i++;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            /*
+            Can't connect to DB, fake default data
+             */
+            rankList.add(new Rank(1, "JustKidding", 100 + ""));
+            rankList.add(new Rank(2, "One2Tree", 3 + ""));
         }
         return rankList;
     }
@@ -58,7 +62,11 @@ public class DBCommonUsage {
                 i++;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+             /*
+            Can't connect to DB, fake default data
+             */
+            rankList.add(new Rank(1, "JustKidding", 20 + ""));
+            rankList.add(new Rank(2, "One2Tree", 3 + ""));
         }
         return rankList;
     }
@@ -77,7 +85,11 @@ public class DBCommonUsage {
                 i++;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+             /*
+            Can't connect to DB, fake default data
+             */
+            rankList.add(new Rank(1, "JustKidding", 83 + ""));
+            rankList.add(new Rank(2, "One2Tree", 50 + ""));
         }
         return rankList;
     }

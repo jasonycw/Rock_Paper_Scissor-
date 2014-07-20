@@ -3,6 +3,7 @@ package cs4280.servlet;
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
+import util.SessionTimeEncrytion;
 import util.SessionValidation;
 
 import javax.servlet.RequestDispatcher;
@@ -25,10 +26,8 @@ public class ProfileServlet extends HttpServlet {
         */
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        String usr = (String)session.getAttribute("usr");
-        String pw = (String)session.getAttribute("pw");
-        String encryptedKey = (String)session.getAttribute("encryptedKey");
-        if(!SessionValidation.CheckBreakInAttempt(usr,pw,encryptedKey)) {
+        PlayerBean player=(PlayerBean)session.getAttribute("playerInfo");
+        if(!SessionValidation.validate(player.getmUsername(),player.getmPassword(), SessionTimeEncrytion.encrypt(player.getmLoginTime()))) {
 
         }
         PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
@@ -43,12 +42,12 @@ public class ProfileServlet extends HttpServlet {
 
 
         if (submited != null && submited.equals("1")) {
-            String PasswwordErrorMessage = passwordErrorMessage(request.getParameter("password"), request.getParameter("confirmPassword"));
+            String PasswordErrorMessage = passwordErrorMessage(request.getParameter("password"), request.getParameter("confirmPassword"));
             AckBean ack = (AckBean) session.getAttribute("ackMsg");
             if (ack == null) {
                 ack = new AckBean();
             }
-            if(PasswwordErrorMessage.equals("")){
+            if(PasswordErrorMessage.equals("")){
                 ack.setmMessage("Your submit has been well received, Thank you!");
                 String theme = request.getParameter("theme");
                 if (theme != null) {
@@ -60,7 +59,7 @@ public class ProfileServlet extends HttpServlet {
                 session.setAttribute("ackMsg", ack);
 
             } else {
-                ack.setmMessage(PasswwordErrorMessage);
+                ack.setmMessage(PasswordErrorMessage);
 
         }
     }

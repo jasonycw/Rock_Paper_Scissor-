@@ -49,7 +49,7 @@ public class ValidateIdentityServlet extends HttpServlet {
                 ResultSet rs = getUserInfo(username, password);
                 player = updateUserInfo(player, rs);
             }
-            long result = Integer.parseInt(currentTime) + 100;
+            long result = Long.parseLong(currentTime) + 100;
             session.setAttribute("playerInfo", player);
             session.setAttribute("sec", result);
             session.setAttribute("ackMsg", new AckBean());
@@ -76,11 +76,14 @@ public class ValidateIdentityServlet extends HttpServlet {
         try {
             if (rs.next()) {
                 player.setmUsername(rs.getString("username"));
+                player.setmPassword(rs.getString("password"));
                 player.setmPreferredTheme(rs.getString("theme"));
                 player.setmWinCount(rs.getInt("win"));
                 player.setmLoseCount(rs.getInt("lose"));
                 player.setmDrawCount(rs.getInt("draw"));
                 player.setmLoginTime(rs.getString("login_time"));
+                player.setmTotalPlaytime(rs.getString("total_playtime"));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

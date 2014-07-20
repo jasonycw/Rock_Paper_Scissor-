@@ -9,14 +9,15 @@ import java.sql.Statement;
 public class PlayerBean {
 
     private String mUsername;
+    private String mPassword;
     private String mPreferredTheme;
     private int mWinCount;
     private int mLoseCount;
     private int mDrawCount;
     private String mLoginTime;
-    private int mTotalPlaytime;
+    private String mTotalPlaytime;
 
-    public int getmTotalPlaytime() {
+    public String getmTotalPlaytime() {
         return mTotalPlaytime;
     }
 
@@ -28,14 +29,28 @@ public class PlayerBean {
 
     public PlayerBean() {
         mUsername = "Developer";
+        mPassword="123";
         mPreferredTheme = "1";
         mWinCount = 100;
         mLoseCount = 1;
+        mDrawCount = 1;
         mLoginTime="1405641600";
-
+        mTotalPlaytime="0";
         /*
         grab current time through db
          */
+    }
+
+    public String getmPassword() {
+        return mPassword;
+    }
+
+    public void setmPassword(String mPassword) {
+        this.mPassword = mPassword;
+    }
+
+    public void setmTotalPlaytime(String mTotalPlaytime) {
+        this.mTotalPlaytime = mTotalPlaytime;
     }
 
     public String getmUsername() {

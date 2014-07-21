@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-#gameDiv {
+#gameDiv, #resultContainer{
     width: 1300px;
     height: 500px;
     margin-top: 100px;
@@ -124,16 +124,31 @@ button:hover {
 
 .FL{
     float: left;
-
 }
 
 .winLoseTitle{
-    margin-bottom: 10px;
+    width: 500px;
+    margin: 0 auto;
+    font-size: 60px;
+    text-align: center;
 }
-.resultBlock1{
+.resultBlock{
+    width: 500px;
+    margin-left: 50px;
     margin-right: 50px;
-
 }
+
+.resultBlock .image{
+    margin: 10 auto;
+    display: block;
+}
+
+.resultBlock h2{
+    margin-left: 170;
+}
+
+
+
 /*.computerImage{*/
 /*width:200px;*/
 /*height: 200px;*/

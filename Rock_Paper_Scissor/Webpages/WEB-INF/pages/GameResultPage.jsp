@@ -22,8 +22,8 @@
 <jsp:useBean id="gameInfo" type="cs4280.bean.GameProgressBean" scope="session"/>
 <jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
 
-<%! private String computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
-<%! private String yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
+<%! private String computerChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
+<%! private String yourChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
 
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
 <div id="backButton" class="backbutton">
@@ -48,13 +48,13 @@
             <h2>Your Choices</h2>
             <% for (RoundResult result : gameInfo.getmResult()) {
                 if (result.getmPlayerDecision() == gameInfo.getROCKCODE()) {
-                    yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";
+                    yourChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";
                     out.print("<img class=\"image\" src=\"" + yourChoiceSrc + "\"/>");
                 } else if (result.getmPlayerDecision() == gameInfo.getPAPERCODE()) {
-                    yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png";
+                    yourChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png";
                     out.print("<img class=\"image\" src=\"" + yourChoiceSrc + "\"/>");
                 } else {
-                    yourChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png";
+                    yourChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png";
                     out.print("<img class=\"image\" src=\"" + yourChoiceSrc + "\"/>");
                 }
             }%>
@@ -64,13 +64,13 @@
             <h2>Computer Choices</h2>
             <% for (RoundResult result : gameInfo.getmResult()) {
                 if (result.getmNPCDecision() == gameInfo.getROCKCODE()) {
-                    computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";
+                    computerChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";
                     out.print("<img class=\"image\" src=\"" + computerChoiceSrc + "\"/>");
                 } else if (result.getmNPCDecision() == gameInfo.getPAPERCODE()) {
-                    computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png";
+                    computerChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png";
                     out.print("<img class=\"image\" src=\"" + computerChoiceSrc + "\"/>");
                 } else {
-                    computerChoiceSrc = "/img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png";
+                    computerChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png";
                     out.print("<img class=\"image\" src=\"" + computerChoiceSrc + "\"/>");
                 }
             }%>

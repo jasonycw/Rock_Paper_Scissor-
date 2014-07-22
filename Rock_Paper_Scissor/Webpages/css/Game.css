@@ -108,17 +108,17 @@ button:hover {
 }
 
 .rock {
-    background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png);
+    background: #fff url('../img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png');
     background-size: cover;
 }
 
 .paper {
-    background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png);
+    background: #fff url('../img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png');
     background-size: cover;
 }
 
 .scissor {
-    background: #fff url(/img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png);
+    background: #fff url('../img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png');
     background-size: cover;
 }
 

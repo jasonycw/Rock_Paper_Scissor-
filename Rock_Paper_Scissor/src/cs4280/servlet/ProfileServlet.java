@@ -16,21 +16,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/*
-Responsible to display user info, provide function to change user preference like theme
- */
 public class ProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
 
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session, request, response);
+            SessionValidation.CheckBreakInAttempt(session);
         } catch (BreakInException e) {
-            session.setAttribute("ackMsg", new AckBean("Warning", "Break-in attempt"));
+            session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
                 response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
                 return;
@@ -40,9 +36,10 @@ public class ProfileServlet extends HttpServlet {
         }
         pageProgressBean.setmBreadcrumb("/profile");
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request,response);
+        processRequest(request, response);
         RequestDispatcher dispatcher;
         try {
             dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/UserProfilePage.jsp");
@@ -54,7 +51,7 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req,resp);
+        processRequest(req, resp);
 
         HttpSession session = req.getSession();
         RequestDispatcher dispatcher;
@@ -63,9 +60,9 @@ public class ProfileServlet extends HttpServlet {
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session, req, resp);
+            SessionValidation.CheckBreakInAttempt(session);
         } catch (BreakInException e) {
-            session.setAttribute("ackMsg", new AckBean("Warning", "Break-in attempt"));
+            session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
                 resp.sendRedirect(ProjectUrl.getBaseUrl(req) + "/login");
                 return;
@@ -84,7 +81,7 @@ public class ProfileServlet extends HttpServlet {
             AckBean ack = new AckBean();
 
             String new_password = req.getParameter("new_password");
-            if (new_password != null && new_password!="") {
+            if (new_password != null && new_password != "") {
                 player.setmPassword(new_password);
             }
             String theme = req.getParameter("theme");
@@ -105,7 +102,7 @@ public class ProfileServlet extends HttpServlet {
             dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/pages/UserProfilePage.jsp");
             dispatcher.forward(req, resp);
             return;
-        } catch (Exception e1) {
+        } catch (Exception ignored) {
         }
     }
 }

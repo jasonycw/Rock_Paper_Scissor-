@@ -3,7 +3,6 @@ package cs4280.servlet;
 
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
-import cs4280.bean.PlayerBean;
 import cs4280.exception.BreakInException;
 import util.ProjectUrl;
 import util.SessionValidation;
@@ -26,9 +25,9 @@ public class MainServlet extends HttpServlet {
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session, request, response);
+            SessionValidation.CheckBreakInAttempt(session);
         } catch (BreakInException e) {
-            session.setAttribute(AckBean.getBeanName(), new AckBean("Warning", "Break-in attempt"));
+            session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
                 response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
                 return;

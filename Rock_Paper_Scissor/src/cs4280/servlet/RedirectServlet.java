@@ -2,6 +2,7 @@ package cs4280.servlet;
 
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
+import cs4280.bean.PlayerBean;
 import cs4280.exception.BreakInException;
 import util.ProjectUrl;
 import util.SessionValidation;
@@ -20,12 +21,18 @@ public class RedirectServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute(PageProgressBean.getBeanName()));
+        PlayerBean player = (PlayerBean) session.getAttribute(PlayerBean.getBeanName());
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session, request, response);
+            SessionValidation.CheckBreakInAttempt(session);
         } catch (BreakInException e) {
-            session.setAttribute(AckBean.getBeanName(), new AckBean("Warning", "Break-in attempt"));
+            if (player != null || pageProgressBean != null) {
+                session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
+
+            } else {
+                session.setAttribute(AckBean.getBeanName(), new AckBean());
+            }
             try {
                 response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
                 return;

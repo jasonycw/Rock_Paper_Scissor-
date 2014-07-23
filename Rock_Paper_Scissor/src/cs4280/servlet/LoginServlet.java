@@ -2,9 +2,7 @@ package cs4280.servlet;
 
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
-import cs4280.exception.BreakInException;
 import util.ProjectUrl;
-import util.SessionValidation;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,19 +23,23 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute(AckBean.getBeanName(), new AckBean());
         }
 
-        try {
-            //Break in checking
-            SessionValidation.CheckBreakInAttempt(session, request, response);
-
+//        try {
+        //Break in checking
+//            SessionValidation.CheckBreakInAttempt(session);
+        if (pageProgressBean != null && pageProgressBean.getmBreadcrumb() != null) {
             response.sendRedirect(ProjectUrl.getBaseUrl(request) + pageProgressBean.getmBreadcrumb());
-        } catch (BreakInException e) {
-            try {
-                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
-                dispatcher.forward(request, response);
-                return;
-            } catch (Exception ignored) {
-            }
+
+        } else {
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/LoginPage.jsp");
+            dispatcher.forward(request, response);
+            return;
         }
+//        } catch (BreakInException e) {
+//            try {
+//
+//            } catch (Exception ignored) {
+//            }
+//        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

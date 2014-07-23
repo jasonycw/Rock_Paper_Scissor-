@@ -6,11 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DBCommonUsage {
-    public static String getLoginTime(String username, String password) {
+    public static String getLoginTime(String username, String password) throws SQLException {
         Connection con = null;
         ResultSet rs = null;
         PreparedStatement stmt = null;
-        try {
+
             con = DBConnection.getConnection();
             stmt = con.prepareStatement("SELECT login_time FROM PlayerAccount WHERE username = ? and password=?");
             stmt.setString(1, username);
@@ -19,9 +19,7 @@ public class DBCommonUsage {
             if (rs.next()) {
                 return rs.getString("login_time");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         return "";
     }
 

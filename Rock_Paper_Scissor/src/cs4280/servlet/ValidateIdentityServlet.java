@@ -45,15 +45,15 @@ public class ValidateIdentityServlet extends HttpServlet {
                 }
             }
             session.setAttribute("test", devMode);
-            session.setAttribute("playerInfo", player);
-            session.setAttribute("ackMsg", new AckBean("Success", "Welcome Back buddy"));
+            session.setAttribute(PlayerBean.getBeanName(), player);
+            session.setAttribute(AckBean.getBeanName(), new AckBean());
             PageProgressBean pageProgress = new PageProgressBean();
             pageProgress.setIsLoggedIn(true);
             pageProgress.setmBreadcrumb("main");
-            session.setAttribute("pageInfo", pageProgress);
+            session.setAttribute(PageProgressBean.getBeanName(), pageProgress);
             response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
         } else {
-            session.setAttribute("ackMsg", new AckBean("Error", "Incorrect credentials"));
+            session.setAttribute(AckBean.getBeanName(), new AckBean("Incorrect credentials"));
             response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
 
         }

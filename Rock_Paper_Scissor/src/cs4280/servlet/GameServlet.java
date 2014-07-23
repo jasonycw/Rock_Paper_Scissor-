@@ -24,13 +24,13 @@ public class GameServlet extends HttpServlet {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
 
-        PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session, request, response);
+            SessionValidation.CheckBreakInAttempt(session);
         } catch (BreakInException e) {
-            session.setAttribute("ackMsg", new AckBean("Warning", "Break-in attempt"));
+            session.setAttribute("ackMsg", new AckBean("Break-in attempt"));
             try {
                 response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
                 return;
@@ -41,14 +41,14 @@ public class GameServlet extends HttpServlet {
 
         pageProgressBean.setmBreadcrumb("/game");
         // set game progress bean to session
-        GameProgressBean gameInfo = (GameProgressBean)session.getAttribute("gameInfo");
-        if (gameInfo == null){
+        GameProgressBean gameInfo = (GameProgressBean) session.getAttribute("gameInfo");
+        if (gameInfo == null) {
             gameInfo = new GameProgressBean();
-            session.setAttribute("gameInfo",gameInfo);
-        }else{
-            if(gameInfo.getmCurrentRound()>=gameInfo.getMAXROUND()){
+            session.setAttribute("gameInfo", gameInfo);
+        } else {
+            if (gameInfo.getmCurrentRound() >= gameInfo.getMAXROUND()) {
                 //PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
-               // setPlayerScore(gameInfo,playerInfo,session);
+                // setPlayerScore(gameInfo,playerInfo,session);
                 gameInfo = new GameProgressBean();
                 session.setAttribute("gameInfo", gameInfo);
             }
@@ -65,7 +65,7 @@ public class GameServlet extends HttpServlet {
             dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
             dispatcher.forward(request, response);
             return;
-        }catch (Exception e) {
+        } catch (Exception e) {
         }
 
     }
@@ -76,59 +76,56 @@ public class GameServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        GameProgressBean gameInfo = (GameProgressBean)session.getAttribute("gameInfo");
+        GameProgressBean gameInfo = (GameProgressBean) session.getAttribute("gameInfo");
         //See if the player gave a choice
         int playerChoice = -1;
-        if(request.getParameter("rock") != null && request.getParameter("rock").equals("1")){
-            playerChoice= 3;
-        }else if(request.getParameter("paper") != null && request.getParameter("paper").equals("1")){
-            playerChoice= 1;
-        }
-        else if(request.getParameter("scissor") != null && request.getParameter("scissor").equals("1")){
-            playerChoice= 2;
-        }
-
-        if(playerChoice!=-1){
-            int npcChoice = 1 + (int)(Math.random()*3);
-
-            gameInfo.updateCurrentRoundResult(playerChoice,npcChoice);
-            session.setAttribute("gameInfo",gameInfo);
+        if (request.getParameter("rock") != null && request.getParameter("rock").equals("1")) {
+            playerChoice = 3;
+        } else if (request.getParameter("paper") != null && request.getParameter("paper").equals("1")) {
+            playerChoice = 1;
+        } else if (request.getParameter("scissor") != null && request.getParameter("scissor").equals("1")) {
+            playerChoice = 2;
         }
 
-        if(gameInfo.getmCurrentRound()>=gameInfo.getMAXROUND()){
-            PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
-            setPlayerScore(gameInfo,playerInfo,session);
+        if (playerChoice != -1) {
+            int npcChoice = 1 + (int) (Math.random() * 3);
+
+            gameInfo.updateCurrentRoundResult(playerChoice, npcChoice);
+            session.setAttribute("gameInfo", gameInfo);
+        }
+
+        if (gameInfo.getmCurrentRound() >= gameInfo.getMAXROUND()) {
+            PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
+            setPlayerScore(gameInfo, playerInfo, session);
             dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GameResultPage.jsp");
 
-        }else {
+        } else {
             dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
 
         }
 
-       // if(request.getParameter("backFromResult") != null && request.getParameter("backFromResult").equals("1")){
-        //    PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
-       //     setPlayerScore(gameInfo,playerInfo,session);
-        //    response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
-        //}
 
         try {
             dispatcher.forward(request, response);
             return;
-        }catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
-    private void setPlayerScore(GameProgressBean gameInfo, PlayerBean playerInfo, HttpSession session){
-        if(gameInfo.getmScore()>gameInfo.getNpcScore()){
+    private void setPlayerScore(GameProgressBean gameInfo, PlayerBean playerInfo, HttpSession session) {
+        if (gameInfo.getmScore() > gameInfo.getNpcScore()) {
             playerInfo.setmWinCount(playerInfo.getmWinCount() + 1);
-        }else if(gameInfo.getmScore()==gameInfo.getNpcScore()){
+        } else if (gameInfo.getmScore() == gameInfo.getNpcScore()) {
             playerInfo.setmDrawCount(playerInfo.getmDrawCount() + 1);
-        }else{
+        } else {
             playerInfo.setmLoseCount(playerInfo.getmLoseCount() + 1);
         }
         try {
             playerInfo.update();
+            session.setAttribute(AckBean.getBeanName(), new AckBean("Your game result has been updated"));
+
         } catch (SQLException e) {
+            session.setAttribute(AckBean.getBeanName(), new AckBean(e.getMessage()));
             e.printStackTrace();
         }
     }

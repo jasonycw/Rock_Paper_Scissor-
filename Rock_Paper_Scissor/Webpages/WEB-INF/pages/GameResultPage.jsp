@@ -31,6 +31,7 @@
         <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
     </a>
 </div>
+
 <div id="resultContainer" class="centered">
     <form action="" method="post">
 

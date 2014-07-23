@@ -47,8 +47,10 @@ public class GameServlet extends HttpServlet {
             session.setAttribute("gameInfo",gameInfo);
         }else{
             if(gameInfo.getmCurrentRound()>=gameInfo.getMAXROUND()){
-                PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
-                setPlayerScore(gameInfo,playerInfo,session);
+                //PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
+               // setPlayerScore(gameInfo,playerInfo,session);
+                gameInfo = new GameProgressBean();
+                session.setAttribute("gameInfo", gameInfo);
             }
         }
 
@@ -94,11 +96,20 @@ public class GameServlet extends HttpServlet {
         }
 
         if(gameInfo.getmCurrentRound()>=gameInfo.getMAXROUND()){
+            PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
+            setPlayerScore(gameInfo,playerInfo,session);
             dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GameResultPage.jsp");
+
         }else {
             dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
 
         }
+
+       // if(request.getParameter("backFromResult") != null && request.getParameter("backFromResult").equals("1")){
+        //    PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
+       //     setPlayerScore(gameInfo,playerInfo,session);
+        //    response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
+        //}
 
         try {
             dispatcher.forward(request, response);
@@ -106,6 +117,7 @@ public class GameServlet extends HttpServlet {
         }catch (Exception e) {
         }
     }
+
     private void setPlayerScore(GameProgressBean gameInfo, PlayerBean playerInfo, HttpSession session){
         if(gameInfo.getmScore()>gameInfo.getNpcScore()){
             playerInfo.setmWinCount(playerInfo.getmWinCount() + 1);
@@ -119,7 +131,6 @@ public class GameServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        gameInfo = new GameProgressBean();
-        session.setAttribute("gameInfo", gameInfo);
     }
+
 }

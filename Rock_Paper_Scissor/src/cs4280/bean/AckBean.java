@@ -1,6 +1,6 @@
 package cs4280.bean;
 
-public class AckBean {
+public class AckBean{
     private String mType;
     private String mMessage;
 
@@ -34,7 +34,7 @@ public class AckBean {
 
     }
 
-    public void clean() {
-        setmMessage("");
+    public static String getBeanName() {
+        return "ackMsg";
     }
 }

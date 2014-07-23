@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-    <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/ack2.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/loginPage.css"/>" rel="stylesheet">
     <script src="<c:url value="/js/prefixfree.min.js"/>"></script>
 </head>

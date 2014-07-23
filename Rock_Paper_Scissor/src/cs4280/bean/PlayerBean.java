@@ -138,4 +138,7 @@ public class PlayerBean {
 
         stmt.executeUpdate();
     }
+    public static String getBeanName(){
+      return "playerInfo";
+    }
 }

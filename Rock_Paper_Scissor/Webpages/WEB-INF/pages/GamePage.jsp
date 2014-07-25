@@ -15,7 +15,7 @@
     <title>Game</title>
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Game.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/ack2.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/backbutton.css"/>" rel="stylesheet">
 </head>
 <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>

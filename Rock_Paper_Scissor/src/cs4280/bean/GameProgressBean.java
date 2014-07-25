@@ -79,6 +79,8 @@ public class GameProgressBean {
             mPlayerScore += 1;
         }
         setmCurrentRound(mCurrentRound + 1);
-
+    }
+    public static String getBeanName(){
+        return "gameInfo";
     }
 }

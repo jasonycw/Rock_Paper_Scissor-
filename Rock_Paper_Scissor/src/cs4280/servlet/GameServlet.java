@@ -5,6 +5,7 @@ import cs4280.bean.GameProgressBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 import cs4280.exception.BreakInException;
+import util.PageURL;
 import util.ProjectUrl;
 import util.SessionValidation;
 
@@ -21,36 +22,33 @@ public class GameServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
 
-        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute(PageProgressBean.getBeanName()));
 
         //Break in checking
         try {
             SessionValidation.CheckBreakInAttempt(session);
         } catch (BreakInException e) {
-            session.setAttribute("ackMsg", new AckBean("Break-in attempt"));
+            session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
-                response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+                response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
                 return;
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
 
-        pageProgressBean.setmBreadcrumb("/game");
+        pageProgressBean.setmBreadcrumb(PageURL.sGameServletURL);
         // set game progress bean to session
-        GameProgressBean gameInfo = (GameProgressBean) session.getAttribute("gameInfo");
+        GameProgressBean gameInfo = (GameProgressBean) session.getAttribute(GameProgressBean.getBeanName());
         if (gameInfo == null) {
             gameInfo = new GameProgressBean();
-            session.setAttribute("gameInfo", gameInfo);
+            session.setAttribute(GameProgressBean.getBeanName(), gameInfo);
         } else {
             if (gameInfo.getmCurrentRound() >= gameInfo.getMAXROUND()) {
-                //PlayerBean playerInfo = (PlayerBean)session.getAttribute("playerInfo");
-                // setPlayerScore(gameInfo,playerInfo,session);
                 gameInfo = new GameProgressBean();
-                session.setAttribute("gameInfo", gameInfo);
+                session.setAttribute(GameProgressBean.getBeanName(), gameInfo);
             }
         }
 
@@ -62,10 +60,10 @@ public class GameServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         try {
-            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
+            dispatcher = request.getServletContext().getRequestDispatcher(PageURL.sGameJSPURL);
             dispatcher.forward(request, response);
             return;
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
     }
@@ -76,7 +74,7 @@ public class GameServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        GameProgressBean gameInfo = (GameProgressBean) session.getAttribute("gameInfo");
+        GameProgressBean gameInfo = (GameProgressBean) session.getAttribute(GameProgressBean.getBeanName());
         //See if the player gave a choice
         int playerChoice = -1;
         if (request.getParameter("rock") != null && request.getParameter("rock").equals("1")) {
@@ -91,17 +89,16 @@ public class GameServlet extends HttpServlet {
             int npcChoice = 1 + (int) (Math.random() * 3);
 
             gameInfo.updateCurrentRoundResult(playerChoice, npcChoice);
-            session.setAttribute("gameInfo", gameInfo);
+            session.setAttribute(GameProgressBean.getBeanName(), gameInfo);
         }
 
         if (gameInfo.getmCurrentRound() >= gameInfo.getMAXROUND()) {
-            PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
+            PlayerBean playerInfo = (PlayerBean) session.getAttribute(PlayerBean.getBeanName());
             setPlayerScore(gameInfo, playerInfo, session);
-            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GameResultPage.jsp");
+            dispatcher = request.getServletContext().getRequestDispatcher(PageURL.sGameResultJSPURL);
 
         } else {
-            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/GamePage.jsp");
-
+            dispatcher = request.getServletContext().getRequestDispatcher(PageURL.sGameJSPURL);
         }
 
 

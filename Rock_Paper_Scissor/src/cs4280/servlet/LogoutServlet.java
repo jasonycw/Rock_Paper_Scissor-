@@ -1,5 +1,6 @@
 package cs4280.servlet;
 
+import util.PageURL;
 import util.ProjectUrl;
 
 import javax.servlet.ServletException;
@@ -16,29 +17,12 @@ public class LogoutServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /////////////////////////////////////////////
-        /*
-        Renee Workspace, clean up everything
-        */
 
-        /////////////////////////////////////////////
-
-        /////////////////////////////////////////////
-        /*
-        Louis Workspace, clean up db last login time
-        */
         HttpSession session = request.getSession();
         session.invalidate();
-        /////////////////////////////////////////////
-
-        /////////////////////////////////////////////
-        /*
-        Lewis, create ackBean to tell user to login again
-         */
-        /////////////////////////////////////////////
 
         //Kick the user back to login page
-        response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/redirect");
+        response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sRedirectServletURL);
     }
 
     @Override

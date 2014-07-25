@@ -2,10 +2,10 @@ package cs4280.servlet;
 
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
-import cs4280.bean.PlayerBean;
 import cs4280.exception.BreakInException;
 import cs4280.model.Rank;
 import util.DBCommonUsage;
+import util.PageURL;
 import util.ProjectUrl;
 import util.SessionValidation;
 
@@ -22,8 +22,7 @@ public class RecordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        PlayerBean playerInfo = (PlayerBean) session.getAttribute("playerInfo");
-        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute(PageProgressBean.getBeanName()));
 
         //Break in checking
         try {
@@ -31,13 +30,12 @@ public class RecordServlet extends HttpServlet {
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
-                response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+                response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
                 return;
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
-        pageProgressBean.setmBreadcrumb("/record");
 
         ArrayList<Rank> win_lose_rank = DBCommonUsage.getWLRateRank();
         ArrayList<Rank> number_of_game_rank = DBCommonUsage.getNumberOfGameRank();
@@ -51,8 +49,8 @@ public class RecordServlet extends HttpServlet {
         session.setAttribute("lose_rank", lose_rank);
         session.setAttribute("total_play_count", total_play_count);
 
-        pageProgressBean.setmBreadcrumb("/record");
-        dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/RecordPage.jsp");
+        pageProgressBean.setmBreadcrumb(PageURL.sRecordServletURL);
+        dispatcher = request.getServletContext().getRequestDispatcher(PageURL.sRecordJSPURL);
         dispatcher.forward(request, response);
     }
 

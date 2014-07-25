@@ -4,6 +4,7 @@ import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 import cs4280.exception.BreakInException;
+import util.PageURL;
 import util.ProjectUrl;
 import util.SessionValidation;
 
@@ -34,7 +35,7 @@ public class RedirectServlet extends HttpServlet {
                 session.setAttribute(AckBean.getBeanName(), new AckBean());
             }
             try {
-                response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+                response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
                 return;
             } catch (IOException ignored) {
             }

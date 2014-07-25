@@ -4,6 +4,7 @@ import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 import util.DBConnection;
+import util.PageURL;
 import util.ProjectUrl;
 import util.Time;
 
@@ -51,10 +52,10 @@ public class ValidateIdentityServlet extends HttpServlet {
             pageProgress.setIsLoggedIn(true);
             pageProgress.setmBreadcrumb("main");
             session.setAttribute(PageProgressBean.getBeanName(), pageProgress);
-            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/main");
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sMainServletURL);
         } else {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Incorrect credentials"));
-            response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+            response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
 
         }
 

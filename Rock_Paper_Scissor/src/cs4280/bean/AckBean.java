@@ -5,7 +5,7 @@ public class AckBean {
     public static final String disclaimer = "This web site exists to fulfill the coursework requirement of CS4280.\nDo not use your real personal data as input.";
 
     public AckBean() {
-        this.mMessage = disclaimer;
+        this.mMessage = "";
     }
 
     public AckBean(String mMessage) {
@@ -19,10 +19,18 @@ public class AckBean {
         }
     }
 
+    private String generateHTML(String message) {
+        if (message.equals("")) {
+            return message;
+        } else {
+            return "<div class=\"ack-box\"><p>" + message + "</p><div class=\"ack-progress\"></div></div>";
+        }
+    }
+
     public String getHTMLOutput() {
-        String temp = "<div class=\"ack-box\"><p>" + mMessage + "</p><div class=\"ack-progress\"></div></div>";
-        setmMessage(disclaimer);
-        return temp;
+        String realMsg = generateHTML(mMessage);
+        setmMessage("");
+        return realMsg + generateHTML(disclaimer);
     }
 
     public static String getBeanName() {

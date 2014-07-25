@@ -4,6 +4,7 @@ package cs4280.servlet;
 import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.exception.BreakInException;
+import util.PageURL;
 import util.ProjectUrl;
 import util.SessionValidation;
 
@@ -21,7 +22,7 @@ public class MainServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        PageProgressBean pageProgressBean =  ((PageProgressBean)session.getAttribute("pageInfo"));
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute(PageProgressBean.getBeanName()));
 
         //Break in checking
         try {
@@ -29,15 +30,15 @@ public class MainServlet extends HttpServlet {
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
-                response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+                response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
                 return;
             } catch (IOException ignored) {
             }
         }
-        pageProgressBean.setmBreadcrumb("/main");
+        pageProgressBean.setmBreadcrumb(PageURL.sMainServletURL);
 
         //Forward response to jsp for display
-        dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/MainPage.jsp");
+        dispatcher = request.getServletContext().getRequestDispatcher(PageURL.sMainJSPURL);
         dispatcher.forward(request, response);
     }
 

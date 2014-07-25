@@ -4,6 +4,7 @@ import cs4280.bean.AckBean;
 import cs4280.bean.PageProgressBean;
 import cs4280.bean.PlayerBean;
 import cs4280.exception.BreakInException;
+import util.PageURL;
 import util.ProjectUrl;
 import util.SessionValidation;
 
@@ -20,7 +21,7 @@ public class ProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute(PageProgressBean.getBeanName()));
 
         //Break in checking
         try {
@@ -28,13 +29,13 @@ public class ProfileServlet extends HttpServlet {
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
-                response.sendRedirect(ProjectUrl.getBaseUrl(request) + "/login");
+                response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
                 return;
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
-        pageProgressBean.setmBreadcrumb("/profile");
+        pageProgressBean.setmBreadcrumb(PageURL.sProfileServletURL);
     }
 
     @Override
@@ -42,10 +43,10 @@ public class ProfileServlet extends HttpServlet {
         processRequest(request, response);
         RequestDispatcher dispatcher;
         try {
-            dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/pages/UserProfilePage.jsp");
+            dispatcher = request.getServletContext().getRequestDispatcher(PageURL.sProfileJSPURL);
             dispatcher.forward(request, response);
             return;
-        } catch (Exception e1) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -56,7 +57,7 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session = req.getSession();
         RequestDispatcher dispatcher;
 
-        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute("pageInfo"));
+        PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute(PageProgressBean.getBeanName()));
 
         //Break in checking
         try {
@@ -64,7 +65,7 @@ public class ProfileServlet extends HttpServlet {
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
-                resp.sendRedirect(ProjectUrl.getBaseUrl(req) + "/login");
+                resp.sendRedirect(ProjectUrl.getBaseUrl(req) + PageURL.sLoginServletURL);
                 return;
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -72,16 +73,16 @@ public class ProfileServlet extends HttpServlet {
         }
 
 
-        pageProgressBean.setmBreadcrumb("/profile");
+        pageProgressBean.setmBreadcrumb(PageURL.sProfileServletURL);
 
         String submited = req.getParameter("submitProfile");
-        PlayerBean player = (PlayerBean) session.getAttribute("playerInfo");
+        PlayerBean player = (PlayerBean) session.getAttribute(PlayerBean.getBeanName());
 
         if (submited != null && submited.equals("1")) {
             AckBean ack = new AckBean();
 
             String new_password = req.getParameter("new_password");
-            if (new_password != null && new_password != "") {
+            if (new_password != null && !new_password.equals("")) {
                 player.setmPassword(new_password);
             }
             String theme = req.getParameter("theme");
@@ -95,11 +96,11 @@ public class ProfileServlet extends HttpServlet {
                 ack.setmMessage(e.getMessage());
             }
 
-            session.setAttribute("ackMsg", ack);
+            session.setAttribute(AckBean.getBeanName(), ack);
         }
 
         try {
-            dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/pages/UserProfilePage.jsp");
+            dispatcher = req.getServletContext().getRequestDispatcher(PageURL.sProfileJSPURL);
             dispatcher.forward(req, resp);
             return;
         } catch (Exception ignored) {

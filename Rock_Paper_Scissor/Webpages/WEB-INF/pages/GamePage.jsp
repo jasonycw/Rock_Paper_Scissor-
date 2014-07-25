@@ -26,6 +26,7 @@
 <%! private String yourChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
 
 <body class="background<%=playerInfo.getmPreferredTheme()%>" onload="changeImage();">
+<%@ include file="../header.jsp" %>
 <div id="backButton" class="backbutton">
     <a href="<c:url value="/main"/>">
         <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
@@ -33,13 +34,15 @@
 </div>
 <div id="mainContainer">
     <div id="title" class="centered">
-        <jsp:getProperty name="playerInfo" property="mUsername"/> V.S. <span font-style="italic">THE COMPUTER</span>
+        <jsp:getProperty name="playerInfo" property="mUsername"/>
+        V.S. <span font-style="italic">THE COMPUTER</span>
     </div>
 
     <div id="gameDiv" class="centered">
         <div id="score">
             <div id="playerScore">
-                <jsp:getProperty name="playerInfo" property="mUsername"/>'s Score: <%=gameInfo.getmScore()%>
+                <jsp:getProperty name="playerInfo" property="mUsername"/>
+                's Score: <%=gameInfo.getmScore()%>
             </div>
 
             <div id="npcScore">
@@ -94,8 +97,7 @@
         </div>
     </div>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
-
-
 </html>
 

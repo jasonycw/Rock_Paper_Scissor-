@@ -13,6 +13,7 @@
 
 <head>
     <title>Game</title>
+    <link href="<c:url value="/css/disclaimer.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Game.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">
@@ -26,6 +27,7 @@
 <%! private String yourChoiceSrc = "./img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png";%>
 
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
+<%@ include file="../header.jsp" %>
 <div id="backButton" class="backbutton">
     <a href="<c:url value="/main"/>">
         <img src="<c:url value="/img/nav/backbutton.png"/>" alt="Home"/>
@@ -79,8 +81,7 @@
 
     </form>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
-
-
 </html>
 

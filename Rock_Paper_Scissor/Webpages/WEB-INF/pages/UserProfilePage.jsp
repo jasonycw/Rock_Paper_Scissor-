@@ -12,6 +12,7 @@
 
 <head>
     <title>Personal Profile</title>
+    <link href="<c:url value="/css/disclaimer.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Profile.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">
@@ -21,6 +22,7 @@
 
 <jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
+<%@ include file="../header.jsp" %>
 <%
     if (request.getParameter("submitProfile") != null && request.getParameter("submitProfile").equals("1")) {
         out.print(ackMsg.getHTMLOutput());
@@ -68,7 +70,7 @@
     </form>
 
 </div>
-
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
 

@@ -1,0 +1,11 @@
+.disclaimer {
+
+}
+
+.disclaimer.header {
+    color: red;
+}
+
+.disclaimer.footer {
+    color: yellow;
+}

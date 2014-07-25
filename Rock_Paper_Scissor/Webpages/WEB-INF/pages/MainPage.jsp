@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>MainPage</title>
+    <link href="<c:url value="/css/disclaimer.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/MainPage.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">
@@ -13,6 +14,7 @@
 <jsp:useBean id="playerInfo" type="cs4280.bean.PlayerBean" scope="session"/>
 <jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
+<%@ include file="../header.jsp" %>
 <jsp:getProperty name="ackMsg" property="HTMLOutput"/>
 <div id="welcomeDiv">
     <p align="right">Welcome,
@@ -51,5 +53,6 @@
         </div>
     </div>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

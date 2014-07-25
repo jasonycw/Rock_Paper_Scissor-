@@ -2,7 +2,6 @@ package cs4280.bean;
 
 public class AckBean {
     private String mMessage;
-    public static final String disclaimer = "This web site exists to fulfill the coursework requirement of CS4280.\nDo not use your real personal data as input.";
 
     public AckBean() {
         this.mMessage = "";
@@ -30,7 +29,7 @@ public class AckBean {
     public String getHTMLOutput() {
         String realMsg = generateHTML(mMessage);
         setmMessage("");
-        return realMsg + generateHTML(disclaimer);
+        return realMsg;
     }
 
     public static String getBeanName() {

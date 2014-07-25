@@ -124,7 +124,7 @@ public class PlayerBean {
         this.mLoginTime = mLoginTime;
     }
 
-    public void update() throws SQLException {
+    public void pushToDB() throws SQLException {
         Connection con = DBConnection.getConnection();
         PreparedStatement stmt = con.prepareStatement("UPDATE PlayerAccount SET password=? , win=?, lose=?, draw=?, theme=?, login_time=?, total_playtime=? where username=?");
         stmt.setString(1, mPassword);

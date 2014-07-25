@@ -24,6 +24,7 @@
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
 <%@ include file="../header.jsp" %>
 <%
+
     if (request.getParameter("submitProfile") != null && request.getParameter("submitProfile").equals("1")) {
         out.print(ackMsg.getHTMLOutput());
     }

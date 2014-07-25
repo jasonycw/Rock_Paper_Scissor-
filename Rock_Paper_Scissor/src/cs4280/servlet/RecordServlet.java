@@ -26,22 +26,44 @@ public class RecordServlet extends HttpServlet {
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session);
+            SessionValidation.CheckBreakInAttempt(session, request);
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
                 response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
                 return;
-            } catch (IOException e1) {
-                e1.printStackTrace();
+            } catch (IOException ignored) {
             }
         }
 
-        ArrayList<Rank> win_lose_rank = DBCommonUsage.getWLRateRank();
-        ArrayList<Rank> number_of_game_rank = DBCommonUsage.getNumberOfGameRank();
-        ArrayList<Rank> win_rank = DBCommonUsage.getWinRank();
-        ArrayList<Rank> lose_rank = DBCommonUsage.getLoseRank();
-        int total_play_count = DBCommonUsage.getTotalGamePlayed();
+        String devMode = (String) session.getAttribute("test");
+        ArrayList<Rank> win_lose_rank = new ArrayList<Rank>();
+        ArrayList<Rank> number_of_game_rank = new ArrayList<Rank>();
+        ArrayList<Rank> win_rank = new ArrayList<Rank>();
+        ArrayList<Rank> lose_rank = new ArrayList<Rank>();
+        int total_play_count = 0;
+        if (devMode != null && !devMode.equals("true")) {
+            win_lose_rank = DBCommonUsage.getWLRateRank();
+            number_of_game_rank = DBCommonUsage.getNumberOfGameRank();
+            win_rank = DBCommonUsage.getWinRank();
+            lose_rank = DBCommonUsage.getLoseRank();
+            total_play_count = DBCommonUsage.getTotalGamePlayed();
+        } else {
+            win_lose_rank.add(new Rank(1, "JustKidding", 83 + ""));
+            win_lose_rank.add(new Rank(2, "One2Tree", 50 + ""));
+
+            number_of_game_rank.add(new Rank(1, "JustKidding", 83 + ""));
+            number_of_game_rank.add(new Rank(2, "One2Tree", 50 + ""));
+
+            win_rank.add(new Rank(1, "JustKidding", 100 + ""));
+            win_rank.add(new Rank(2, "One2Tree", 3 + ""));
+
+            lose_rank.add(new Rank(1, "JustKidding", 20 + ""));
+            lose_rank.add(new Rank(2, "One2Tree", 3 + ""));
+
+            total_play_count = 999;
+        }
+
 
         session.setAttribute("win_lose_rank", win_lose_rank);
         session.setAttribute("number_of_game_rank", number_of_game_rank);

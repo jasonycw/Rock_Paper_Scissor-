@@ -7,24 +7,24 @@ import java.util.ArrayList;
 
 public class DBCommonUsage {
     public static String getLoginTime(String username, String password) throws SQLException {
-        Connection con = null;
-        ResultSet rs = null;
-        PreparedStatement stmt = null;
+        Connection con;
+        ResultSet rs;
+        PreparedStatement stmt;
 
-            con = DBConnection.getConnection();
-            stmt = con.prepareStatement("SELECT login_time FROM PlayerAccount WHERE username = ? and password=?");
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getString("login_time");
-            }
+        con = DBConnection.getConnection();
+        stmt = con.prepareStatement("SELECT login_time FROM PlayerAccount WHERE username = ? and password=?");
+        stmt.setString(1, username);
+        stmt.setString(2, password);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("login_time");
+        }
 
         return "";
     }
 
     public static ArrayList<Rank> getWinRank() {
-        ResultSet rs = null;
+        ResultSet rs;
         ArrayList<Rank> rankList = new ArrayList<Rank>();
         try {
             int i = 1;
@@ -36,18 +36,13 @@ public class DBCommonUsage {
                 rankList.add(new Rank(i, rs.getString("username"), rs.getInt("win") + ""));
                 i++;
             }
-        } catch (SQLException e) {
-            /*
-            Can't connect to DB, fake default data
-             */
-            rankList.add(new Rank(1, "JustKidding", 100 + ""));
-            rankList.add(new Rank(2, "One2Tree", 3 + ""));
+        } catch (SQLException ignored) {
         }
         return rankList;
     }
 
     public static ArrayList<Rank> getLoseRank() {
-        ResultSet rs = null;
+        ResultSet rs;
         ArrayList<Rank> rankList = new ArrayList<Rank>();
         try {
             int i = 1;
@@ -59,18 +54,13 @@ public class DBCommonUsage {
                 rankList.add(new Rank(i, rs.getString("username"), rs.getInt("lose") + ""));
                 i++;
             }
-        } catch (SQLException e) {
-             /*
-            Can't connect to DB, fake default data
-             */
-            rankList.add(new Rank(1, "JustKidding", 20 + ""));
-            rankList.add(new Rank(2, "One2Tree", 3 + ""));
+        } catch (SQLException ignored) {
         }
         return rankList;
     }
 
     public static ArrayList<Rank> getWLRateRank() {
-        ResultSet rs = null;
+        ResultSet rs;
         ArrayList<Rank> rankList = new ArrayList<Rank>();
         try {
             int i = 1;
@@ -82,18 +72,13 @@ public class DBCommonUsage {
                 rankList.add(new Rank(i, rs.getString("username"), rs.getInt("rate") + ""));
                 i++;
             }
-        } catch (SQLException e) {
-             /*
-            Can't connect to DB, fake default data
-             */
-            rankList.add(new Rank(1, "JustKidding", 83 + ""));
-            rankList.add(new Rank(2, "One2Tree", 50 + ""));
+        } catch (SQLException ignored) {
         }
         return rankList;
     }
 
     public static ArrayList<Rank> getNumberOfGameRank() {
-        ResultSet rs = null;
+        ResultSet rs;
         ArrayList<Rank> rankList = new ArrayList<Rank>();
         try {
             int i = 1;
@@ -105,19 +90,13 @@ public class DBCommonUsage {
                 rankList.add(new Rank(i, rs.getString("username"), rs.getInt("GameCount") + ""));
                 i++;
             }
-        } catch (SQLException e) {
-             /*
-            Can't connect to DB, fake default data
-             */
-            rankList.add(new Rank(1, "JustKidding", 83 + ""));
-            rankList.add(new Rank(2, "One2Tree", 50 + ""));
+        } catch (SQLException ignored) {
         }
         return rankList;
     }
 
     public static int getTotalGamePlayed() {
-        ResultSet rs = null;
-        ArrayList<Rank> rankList = new ArrayList<Rank>();
+        ResultSet rs;
         try {
             int i = 1;
             Connection con = DBConnection.getConnection();
@@ -127,9 +106,8 @@ public class DBCommonUsage {
             if (rs.next()) {
                 return rs.getInt("Count");
             }
-        } catch (SQLException e) {
-
+        } catch (SQLException ignored) {
         }
-        return 3;
+        return 0;
     }
 }

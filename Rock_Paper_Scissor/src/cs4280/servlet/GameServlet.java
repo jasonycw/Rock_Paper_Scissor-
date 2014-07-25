@@ -28,7 +28,7 @@ public class GameServlet extends HttpServlet {
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session);
+            SessionValidation.CheckBreakInAttempt(session, request);
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
@@ -118,12 +118,14 @@ public class GameServlet extends HttpServlet {
             playerInfo.setmLoseCount(playerInfo.getmLoseCount() + 1);
         }
         try {
-            playerInfo.update();
+            String devMode = (String) session.getAttribute("test");
+            if (devMode != null && !devMode.equals("true")) {
+                playerInfo.pushToDB();
+            }
             session.setAttribute(AckBean.getBeanName(), new AckBean("Your game result has been updated"));
 
         } catch (SQLException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean(e.getMessage()));
-            e.printStackTrace();
         }
     }
 

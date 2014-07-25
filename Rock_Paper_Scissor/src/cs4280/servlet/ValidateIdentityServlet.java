@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,37 +28,69 @@ public class ValidateIdentityServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        boolean devMode = request.getParameter("test").equals("true");
+        String devMode = request.getParameter("test");
         String username = request.getParameter("j_username");
         String password = request.getParameter("j_password");
 
-        if (devMode || isUserValid(username, password)) {
-            PlayerBean player = new PlayerBean();
-            String currentTime = Time.getCurrentTimeInUnix();
-            if (!devMode) {
-                //Get info from DB
+        PlayerBean player;
+        String currentTime = Time.getCurrentTimeInUnix();
+
+
+        if (devMode.equals("true")) {
+            /*
+            Under developer mode
+             */
+            player = new PlayerBean();
+            player.setmLoginTime(currentTime);
+        } else {
+            if (isUserValid(username, password)) {
+                /*
+                Valid pw, get info from DB
+                 */
                 ResultSet rs = getUserInfo(username, password);
                 player = new PlayerBean(rs);
+                player.setmLoginTime(currentTime);
                 try {
-                    player.setmLoginTime(currentTime);
-                    player.update();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                    player.pushToDB();
+                } catch (SQLException ignored) {}
+            } else {
+                /*
+                Wrong credentials, kick him back
+                 */
+                session.setAttribute(AckBean.getBeanName(), new AckBean("Incorrect credentials"));
+                response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
+                return;
             }
+        }
+
+//
+//        if (devMode || isUserValid(username, password)) {
+//            PlayerBean player = new PlayerBean();
+//            String currentTime = Time.getCurrentTimeInUnix();
+//            if (!devMode) {
+//                //Get info from DB
+//                ResultSet rs = getUserInfo(username, password);
+//                player = new PlayerBean(rs);
+//                try {
+//                    player.setmLoginTime(currentTime);
+//                    player.pushToDB();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
             session.setAttribute("test", devMode);
             session.setAttribute(PlayerBean.getBeanName(), player);
             session.setAttribute(AckBean.getBeanName(), new AckBean());
             PageProgressBean pageProgress = new PageProgressBean();
             pageProgress.setIsLoggedIn(true);
-            pageProgress.setmBreadcrumb("main");
+            pageProgress.setmBreadcrumb(PageURL.sMainServletURL);
             session.setAttribute(PageProgressBean.getBeanName(), pageProgress);
             response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sMainServletURL);
-        } else {
-            session.setAttribute(AckBean.getBeanName(), new AckBean("Incorrect credentials"));
-            response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
-
-        }
+//        } else {
+//            session.setAttribute(AckBean.getBeanName(), new AckBean("Incorrect credentials"));
+//            response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
+//
+//        }
 
     }
 

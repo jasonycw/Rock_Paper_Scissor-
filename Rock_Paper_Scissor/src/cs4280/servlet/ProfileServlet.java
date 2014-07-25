@@ -25,7 +25,7 @@ public class ProfileServlet extends HttpServlet {
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session);
+            SessionValidation.CheckBreakInAttempt(session, request);
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
@@ -51,46 +51,48 @@ public class ProfileServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
 
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         RequestDispatcher dispatcher;
 
         PageProgressBean pageProgressBean = ((PageProgressBean) session.getAttribute(PageProgressBean.getBeanName()));
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session);
+            SessionValidation.CheckBreakInAttempt(session, request);
         } catch (BreakInException e) {
             session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));
             try {
-                resp.sendRedirect(ProjectUrl.getBaseUrl(req) + PageURL.sLoginServletURL);
+                response.sendRedirect(ProjectUrl.getBaseUrl(request) + PageURL.sLoginServletURL);
                 return;
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
 
-
         pageProgressBean.setmBreadcrumb(PageURL.sProfileServletURL);
 
-        String submited = req.getParameter("submitProfile");
+        String submited = request.getParameter("submitProfile");
         PlayerBean player = (PlayerBean) session.getAttribute(PlayerBean.getBeanName());
 
         if (submited != null && submited.equals("1")) {
             AckBean ack = new AckBean();
 
-            String new_password = req.getParameter("new_password");
+            String new_password = request.getParameter("new_password");
             if (new_password != null && !new_password.equals("")) {
                 player.setmPassword(new_password);
             }
-            String theme = req.getParameter("theme");
+            String theme = request.getParameter("theme");
             if (theme != null) {
                 player.setmPreferredTheme(theme);
             }
             try {
-                player.update();
+                String devMode = (String) session.getAttribute("test");
+                if (devMode != null && !devMode.equals("true")) {
+                    player.pushToDB();
+                }
                 ack.setmMessage("Received with thanks");
             } catch (SQLException e) {
                 ack.setmMessage(e.getMessage());
@@ -100,8 +102,8 @@ public class ProfileServlet extends HttpServlet {
         }
 
         try {
-            dispatcher = req.getServletContext().getRequestDispatcher(PageURL.sProfileJSPURL);
-            dispatcher.forward(req, resp);
+            dispatcher = request.getServletContext().getRequestDispatcher(PageURL.sProfileJSPURL);
+            dispatcher.forward(request, response);
             return;
         } catch (Exception ignored) {
         }

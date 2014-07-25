@@ -26,7 +26,7 @@ public class RedirectServlet extends HttpServlet {
 
         //Break in checking
         try {
-            SessionValidation.CheckBreakInAttempt(session);
+            SessionValidation.CheckBreakInAttempt(session, request);
         } catch (BreakInException e) {
             if (player != null || pageProgressBean != null) {
                 session.setAttribute(AckBean.getBeanName(), new AckBean("Break-in attempt"));

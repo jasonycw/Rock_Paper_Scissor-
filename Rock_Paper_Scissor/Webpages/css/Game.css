@@ -85,7 +85,7 @@
 button {
     width: 260px;
     height: 35px;
-    background: #fff;
+    background: #464646;
     border: 1px solid #fff;
     cursor: pointer;
     border-radius: 2px;
@@ -103,23 +103,30 @@ button:hover {
 }
 
 .image:hover {
+    background-color: #262626;
     opacity: 0.99;
     filter: alpha(opacity=99); /*For IE8 and earlier */
 }
 
 .rock {
-    background: #fff url('../img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png');
-    background-size: cover;
+    background: #464646 url('../img/RockPaperScissor/Rock-Paper-Scissors-Rock-icon.png');
+    background-size: 130px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .paper {
-    background: #fff url('../img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png');
-    background-size: cover;
+    background: #464646 url('../img/RockPaperScissor/Rock-Paper-Scissors-Paper-icon.png');
+    background-size: 130px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .scissor {
-    background: #fff url('../img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png');
-    background-size: cover;
+    background: #464646 url('../img/RockPaperScissor/Rock-Paper-Scissors-Scissors-icon.png');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .FL{

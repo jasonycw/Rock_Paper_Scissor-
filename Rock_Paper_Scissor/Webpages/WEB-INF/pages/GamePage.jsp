@@ -13,6 +13,7 @@
 
 <head>
     <title>Game</title>
+    <link href="<c:url value="/css/disclaimer.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Background.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/Game.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/ack.css"/>" rel="stylesheet">

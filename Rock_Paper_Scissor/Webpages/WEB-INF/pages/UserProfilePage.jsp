@@ -23,12 +23,14 @@
 <jsp:useBean id="ackMsg" type="cs4280.bean.AckBean" scope="session"/>
 <body class="background<%=playerInfo.getmPreferredTheme()%>">
 <%@ include file="../header.jsp" %>
+<div id="ack">
 <%
 
     if (request.getParameter("submitProfile") != null && request.getParameter("submitProfile").equals("1")) {
         out.print(ackMsg.getHTMLOutput());
     }
 %>
+</div>
 <%!String selectedTheme = "";%>
 <% if (request.getParameter("theme") != null) {
     selectedTheme = request.getParameter("theme");

@@ -52,3 +52,12 @@ button:hover{
 .content{
     margin-left: 150px;
 }
+
+#ack{
+    /*position*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}

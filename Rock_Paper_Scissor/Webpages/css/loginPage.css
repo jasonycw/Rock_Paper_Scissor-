@@ -17,7 +17,7 @@ body{
     left: calc(40%);
 }
 
-.header{
+.title{
     float: left;
     padding-top: 35px;
     /*top: calc(50% - 35px);*/
@@ -26,7 +26,7 @@ body{
     z-index: 2;
 }
 
-.header div{
+.title div{
     float: left;
     color: #fff;
     font-family: 'Exo', sans-serif;
@@ -34,7 +34,7 @@ body{
     font-weight: 200;
 }
 
-.header div span{
+.title div span{
     color: #fae055 !important;
 }
 

@@ -17,6 +17,13 @@ body{
     height: 200px;
     display: inline-block;
     margin-right: 20px;
+
+    /*Animation*/
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 .clearfix {
     clear: both;

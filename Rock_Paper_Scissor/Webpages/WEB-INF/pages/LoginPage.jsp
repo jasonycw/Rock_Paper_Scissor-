@@ -19,7 +19,7 @@
 
 <jsp:getProperty name="ackMsg" property="HTMLOutput"/>
 <div class="mainContainer">
-    <div class="header">
+    <div class="title">
         <div>Rock<span>Paper</span>Scissor</div>
     </div>
     <div class="login">

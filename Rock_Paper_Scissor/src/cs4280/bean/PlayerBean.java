@@ -55,7 +55,7 @@ public class PlayerBean {
     }
 
     public void setmPassword(String mPassword) {
-        this.mPassword = mPassword;
+        if(mPassword!="")this.mPassword = mPassword;
     }
 
     public void setmTotalOnlineTime(String mTotalPlaytime) {

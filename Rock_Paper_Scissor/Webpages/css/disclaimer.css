@@ -3,9 +3,19 @@
 }
 
 .disclaimer.header {
+    /*position*/
+    position: fixed;
+    top: 0;
+    right: 0;
+
     color: red;
 }
 
 .disclaimer.footer {
+    /*position*/
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
     color: yellow;
 }
